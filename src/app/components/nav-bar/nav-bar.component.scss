@@ -1,0 +1,30 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.avatar-circle {
+  img {
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+  }
+}
+
+.cake-icon {
+  font-size: 21px;
+  padding-right: .4em;
+}

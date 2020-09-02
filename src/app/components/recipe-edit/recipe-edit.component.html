@@ -1,0 +1,15 @@
+<form [formGroup]="editRecipeForm" (ngSubmit)="onSubmit(editRecipeForm.value)">
+
+    <mat-form-field appearance="outline">
+        <mat-label for="title">Titel</mat-label>
+        <input matInput placeholder="Bijv. Chocolade koekjes" type="text" formControlName="title">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label for="description">Beschrijving</mat-label>
+        <input matInput placeholder="" type="text" formControlName="description">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">Save</button>
+
+</form>

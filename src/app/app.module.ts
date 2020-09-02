@@ -1,16 +1,51 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
+import { environment } from 'src/environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
+import { MaterialModule } from './material.module';
 import { AppComponent } from './app.component';
+
+import {
+  NavBarComponent,
+  RecipeDetailComponent,
+  RecipeListComponent,
+  RecipeEditComponent,
+  HomeComponent,
+  NotFoundComponent,
+  LoginComponent,
+} from './components';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    RecipeDetailComponent,
+    NavBarComponent,
+    RecipeListComponent,
+    RecipeEditComponent,
+    HomeComponent,
+    NotFoundComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    FormsModule,
+    ReactiveFormsModule,
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
+    BrowserAnimationsModule,
+    FlexLayoutModule,
+    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

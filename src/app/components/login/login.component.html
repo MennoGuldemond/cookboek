@@ -1,0 +1,9 @@
+<div class="center-content page-padding">
+    <div *ngIf="auth.user$ | async as user; else login">
+        <button mat-raised-button (click)="auth.signOut()">Sign Out</button>
+    </div>
+    
+    <ng-template #login>
+        <button mat-raised-button (click)="auth.googleSignin()">Login</button>
+    </ng-template>
+</div>

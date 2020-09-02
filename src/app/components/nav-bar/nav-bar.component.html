@@ -1,0 +1,38 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+    <mat-toolbar>
+      <mat-icon class="cake-icon" aria-hidden="false" aria-label="Cake" color="primary">cake</mat-icon>
+      Menu
+    </mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item href="/home">Home</a>
+      <a mat-list-item href="/recipes">Recipes</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" fxLayout="row">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span fxFlex>Cookboek</span>
+      <div *ngIf="auth.user$ | async as user; else login" fxLayout="row" class="avatar-circle">
+        <button mat-button (click)="onUserClick()">{{ user.displayName }}</button>
+        <img fxFlex [src]="user.photoURL + '=s32'" alt="profile photo">
+      </div>
+      <ng-template #login>
+        <button mat-stroked-button (click)="auth.googleSignin()">Inloggen</button>
+      </ng-template>
+    </mat-toolbar>
+
+    <router-outlet></router-outlet>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
