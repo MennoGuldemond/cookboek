@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireStorageModule, BUCKET } from '@angular/fire/storage';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { environment } from 'src/environments/environment';
@@ -43,11 +44,14 @@ import {
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
+    AngularFireStorageModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
     MaterialModule,
   ],
-  providers: [],
+  providers: [
+    { provide: BUCKET, useValue: environment.firebase.storageBucket }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

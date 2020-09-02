@@ -1,9 +1,14 @@
-import { Ingredient } from './ingredient';
+export class Recipe {
 
-export interface Recipe {
+    constructor() {
+        this.ingredients = [];
+        this.steps = [];
+    }
+
     id: string;
-    name: string;
+    title: string;
     description: string;
     ingredients: string[];
     steps: string[];
+    photoURL: string;
 }

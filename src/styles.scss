@@ -7,10 +7,20 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     text-align: center;
 }
 
+.align-content-right {
+    text-align: right;
+}
+
 .page-padding {
     padding: 2em;
 }
 
 .clickable {
     cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+    .mobile-center-content {
+        text-align: center;
+    }
 }

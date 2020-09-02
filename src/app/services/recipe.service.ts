@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable, from } from 'rxjs';
+import { Observable, from, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { Recipe } from '../models';
@@ -34,6 +34,12 @@ export class RecipeService {
       console.error(`There was an error getting the document: ${error}`);
       return null;
     }));
+  }
+
+  save(recipe: Recipe): void {
+    this.afs.collection('recipes').add(recipe).then(docRef => {
+      console.log(docRef);
+    });
   }
 
 }
