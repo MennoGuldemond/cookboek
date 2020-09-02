@@ -1,6 +1,6 @@
 <div class="page-padding" fxLayout="row" fxLayoutGap="10px">
     <div *ngFor="let recipe of recipes$ | async" fxFlex="50%">
-        <mat-card (click)="onRecipeClick(recipe)">
+        <mat-card class="clickable" (click)="onRecipeClick(recipe)">
             <mat-card-header>
                 <mat-card-title>{{ recipe.name }}</mat-card-title>
                 <mat-card-subtitle>{{ recipe.description }}</mat-card-subtitle>
