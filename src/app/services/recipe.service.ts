@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
 import { Observable, from, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -36,10 +36,14 @@ export class RecipeService {
     }));
   }
 
-  save(recipe: Recipe): void {
-    this.afs.collection('recipes').add(recipe).then(docRef => {
-      console.log(docRef);
-    });
+  save(recipe: Recipe): Observable<DocumentReference> {
+    return from(this.afs.collection('recipes').add(recipe).then(docRef => {
+      return docRef;
+    }));
+  }
+
+  update(recipe: Recipe): void {
+    // let temp = this.afs.collection('recipes').doc(recipe.id).set(recipe).then();
   }
 
 }

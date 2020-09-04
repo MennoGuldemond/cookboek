@@ -1,14 +1,26 @@
-<div *ngIf="recipe$ | async as recipe">
-    <h2>{{ recipe.title }}</h2>
-    <p>{{ recipe.description }}</p>
-    <ul>
+<div class="page-padding">
+  <mat-card *ngIf="recipe$ | async as recipe">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{ recipe.title }}</mat-card-title>
+      <mat-card-subtitle>{{ recipe.description }}</mat-card-subtitle>
+    </mat-card-header>
+    <img [src]="recipe.photoURL" alt="recipe photo" class="recipe-image" />
+    <mat-card-content>
+      <ul>
         <li *ngFor="let ingredient of recipe.ingredients">
-            {{ ingredient }}
+          {{ ingredient }}
         </li>
-    </ul>
-    <ol>
+      </ul>
+      <ol>
         <li *ngFor="let step of recipe.steps">
-            {{ step }}
+          {{ step }}
         </li>
-    </ol>
+      </ol>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button>LIKE</button>
+      <button mat-button>SHARE</button>
+    </mat-card-actions>
+  </mat-card>
 </div>
