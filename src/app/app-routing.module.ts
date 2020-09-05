@@ -15,9 +15,10 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'recipe/:id', component: RecipeDetailComponent },
   { path: 'recipes', component: RecipeListComponent },
+  { path: 'recipe-edit/:id', component: RecipeEditComponent, canActivate: [AuthGuard] },
   { path: 'recipe-edit', component: RecipeEditComponent, canActivate: [AuthGuard] },
   { path: '',   redirectTo: '/home', pathMatch: 'full' },
-  { path: '**', component: NotFoundComponent }
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({

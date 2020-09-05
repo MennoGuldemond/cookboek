@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { RecipeService } from '../../services';
 import { Recipe } from '../../models';
+
 
 @Component({
   selector: 'cobo-recipe-detail',
@@ -14,7 +15,10 @@ export class RecipeDetailComponent implements OnInit {
 
   recipe$: Observable<Recipe>;
 
-  constructor(private route: ActivatedRoute, private recipeService: RecipeService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private recipeService: RecipeService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -22,6 +26,10 @@ export class RecipeDetailComponent implements OnInit {
         this.recipe$ = this.recipeService.getById(params.id);
       }
    });
+  }
+
+  onEditClick(id: string): void {
+    this.router.navigate([`recipe-edit/${id}`]);
   }
 
 }

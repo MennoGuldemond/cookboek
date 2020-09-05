@@ -19,8 +19,9 @@
       </ol>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button>LIKE</button>
-      <button mat-button>SHARE</button>
+      <button mat-button>Like</button>
+      <button mat-button>Share</button>
+      <button mat-button (click)="onEditClick(recipe.id)">Edit</button>
     </mat-card-actions>
   </mat-card>
 </div>

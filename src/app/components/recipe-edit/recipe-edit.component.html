@@ -1,7 +1,7 @@
 <div class="page-padding">
-    <form [formGroup]="editRecipeForm" (ngSubmit)="onSubmit()" fxLayout="column">
+    <form *ngIf="recipe" [formGroup]="editRecipeForm" (ngSubmit)="onSubmit()" fxLayout="column">
 
-        <div fxLayout="row" fxLayoutGap="20px">
+        <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
             <mat-form-field appearance="outline" fxFlex>
                 <mat-label for="title">Titel</mat-label>
                 <input matInput placeholder="Bijv. Chocolade koekjes" type="text" formControlName="title">
@@ -63,7 +63,7 @@
             </div>
         </div>
         <div class="align-content-right">
-            <button mat-raised-button color="primary" class="save-button" type="submit">Opslaan</button>
+            <button mat-raised-button color="primary" class="save-button" type="submit" [disabled]="editRecipeForm.invalid">Opslaan</button>
         </div>
 
     </form>
