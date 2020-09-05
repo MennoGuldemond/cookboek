@@ -11,4 +11,7 @@ export class Recipe {
     ingredients: string[];
     steps: string[];
     photoURL: string;
+
+    ownerId: string;
+    ownerName: string;
 }
