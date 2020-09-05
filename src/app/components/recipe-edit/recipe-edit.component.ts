@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { PhotoService, RecipeService } from '../../services';
 import { Recipe } from '../../models';
@@ -28,7 +28,8 @@ export class RecipeEditComponent implements OnInit {
     private formBuilder: FormBuilder,
     private photoService: PhotoService,
     private recipeService: RecipeService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -81,7 +82,6 @@ export class RecipeEditComponent implements OnInit {
       this.photoService.uploadPhoto(this.photoFile).subscribe(uploadResult => {
         uploadResult.downloadURL$.subscribe(url => {
           this.recipe.photoURL = url;
-          console.log(this.recipe.photoURL);
           this.saveRecipe();
         });
       });
@@ -100,7 +100,17 @@ export class RecipeEditComponent implements OnInit {
       steps: this.editRecipeForm.value.steps.map(x => x.step)
     };
 
-    this.recipeService.save(toSave);
+    if (this.recipe.id) {
+      // Existing recipe
+      this.recipeService.update(toSave).subscribe(id => {
+        this.router.navigate([`recipe/${id}`]);
+      });
+    } else {
+      // New recipe
+      this.recipeService.save(toSave).subscribe(id => {
+        this.router.navigate([`recipe/${id}`]);
+      });
+    }
   }
 
   onFileInputChange(data: any): void {
@@ -115,8 +125,16 @@ export class RecipeEditComponent implements OnInit {
     this.ingredientsFormArray.push(this.formBuilder.group({ ingredient: '' }));
   }
 
+  removeIngredient(index: number): void {
+    this.ingredientsFormArray.removeAt(index);
+  }
+
   addStep(): void {
     this.stepsFormArray.push(this.formBuilder.group({ step: '' }));
+  }
+
+  removeStep(index: number): void {
+    this.stepsFormArray.removeAt(index);
   }
 
   canAddIngredient(): boolean {

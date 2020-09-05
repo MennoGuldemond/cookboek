@@ -26,4 +26,8 @@ export class RecipeListComponent implements OnInit {
     }
   }
 
+  onClickAdd(): void {
+    this.router.navigate(['recipe-edit']);
+  }
+
 }

@@ -36,14 +36,19 @@ export class RecipeService {
     }));
   }
 
-  save(recipe: Recipe): Observable<DocumentReference> {
+  save(recipe: Recipe): Observable<string> {
     return from(this.afs.collection('recipes').add(recipe).then(docRef => {
-      return docRef;
+      return docRef.id;
     }));
   }
 
-  update(recipe: Recipe): void {
-    // let temp = this.afs.collection('recipes').doc(recipe.id).set(recipe).then();
+  update(recipe: Recipe): Observable<string> {
+    return from(this.afs.collection('recipes').doc(recipe.id).set(recipe).catch(err => {
+      console.log(err);
+      return null;
+    }).then(() => {
+      return recipe.id;
+    }));
   }
 
 }

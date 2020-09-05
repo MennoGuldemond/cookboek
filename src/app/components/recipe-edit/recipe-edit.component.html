@@ -1,70 +1,71 @@
 <div class="page-padding">
-    <form *ngIf="recipe" [formGroup]="editRecipeForm" (ngSubmit)="onSubmit()" fxLayout="column">
+  <form *ngIf="recipe" [formGroup]="editRecipeForm" (ngSubmit)="onSubmit()" fxLayout="column">
 
-        <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
-            <mat-form-field appearance="outline" fxFlex>
-                <mat-label for="title">Titel</mat-label>
-                <input matInput placeholder="Bijv. Chocolade koekjes" type="text" formControlName="title">
+    <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
+      <mat-form-field appearance="outline" fxFlex>
+        <mat-label for="title">Titel</mat-label>
+        <input matInput placeholder="Bijv. Chocolade koekjes" type="text" formControlName="title">
+      </mat-form-field>
+
+      <input #imageInput hidden type="file" onclick="this.value=null" (change)="onFileInputChange($event)"
+          accept="image/png, image/jpeg" />
+      <button mat-raised-button type="button" class="upload-button" (click)="imageInput.click()">
+        <mat-icon aria-hidden="false" color="primary">insert_photo</mat-icon>
+        Upload image
+      </button>
+    </div>
+
+    <mat-form-field appearance="outline">
+      <mat-label for="description">Beschrijving</mat-label>
+      <textarea matInput placeholder="Vertel iets over jouw recept" formControlName="description"
+          rows="5"></textarea>
+    </mat-form-field>
+
+    <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
+      <div fxFlex="50%" class="form-array-container">
+          <h2 class="form-array-header">Ingredi&#235;nten</h2>
+
+          <div formArrayName="ingredients" fxLayout="column">
+            <mat-form-field *ngFor="let step of ingredientsFormArray.controls; let i = index"
+              [formGroupName]="i" appearance="outline">
+              <mat-label for="ingredient{{i}}">Ingredi&#235;nt {{i + 1}}</mat-label>
+              <input matInput placeholder="Bijv. 200 gram bloem" type="text" formControlName="ingredient">
+              <mat-icon matSuffix aria-label="Remove" class="delete-icon" (click)="removeIngredient(i)">clear</mat-icon>
             </mat-form-field>
+          </div>
 
-            <input #imageInput hidden type="file" onclick="this.value=null" (change)="onFileInputChange($event)"
-                accept="image/png, image/jpeg" />
-            <button mat-raised-button type="button" class="upload-button" (click)="imageInput.click()">
-                <mat-icon aria-hidden="false" color="primary">insert_photo</mat-icon>
-                Upload image
+          <div class="mobile-center-content">
+            <button mat-mini-fab color="primary" aria-label="button for adding a new ingredi&#235;nt"
+              [disabled]="canAddIngredient() == false" (click)="addIngredient()">
+              <mat-icon>add</mat-icon>
             </button>
-        </div>
+          </div>
+      </div>
 
+      <div fxFlex="50%" class="form-array-container">
+          <h2 class="form-array-header">Stappen</h2>
 
-        <mat-form-field appearance="outline">
-            <mat-label for="description">Beschrijving</mat-label>
-            <textarea matInput placeholder="Vertel iets over jouw recept" formControlName="description"
-                rows="5"></textarea>
-        </mat-form-field>
+          <div formArrayName="steps" fxLayout="column">
+            <mat-form-field *ngFor="let step of stepsFormArray.controls; let i = index" [formGroupName]="i"
+              appearance="outline">
+              <mat-label for="step{{i}}">Stap {{i + 1}}</mat-label>
+              <input matInput placeholder="Bijv. Voeg nu het ei toe" type="text" formControlName="step">
+              <mat-icon matSuffix aria-label="Remove" class="delete-icon" (click)="removeStep(i)">clear</mat-icon>
+            </mat-form-field>
+          </div>
 
-        <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
-            <div fxFlex="50%" class="form-array-container">
-                <h2 class="form-array-header">Ingredi&#235;nten</h2>
+          <div class="mobile-center-content">
+            <button mat-mini-fab color="primary" aria-label="button for adding a new step"
+              [disabled]="canAddStep() == false" (click)="addStep()">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
 
-                <div formArrayName="ingredients" fxLayout="column">
-                    <mat-form-field *ngFor="let step of ingredientsFormArray.controls; let i = index"
-                        [formGroupName]="i" appearance="outline">
-                        <mat-label for="ingredient{{i}}">Ingredi&#235;nt {{i + 1}}</mat-label>
-                        <input matInput placeholder="Bijv. 200 gram bloem" type="text" formControlName="ingredient">
-                    </mat-form-field>
-                </div>
+      </div>
+    </div>
+    <div class="align-content-right">
+      <button mat-raised-button color="primary" class="save-button" type="submit" [disabled]="editRecipeForm.invalid">Opslaan</button>
+    </div>
 
-                <div class="mobile-center-content">
-                    <button mat-mini-fab color="primary" aria-label="button for adding a new ingredi&#235;nt"
-                        [disabled]="canAddIngredient() == false" (click)="addIngredient()">
-                        <mat-icon>add</mat-icon>
-                    </button>
-                </div>
-            </div>
-
-            <div fxFlex="50%" class="form-array-container">
-                <h2 class="form-array-header">Stappen</h2>
-
-                <div formArrayName="steps" fxLayout="column">
-                    <mat-form-field *ngFor="let step of stepsFormArray.controls; let i = index" [formGroupName]="i"
-                        appearance="outline">
-                        <mat-label for="step{{i}}">Stap {{i + 1}}</mat-label>
-                        <input matInput placeholder="Bijv. Voeg nu het ei toe" type="text" formControlName="step">
-                    </mat-form-field>
-                </div>
-
-                <div class="mobile-center-content">
-                    <button mat-mini-fab color="primary" aria-label="button for adding a new step"
-                        [disabled]="canAddStep() == false" (click)="addStep()">
-                        <mat-icon>add</mat-icon>
-                    </button>
-                </div>
-
-            </div>
-        </div>
-        <div class="align-content-right">
-            <button mat-raised-button color="primary" class="save-button" type="submit" [disabled]="editRecipeForm.invalid">Opslaan</button>
-        </div>
-
-    </form>
+  </form>
 </div>
