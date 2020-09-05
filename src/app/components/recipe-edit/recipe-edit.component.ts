@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { PhotoService, RecipeService } from '../../services';
+import { PhotoService, RecipeService, AuthService } from '../../services';
 import { Recipe } from '../../models';
 
 @Component({
@@ -28,8 +28,10 @@ export class RecipeEditComponent implements OnInit {
     private formBuilder: FormBuilder,
     private photoService: PhotoService,
     private recipeService: RecipeService,
+    private authService: AuthService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -55,22 +57,22 @@ export class RecipeEditComponent implements OnInit {
 
     if (this.recipe.ingredients.length) {
       for (const ingredient of this.recipe.ingredients) {
-        ingredientsArray.push(this.formBuilder.group({ ingredient }));
+        ingredientsArray.push(this.formBuilder.group({ ingredient: [ingredient, [Validators.required]] }));
       }
     } else {
-      ingredientsArray.push(this.formBuilder.group({ ingredient: '' }));
+      ingredientsArray.push(this.formBuilder.group({ ingredient: ['', [Validators.required]] }));
     }
 
     if (this.recipe.steps.length) {
       for (const step of this.recipe.steps) {
-        stepsArray.push(this.formBuilder.group({ step }));
+        stepsArray.push(this.formBuilder.group({ step: [step, [Validators.required]] }));
       }
     } else {
-      stepsArray.push(this.formBuilder.group({ step: '' }));
+      stepsArray.push(this.formBuilder.group({ step: ['', [Validators.required]] }));
     }
 
     this.editRecipeForm = this.formBuilder.group({
-      title: this.recipe.title,
+      title: [this.recipe.title, [Validators.required]],
       description: this.recipe.description,
       ingredients: this.formBuilder.array(ingredientsArray),
       steps: this.formBuilder.array(stepsArray)
@@ -92,25 +94,32 @@ export class RecipeEditComponent implements OnInit {
   }
 
   saveRecipe(): void {
-    const toSave: Recipe = {
-      ...this.recipe,
-      title: this.editRecipeForm.value.title,
-      description: this.editRecipeForm.value.description,
-      ingredients: this.editRecipeForm.value.ingredients.map(x => x.ingredient),
-      steps: this.editRecipeForm.value.steps.map(x => x.step)
-    };
+    this.authService.user$.subscribe(user => {
+      const toSave: Recipe = {
+        ...this.recipe,
+        title: this.editRecipeForm.value.title,
+        description: this.editRecipeForm.value.description,
+        ingredients: this.editRecipeForm.value.ingredients.map(x => x.ingredient),
+        steps: this.editRecipeForm.value.steps.map(x => x.step)
+      };
+  
+  
+  
+      if (this.recipe.id) {
+        // Existing recipe
+        this.recipeService.update(toSave).subscribe(id => {
+          this.router.navigate([`recipe/${id}`]);
+        });
+      } else {
+        // New recipe
+        toSave.ownerId = user.uid;
+        toSave.ownerName = user.displayName;
 
-    if (this.recipe.id) {
-      // Existing recipe
-      this.recipeService.update(toSave).subscribe(id => {
-        this.router.navigate([`recipe/${id}`]);
-      });
-    } else {
-      // New recipe
-      this.recipeService.save(toSave).subscribe(id => {
-        this.router.navigate([`recipe/${id}`]);
-      });
-    }
+        this.recipeService.save(toSave).subscribe(id => {
+          this.router.navigate([`recipe/${id}`]);
+        });
+      }
+    });
   }
 
   onFileInputChange(data: any): void {
@@ -122,7 +131,7 @@ export class RecipeEditComponent implements OnInit {
   }
 
   addIngredient(): void {
-    this.ingredientsFormArray.push(this.formBuilder.group({ ingredient: '' }));
+    this.ingredientsFormArray.push(this.formBuilder.group({ ingredient: ['', [Validators.required]] }));
   }
 
   removeIngredient(index: number): void {
@@ -130,7 +139,7 @@ export class RecipeEditComponent implements OnInit {
   }
 
   addStep(): void {
-    this.stepsFormArray.push(this.formBuilder.group({ step: '' }));
+    this.stepsFormArray.push(this.formBuilder.group({ step: ['', [Validators.required]] }));
   }
 
   removeStep(index: number): void {
