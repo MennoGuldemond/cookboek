@@ -8,12 +8,12 @@
     <img [src]="recipe.photoURL" alt="recipe photo" class="recipe-image" />
     <mat-card-content>
       <ul>
-        <li *ngFor="let ingredient of recipe.ingredients">
+        <li *ngFor="let ingredient of recipe.ingredients" [hidden]="ingredient == ''">
           {{ ingredient }}
         </li>
       </ul>
       <ol>
-        <li *ngFor="let step of recipe.steps">
+        <li *ngFor="let step of recipe.steps" [hidden]="step == ''">
           {{ step }}
         </li>
       </ol>
