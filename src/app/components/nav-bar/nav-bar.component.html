@@ -22,6 +22,9 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
+      <button *ngIf="(isHandset$ | async) === false" mat-icon-button aria-label="Back button" (click)="onBackClick()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
       <span fxFlex>Cookboek</span>
       <div *ngIf="auth.user$ | async as user; else login" fxLayout="row" class="avatar-circle">
         <button mat-button (click)="onUserClick()">{{ user.displayName }}</button>

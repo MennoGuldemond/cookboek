@@ -29,4 +29,8 @@ export class NavBarComponent {
     this.router.navigate(['login']);
   }
 
+  onBackClick(): void {
+    window.history.back();
+  }
+
 }
