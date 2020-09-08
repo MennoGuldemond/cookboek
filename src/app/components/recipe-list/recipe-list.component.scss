@@ -3,3 +3,12 @@
   bottom: 30px;
   right: 30px;
 }
+
+.recipe-image {
+  max-height: 200px;
+  object-fit: cover;
+}
+
+.recipe-container {
+  padding-bottom: 10px;
+}
