@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { PhotoService, RecipeService, AuthService } from '../../services';
 import { Recipe } from '../../models';
@@ -31,6 +32,7 @@ export class RecipeEditComponent implements OnInit {
     private authService: AuthService,
     private route: ActivatedRoute,
     private router: Router,
+    private snackBar: MatSnackBar,
   ) { }
 
   ngOnInit(): void {
@@ -108,6 +110,7 @@ export class RecipeEditComponent implements OnInit {
       if (this.recipe.id) {
         // Existing recipe
         this.recipeService.update(toSave).subscribe(id => {
+          this.snackBar.open('Recept bijgewerkt', 'Oke', { duration: 3000 });
           this.router.navigate([`recipe/${id}`]);
         });
       } else {
@@ -116,6 +119,7 @@ export class RecipeEditComponent implements OnInit {
         toSave.ownerName = user.displayName;
 
         this.recipeService.save(toSave).subscribe(id => {
+          this.snackBar.open('Recept Opgeslagen', 'Oke', { duration: 3000 });
           this.router.navigate([`recipe/${id}`]);
         });
       }
