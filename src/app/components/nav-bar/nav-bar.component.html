@@ -1,8 +1,8 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport
-      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-      [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="(isHandset$ | async) === false">
+      [attr.role]="(deviceService.isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(deviceService.isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(deviceService.isHandset$ | async) === false">
     <mat-toolbar>
       <mat-icon class="cake-icon" aria-hidden="false" aria-label="Cake" color="primary">cake</mat-icon>
       Menu
@@ -19,10 +19,10 @@
         aria-label="Toggle sidenav"
         mat-icon-button
         (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
+        *ngIf="deviceService.isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <button *ngIf="(isHandset$ | async) === false" mat-icon-button aria-label="Back button" (click)="onBackClick()">
+      <button *ngIf="(deviceService.isHandset$ | async) === false" mat-icon-button aria-label="Back button" (click)="onBackClick()">
         <mat-icon>arrow_back</mat-icon>
       </button>
       <span fxFlex>Cookboek</span>
