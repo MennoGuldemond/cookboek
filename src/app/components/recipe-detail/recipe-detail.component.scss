@@ -1,4 +1,16 @@
 .recipe-image {
   max-height: 400px;
   object-fit: cover;
+  margin-bottom: 0;
+}
+
+.desktop-actions {
+  position: absolute;
+  right: 0;
+  padding: 0 16px;
+}
+
+.mobile-actions {
+  padding-bottom: 8px;
+  margin-left: -8px;
 }
