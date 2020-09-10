@@ -24,7 +24,7 @@
         <button mat-icon-button color="primary" aria-label="Like button">
           <mat-icon>favorite_border</mat-icon>
         </button>
-        <button mat-icon-button color="primary" aria-label="Edit button" (click)="onEditClick(recipe.id)">
+        <button *ngIf="(auth.user$ | async)?.uid === recipe.ownerId" mat-icon-button color="primary" aria-label="Edit button" (click)="onEditClick(recipe.id)">
           <mat-icon>edit</mat-icon>
         </button>
       </div>
