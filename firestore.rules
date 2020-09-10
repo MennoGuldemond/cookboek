@@ -4,8 +4,6 @@ service cloud.firestore {
     match /recipes/{id} {
       allow write: if resource.data.ownerId == request.auth.uid;
     }
-  }
-  match /databases/{database}/documents {
     match /{document=**} {
       allow read;
       allow create: if request.auth != null;
