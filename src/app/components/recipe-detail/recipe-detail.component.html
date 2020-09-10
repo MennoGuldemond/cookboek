@@ -4,20 +4,18 @@
       <mat-card-title>{{ recipe.title }}</mat-card-title>
       <mat-card-subtitle>Een recept van {{ recipe.ownerName }}</mat-card-subtitle>
       <div *ngIf="(deviceService.isHandset$ | async) === false" class="desktop-actions">
-        <button *ngIf="deviceService.isSafari()"
-          mat-icon-button color="primary" aria-label="Share button" (click)="onClickShare(recipe.title)">
+        <button *ngIf="deviceService.isSafari()" mat-icon-button color="primary" aria-label="Share button" (click)="onClickShare(recipe.title)">
           <mat-icon>share</mat-icon>
         </button>
         <button mat-icon-button color="primary" aria-label="Like button">
           <mat-icon>favorite_border</mat-icon>
         </button>
-        <button mat-icon-button color="primary" aria-label="Edit button" (click)="onEditClick(recipe.id)">
+        <button *ngIf="(auth.user$ | async)?.uid === recipe.ownerId" mat-icon-button color="primary" aria-label="Edit button" (click)="onEditClick(recipe.id)">
           <mat-icon>edit</mat-icon>
         </button>
       </div>
     </mat-card-header>
     <div mat-card-image class="recipe-image" [ngStyle]="{'background-image': getImageURLStyle(recipe.photoURL)}"></div>
-    <!-- <img mat-card-image [src]="recipe.photoURL" alt="recipe photo" class="recipe-image" /> -->
     <mat-card-content>
       <div *ngIf="(deviceService.isHandset$ | async)" class="mobile-actions">
         <button mat-icon-button color="primary" aria-label="Share button" (click)="onClickShare(recipe.title)">

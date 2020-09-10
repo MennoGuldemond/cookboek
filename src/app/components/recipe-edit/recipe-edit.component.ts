@@ -105,14 +105,17 @@ export class RecipeEditComponent implements OnInit {
         ingredients: this.editRecipeForm.value.ingredients.map(x => x.ingredient),
         steps: this.editRecipeForm.value.steps.map(x => x.step)
       };
-  
-  
-  
+
       if (this.recipe.id) {
         // Existing recipe
         this.recipeService.update(toSave).subscribe(id => {
-          this.snackBar.open('Recept bijgewerkt', 'Oke', { duration: 3000 });
-          this.router.navigate([`recipe/${id}`]);
+          console.log(id);
+          if (id) {
+            this.snackBar.open('Recept Bijgewerkt', 'Oke', { duration: 3000 });
+            this.router.navigate([`recipe/${id}`]);
+          } else {
+            this.snackBar.open('Bijwerken mislukt', 'Oke', { duration: 3000 });
+          }
         });
       } else {
         // New recipe
@@ -120,8 +123,12 @@ export class RecipeEditComponent implements OnInit {
         toSave.ownerName = user.displayName;
 
         this.recipeService.save(toSave).subscribe(id => {
-          this.snackBar.open('Recept Opgeslagen', 'Oke', { duration: 3000 });
-          this.router.navigate([`recipe/${id}`]);
+          if (id) {
+            this.snackBar.open('Recept Opgeslagen', 'Oke', { duration: 3000 });
+            this.router.navigate([`recipe/${id}`]);
+          } else {
+            this.snackBar.open('Opslaan mislukt', 'Oke', { duration: 3000 });
+          }
         });
       }
     });
