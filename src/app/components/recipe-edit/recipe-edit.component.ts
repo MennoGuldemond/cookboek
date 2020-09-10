@@ -16,6 +16,7 @@ export class RecipeEditComponent implements OnInit {
   recipe: Recipe;
   photoFile: File;
   editRecipeForm: FormGroup;
+  imagePreviewSrc: string;
 
   get ingredientsFormArray(): FormArray {
     return this.editRecipeForm.get('ingredients') as FormArray;
@@ -129,6 +130,12 @@ export class RecipeEditComponent implements OnInit {
   onFileInputChange(data: any): void {
     if (data.target.files) {
       this.photoFile = data.target.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(this.photoFile);
+
+      reader.onload = () => {
+        this.imagePreviewSrc = reader.result as string;
+      };
     } else {
       this.photoFile = null;
     }

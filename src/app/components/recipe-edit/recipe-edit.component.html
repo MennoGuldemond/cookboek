@@ -1,25 +1,24 @@
 <div class="page-padding">
   <form *ngIf="recipe" [formGroup]="editRecipeForm" (ngSubmit)="onSubmit()" fxLayout="column">
 
-    <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
-      <mat-form-field appearance="outline" fxFlex>
-        <mat-label for="title">Titel</mat-label>
-        <input matInput placeholder="Bijv. Chocolade koekjes" type="text" formControlName="title">
-      </mat-form-field>
-
-      <input #imageInput hidden type="file" onclick="this.value=null" (change)="onFileInputChange($event)"
-          accept="image/png, image/jpeg" />
-      <button mat-raised-button type="button" class="upload-button" (click)="imageInput.click()">
-        <mat-icon aria-hidden="false" color="primary">insert_photo</mat-icon>
-        Upload image
-      </button>
-    </div>
-
     <mat-form-field appearance="outline">
-      <mat-label for="description">Beschrijving</mat-label>
-      <textarea matInput placeholder="Vertel iets over jouw recept" formControlName="description"
-          rows="5"></textarea>
+      <mat-label for="title">Titel</mat-label>
+      <input matInput placeholder="Bijv. Chocolade koekjes" type="text" formControlName="title">
     </mat-form-field>
+
+    <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" class="image-and-description-container">
+      <mat-form-field appearance="outline" fxFlex>
+        <mat-label for="description">Beschrijving</mat-label>
+        <textarea matInput placeholder="Vertel iets over jouw recept" formControlName="description"
+            rows="5"></textarea>
+      </mat-form-field>
+      <input #imageInput hidden type="file" onclick="this.value=null" (change)="onFileInputChange($event)"
+        accept="image/png, image/jpeg" />
+      <div *ngIf="!imagePreviewSrc && !recipe.photoURL" class="image-preview" (click)="imageInput.click()">
+        <h4>Foto uploaden</h4>
+      </div>
+      <img *ngIf="imagePreviewSrc || recipe.photoURL" [src]="imagePreviewSrc ? imagePreviewSrc : recipe.photoURL" class="image-preview" (click)="imageInput.click()">
+    </div>
 
     <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
       <div fxFlex="50%" class="form-array-container">

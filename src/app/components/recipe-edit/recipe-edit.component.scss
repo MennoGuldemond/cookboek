@@ -1,20 +1,51 @@
 .form-array-header {
-    display: inline;
+  display: inline;
 }
 
-.upload-button{
-    height: 2.6em;
-    max-width: 300px;
-    margin-top: .7em;
+.upload-button {
+  height: 2.6em;
+  max-width: 300px;
+  margin-top: 0.7em;
 }
 
 .save-button {
-    margin-top: 3em;
-    max-width: 300px;
+  margin-top: 3em;
+  max-width: 300px;
 }
 
 .delete-icon {
-    color: #bbb;
-    cursor: pointer;
-    font-size: 18px;
+  color: #bbb;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.image-preview {
+  height: 100px;
+  width: 160px;
+  cursor: pointer;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  margin: 8px 16px 16px 16px;
+  text-align: center;
+
+  & h4 {
+    color: #ccc;
+    padding-top: 40px;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .image-and-description-container {
+    align-items: center;
+  }
+
+  mat-form-field {
+    width: 100%;
+    margin-bottom: 0 !important;
+  }
+
+  .image-preview {
+    margin-bottom: 32px;
+  }
+
 }
