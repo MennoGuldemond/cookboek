@@ -16,7 +16,8 @@
         </button>
       </div>
     </mat-card-header>
-    <img mat-card-image [src]="recipe.photoURL" alt="recipe photo" class="recipe-image" />
+    <div mat-card-image class="recipe-image" [ngStyle]="{'background-image': getImageURLStyle(recipe.photoURL)}"></div>
+    <!-- <img mat-card-image [src]="recipe.photoURL" alt="recipe photo" class="recipe-image" /> -->
     <mat-card-content>
       <div *ngIf="(deviceService.isHandset$ | async)" class="mobile-actions">
         <button mat-icon-button color="primary" aria-label="Share button" (click)="onClickShare(recipe.title)">

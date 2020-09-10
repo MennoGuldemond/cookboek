@@ -41,6 +41,9 @@ export class RecipeDetailComponent implements OnInit {
     } catch (error) {
       console.log('This browser does not support the share function.')
     }
+  }
 
+  getImageURLStyle(url: string): string {
+    return `url(${url});`;
   }
 }

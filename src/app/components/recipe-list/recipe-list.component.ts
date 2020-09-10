@@ -30,4 +30,8 @@ export class RecipeListComponent implements OnInit {
     this.router.navigate(['recipe-edit']);
   }
 
+  getImageURLStyle(recipe: Recipe): string {
+    return `url(${recipe.photoURL});`;
+  }
+
 }

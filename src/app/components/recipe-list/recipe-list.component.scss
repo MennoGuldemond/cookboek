@@ -5,11 +5,20 @@
 }
 
 .recipe-image {
-  max-height: 200px;
-  object-fit: cover;
+  height: 200px;
   margin-bottom: 6px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .recipe-container {
   padding-bottom: 10px;
+}
+
+// Only on larger screens
+@media only screen and (min-width: 700px) {
+  .recipe-image {
+    height: 400px;
+  }
 }
