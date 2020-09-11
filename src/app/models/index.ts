@@ -1,3 +1,3 @@
 export { Recipe } from './recipe';
-export { User } from './user';
+export { User, GoogleUser } from './user';
 export { UploadResult } from './upload-result';
