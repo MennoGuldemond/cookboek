@@ -6,7 +6,7 @@ import { AngularFirestore, AngularFirestoreDocument  } from '@angular/fire/fires
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
-import { User } from '../models/user';
+import { User, GoogleUser } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -45,9 +45,9 @@ export class AuthService {
     return this.updateUserData(credential.user);
   }
 
-  private updateUserData(user: User): Promise<void> {
+  private updateUserData(user: GoogleUser): Promise<void> {
     // Sets user data to firestore on login
-    const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
+    const userRef: AngularFirestoreDocument<GoogleUser> = this.afs.doc(`users/${user.uid}`);
 
     const data = {
       uid: user.uid,

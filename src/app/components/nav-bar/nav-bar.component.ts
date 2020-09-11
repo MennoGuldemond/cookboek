@@ -14,10 +14,14 @@ export class NavBarComponent {
     public auth: AuthService,
     public deviceService: DeviceService,
     private router: Router
-  ) {}
+  ) { }
 
-  onUserClick(): void {
-    this.router.navigate(['login']);
+  onLogoutClick(): void {
+    this.auth.signOut();
+  }
+  
+  onAccountClick(): void {
+    this.router.navigate(['account']);
   }
 
   onBackClick(): void {

@@ -8,8 +8,9 @@
       Menu
     </mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="/home">Home</a>
-      <a mat-list-item href="/recipes">Recipes</a>
+      <a mat-list-item routerLink="/home">Home</a>
+      <a mat-list-item routerLink="/recipes">Recepten</a>
+      <a *ngIf="auth.user$ | async" mat-list-item routerLink="/account">Mijn Account</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -27,8 +28,11 @@
       </button>
       <span fxFlex>Cookboek</span>
       <div *ngIf="auth.user$ | async as user; else login" fxLayout="row" class="avatar-circle">
-        <button mat-button (click)="onUserClick()">{{ user.displayName }}</button>
-        <img fxFlex [src]="user.photoURL + '=s32'" alt="profile photo">
+        <img fxFlex [matMenuTriggerFor]="userMenu" [src]="user.photoURL + '=s32'" alt="Profiel foto">
+        <mat-menu #userMenu="matMenu">
+          <button mat-menu-item (click)="onAccountClick()">Mijn Account</button>
+          <button mat-menu-item (click)="onLogoutClick()">Uitloggen</button>
+        </mat-menu>
       </div>
       <ng-template #login>
         <button mat-stroked-button (click)="auth.googleSignin()">Inloggen</button>
