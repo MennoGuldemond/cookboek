@@ -2,7 +2,7 @@
   <mat-card *ngIf="auth.user$ | async as user">
     <mat-card-header>
       <mat-card-title>{{ user.displayName }}</mat-card-title>
-      <mat-card-subtitle>Lid sinds: (datum)</mat-card-subtitle>
+      <mat-card-subtitle>Lid sinds: {{ user.createdOn.toDate() | date: 'dd MMMM yyyy' }}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <p>Aantal recepten: {{ user.recipeIds.length }}</p>
