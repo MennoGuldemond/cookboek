@@ -22,8 +22,8 @@ import {
   HomeComponent,
   NotFoundComponent,
   LoginComponent,
+  AccountComponent,
 } from './components';
-
 
 @NgModule({
   declarations: [
@@ -35,6 +35,7 @@ import {
     HomeComponent,
     NotFoundComponent,
     LoginComponent,
+    AccountComponent,
   ],
   imports: [
     BrowserModule,

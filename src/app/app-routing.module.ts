@@ -6,7 +6,8 @@ import {
   NotFoundComponent,
   HomeComponent,
   RecipeListComponent,
-  LoginComponent
+  LoginComponent,
+  AccountComponent,
 } from './components';
 import { AuthGuard } from './guards';
 
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'recipes', component: RecipeListComponent },
   { path: 'recipe-edit/:id', component: RecipeEditComponent, canActivate: [AuthGuard] },
   { path: 'recipe-edit', component: RecipeEditComponent, canActivate: [AuthGuard] },
+  { path: 'account', component: AccountComponent, canActivate: [AuthGuard] },
   { path: '',   redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: NotFoundComponent },
 ];
