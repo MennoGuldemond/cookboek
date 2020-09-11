@@ -4,7 +4,7 @@ import { auth } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument  } from '@angular/fire/firestore';
 import { Observable, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, take, map } from 'rxjs/operators';
 
 import { User, GoogleUser } from '../models/user';
 
@@ -42,21 +42,33 @@ export class AuthService {
       localStorage.removeItem('urlBeforeLogin');
     }
 
-    return this.updateUserData(credential.user);
+    this.updateUserData(credential.user).subscribe(x => x);
+    return null;
   }
 
-  private updateUserData(user: GoogleUser): Promise<void> {
-    // Sets user data to firestore on login
+  private updateUserData(user: GoogleUser): Observable<Promise<void>> {
     const userRef: AngularFirestoreDocument<GoogleUser> = this.afs.doc(`users/${user.uid}`);
 
-    const data = {
-      uid: user.uid,
-      email: user.email,
-      displayName: user.displayName,
-      photoURL: user.photoURL
-    };
+    return userRef.valueChanges().pipe(
+      take(1),
+      map((savedUser: User) => {        
+        const data: any = {
+          uid: user.uid,
+          email: user.email,
+          displayName: user.displayName,
+          photoURL: user.photoURL
+        };
 
-    return userRef.set(data, { merge: true });
+        if (savedUser == null) {
+          // New user, initialize some values.
+          data.recipeIds = [];
+          data.createdOn = new Date();
+          return userRef.set(data);
+        }
+
+        return userRef.set(data, { merge: true });
+      })
+    )
   }
 
   async signOut(): Promise<void> {

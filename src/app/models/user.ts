@@ -1,14 +1,6 @@
-export class User implements GoogleUser {
-
-    constructor() {
-        this.recipeIds = [];
-    }
-
-    uid: string;
-    email: string;
-    photoURL?: string;
-    displayName?: string;
+export interface User extends GoogleUser {
     recipeIds: string[];
+    createdOn: Date;
 }
 
 export interface GoogleUser {
