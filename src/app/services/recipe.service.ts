@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
-import { Observable, from, of } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { Recipe } from '../models';
@@ -52,6 +52,29 @@ export class RecipeService {
     }).then(() => {
       return recipe.id;
     }));
+  }
+
+  addLike(recipe: Recipe, userUid: string): void {
+    let recipeRef = this.afs.collection("recipes").doc(recipe.id);
+    recipeRef.get().subscribe(doc => {
+      // Only save the like, if this user hasn't liked it already.
+      if (doc.data().likes.includes(userUid) === false) {
+        recipe.likes = [ ...doc.data().likes, userUid ];
+        recipeRef.update({ likes: recipe.likes });
+      }
+    });
+  }
+
+  removeLike(recipe: Recipe, userUid: string): void {
+    let recipeRef = this.afs.collection("recipes").doc(recipe.id);
+    recipeRef.get().subscribe(doc => {
+      recipe.likes = doc.data().likes;
+      const index = recipe.likes.indexOf(userUid);
+      if (index > -1) {
+        recipe.likes.splice(index, 1);
+        recipeRef.update({ likes: recipe.likes });
+      }
+    });
   }
 
 }

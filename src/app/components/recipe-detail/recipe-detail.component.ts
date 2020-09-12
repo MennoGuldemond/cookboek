@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 
 import { RecipeService, DeviceService, AuthService } from '../../services';
 import { Recipe } from '../../models';
-import { map, first } from 'rxjs/operators';
 
 @Component({
   selector: 'cobo-recipe-detail',
@@ -12,6 +11,7 @@ import { map, first } from 'rxjs/operators';
   styleUrls: ['./recipe-detail.component.scss'],
 })
 export class RecipeDetailComponent implements OnInit {
+
   recipe$: Observable<Recipe>;
 
   constructor(
@@ -47,6 +47,20 @@ export class RecipeDetailComponent implements OnInit {
 
   getImageURLStyle(url: string): string {
     return `url(${url});`;
+  }
+
+  onLikeClick(event: MouseEvent, recipe: Recipe): void {
+    event.stopPropagation();
+    this.auth.user$.subscribe(user => {
+      this.recipeService.addLike(recipe, user.uid);
+    });
+  }
+
+  onUnlikeClick(event: MouseEvent, recipe: Recipe): void {
+    event.stopPropagation();
+    this.auth.user$.subscribe(user => {
+      this.recipeService.removeLike(recipe, user.uid);
+    });
   }
 
 }

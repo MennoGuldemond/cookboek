@@ -11,9 +11,7 @@
         <mat-card-subtitle>Een recept van {{ recipe.ownerName }}</mat-card-subtitle>
       </mat-card-header>
       <div mat-card-image class="recipe-image" [ngStyle]="{'background-image': getImageURLStyle(recipe)}"></div>
-      <button mat-icon-button color="primary" aria-label="Like button">
-        <mat-icon>favorite_border</mat-icon>
-      </button>
+      <p *ngIf="recipe.likes?.length > 0">{{ recipe.likes.length }}{{ recipe.likes.length > 1 ? ' personen vinden' : ' persoon vindt'}} dit recept leuk</p>
     </mat-card>
   </div>
   <button class="add-button" mat-fab color="primary" aria-label="Add new recipe button" (click)="onClickAdd()">
