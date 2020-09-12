@@ -12,6 +12,7 @@ export class Recipe {
     steps: string[];
     photoURL: string;
     likes: string[];
+    createdOn: Date;
 
     ownerId: string;
     ownerName: string;

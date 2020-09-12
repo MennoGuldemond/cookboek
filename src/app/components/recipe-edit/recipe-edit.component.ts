@@ -121,6 +121,8 @@ export class RecipeEditComponent implements OnInit {
         // New recipe
         toSave.ownerId = user.uid;
         toSave.ownerName = user.displayName;
+        toSave.likes = [];
+        toSave.createdOn = new Date();
 
         this.recipeService.save(toSave).subscribe(id => {
           if (id) {

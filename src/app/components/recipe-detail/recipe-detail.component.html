@@ -42,6 +42,7 @@
           <mat-icon>edit</mat-icon>
         </button>
       </div>
+      <p>Recept aangemaakt op: {{ recipe.createdOn.toDate() | date: 'dd MMMM yyyy' }}</p>
       <p>{{ recipe.description }}</p>
       <h3>Ingredi&#235;nten</h3>
       <ul>
