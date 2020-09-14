@@ -1,4 +1,6 @@
-.home-icon {
-    font-size: 100px;
-    width: 100%;
+// Only on larger screens
+@media only screen and (min-width: 700px) {
+  .recipe-container {
+    padding: 50px;
+  }
 }

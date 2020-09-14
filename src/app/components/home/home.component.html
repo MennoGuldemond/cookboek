@@ -1,4 +1,9 @@
 <div class="center-content page-padding">
-    <h1>Welkom bij Cookboek</h1>
-    <mat-icon class="home-icon" aria-hidden="false" aria-label="Cake" color="primary">cake</mat-icon>
+  <h1>Welkom bij Cookboek</h1>
+  <h3>De app om recepten de delen en te vinden!</h3>
+
+  <div *ngIf="newestRecipe$ | async as newRecipe" class="recipe-container">
+    <h3>Bekijk nu het meest recente recept!</h3>
+    <cobo-recipe-card [recipe]="newRecipe"></cobo-recipe-card>
+  </div>
 </div>

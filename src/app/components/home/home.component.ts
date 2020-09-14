@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+
+import { Recipe } from '../../models';
+import { RecipeService } from '../../services';
 
 @Component({
   selector: 'cobo-home',
@@ -7,9 +11,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  newestRecipe$: Observable<Recipe>;
+
+  constructor(private recipeService: RecipeService) { }
 
   ngOnInit(): void {
+    this.newestRecipe$ = this.recipeService.getNewest();
   }
 
 }
