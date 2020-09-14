@@ -1,0 +1,10 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+$cobo-primary: mat-palette($mat-green);
+$cobo-accent: mat-palette($mat-lime, 100, 500, A100);
+$cobo-warn: mat-palette($mat-deep-orange);
+
+$cobo-theme: mat-light-theme($cobo-primary, $cobo-accent, $cobo-warn);
+
+@include angular-material-theme($cobo-theme);
