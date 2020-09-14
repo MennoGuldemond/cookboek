@@ -5,14 +5,7 @@
   fxLayoutGap="1%"
 >
   <div *ngFor="let recipe of recipes$ | async" fxFlex="49%" fxFlex.xl="32%" class="recipe-container">
-    <mat-card class="clickable" (click)="onRecipeClick(recipe)">
-      <mat-card-header>
-        <mat-card-title>{{ recipe.title }}</mat-card-title>
-        <mat-card-subtitle>Een recept van {{ recipe.ownerName }}</mat-card-subtitle>
-      </mat-card-header>
-      <div mat-card-image class="recipe-image" [ngStyle]="{'background-image': getImageURLStyle(recipe)}"></div>
-      <mat-icon [matBadge]="recipe.likes?.length" matBadgeColor="accent" matBadgeSize="small" color="primary">favorite</mat-icon>
-    </mat-card>
+    <cobo-recipe-card class="clickable" [recipe]="recipe" (click)="onRecipeClick(recipe)"></cobo-recipe-card>
   </div>
   <button class="add-button" mat-fab color="primary" aria-label="Add new recipe button" (click)="onClickAdd()">
     <mat-icon>add</mat-icon>

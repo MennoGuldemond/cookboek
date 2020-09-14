@@ -15,10 +15,3 @@
 .recipe-container {
   padding-bottom: 10px;
 }
-
-// Only on larger screens
-@media only screen and (min-width: 700px) {
-  .recipe-image {
-    height: 400px;
-  }
-}

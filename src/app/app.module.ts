@@ -23,6 +23,7 @@ import {
   NotFoundComponent,
   LoginComponent,
   AccountComponent,
+  RecipeCardComponent
 } from './components';
 
 @NgModule({
@@ -36,6 +37,7 @@ import {
     NotFoundComponent,
     LoginComponent,
     AccountComponent,
+    RecipeCardComponent,
   ],
   imports: [
     BrowserModule,
