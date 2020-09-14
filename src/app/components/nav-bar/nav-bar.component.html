@@ -7,7 +7,7 @@
       <mat-icon class="cake-icon" aria-hidden="false" aria-label="Cake" color="primary">cake</mat-icon>
       Menu
     </mat-toolbar>
-    <mat-nav-list>
+    <mat-nav-list (click)="closeDrawerIfHandset(drawer)">
       <a mat-list-item routerLink="/home">Home</a>
       <a mat-list-item routerLink="/recipes">Recepten</a>
       <a *ngIf="auth.user$ | async" mat-list-item routerLink="/account">Mijn Account</a>

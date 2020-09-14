@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 
 import { AuthService, DeviceService } from '../../services';
@@ -26,5 +27,13 @@ export class NavBarComponent {
 
   onBackClick(): void {
     window.history.back();
+  }
+
+  closeDrawerIfHandset(drawer: MatSidenav): void {
+    this.deviceService.isHandset$.subscribe(isHandset => {
+      if (isHandset === true) {
+        drawer.close();
+      }
+    })
   }
 }
