@@ -37,8 +37,8 @@ export class RecipeService {
   }
 
   getNewest(): Observable<Recipe> {
-    return this.afs.collection<Recipe>('recipes', ref => {
-      return ref.orderBy('createdOn').limit(1);
+    return this.afs.collection<Recipe>(('recipes'), ref => {
+      return ref.orderBy('createdOn', 'desc').limit(1);
     }).valueChanges().pipe(
       map(arrayWithOneRecipe => {
         return arrayWithOneRecipe[0];
