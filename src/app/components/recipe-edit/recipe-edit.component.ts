@@ -178,4 +178,22 @@ export class RecipeEditComponent implements OnInit {
     return this.editRecipeForm.value.steps[lastStepIndex].step != '';
   }
 
+  onListEnter(event, addButton): void {
+    event.preventDefault();
+    
+    if (addButton) {
+      addButton._elementRef.nativeElement.click();
+    }
+
+    // TODO: fix this trickery
+    setTimeout(() => {
+      let element = event.srcElement.parentElement.parentElement.parentElement.parentElement.nextElementSibling.getElementsByTagName('input')[0];
+      if(element == null)
+        return;
+      else
+      // focus if the next input is found
+        element.focus();
+      }, 1);
+}
+
 }

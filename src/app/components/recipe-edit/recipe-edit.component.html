@@ -26,7 +26,7 @@
 
           <div formArrayName="ingredients" fxLayout="column">
             <mat-form-field *ngFor="let step of ingredientsFormArray.controls; let i = index"
-              [formGroupName]="i" appearance="outline">
+              [formGroupName]="i" appearance="outline" (keyup.enter)="onListEnter($event, addIngredientBtn)">
               <mat-label for="ingredient{{i}}">Ingredi&#235;nt {{i + 1}}</mat-label>
               <input matInput placeholder="Bijv. 200 gram bloem" type="text" formControlName="ingredient">
               <mat-icon matSuffix aria-label="Remove" class="delete-icon" (click)="removeIngredient(i)">clear</mat-icon>
@@ -34,7 +34,7 @@
           </div>
 
           <div class="mobile-center-content">
-            <button mat-mini-fab color="primary" aria-label="button for adding a new ingredi&#235;nt"
+            <button #addIngredientBtn mat-mini-fab color="primary" type="button"  aria-label="button for adding a new ingredi&#235;nt"
               [disabled]="canAddIngredient() == false" (click)="addIngredient()">
               <mat-icon>add</mat-icon>
             </button>
@@ -46,7 +46,7 @@
 
           <div formArrayName="steps" fxLayout="column">
             <mat-form-field *ngFor="let step of stepsFormArray.controls; let i = index" [formGroupName]="i"
-              appearance="outline">
+              appearance="outline" (keyup.enter)="onListEnter($event, addStepBtn)">
               <mat-label for="step{{i}}">Stap {{i + 1}}</mat-label>
               <input matInput placeholder="Bijv. Voeg nu het ei toe" type="text" formControlName="step">
               <mat-icon matSuffix aria-label="Remove" class="delete-icon" (click)="removeStep(i)">clear</mat-icon>
@@ -54,7 +54,7 @@
           </div>
 
           <div class="mobile-center-content">
-            <button mat-mini-fab color="primary" aria-label="button for adding a new step"
+            <button #addStepBtn mat-mini-fab color="primary" type="button" aria-label="button for adding a new step"
               [disabled]="canAddStep() == false" (click)="addStep()">
               <mat-icon>add</mat-icon>
             </button>
