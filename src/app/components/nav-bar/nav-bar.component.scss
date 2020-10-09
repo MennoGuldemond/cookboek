@@ -1,5 +1,9 @@
 mat-toolbar {
-  color: #fff !important;
+  color: #8d8d8d !important;
+}
+
+mat-sidenav-content {
+  background-color: #fff;
 }
 
 .sidenav-container {
@@ -8,6 +12,7 @@ mat-toolbar {
 
 .sidenav {
   width: 200px;
+  border-radius: 0px 16px 16px 0px;
 }
 
 .sidenav .mat-toolbar {
@@ -15,6 +20,8 @@ mat-toolbar {
 }
 
 .mat-toolbar.mat-primary {
+  background: #fff;
+  color: #8d8d8d !important;
   position: sticky;
   top: 0;
   z-index: 1;

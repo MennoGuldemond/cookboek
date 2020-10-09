@@ -1,5 +1,6 @@
 mat-card {
   text-align: start;
+  border-radius: 16px;
 }
 
 .recipe-image {
@@ -7,6 +8,12 @@ mat-card {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  color: #fff;
+
+  & > h2, h4 {
+    padding: 0 8px;
+    margin: 0;
+  }
 }
 
 // Only on larger screens

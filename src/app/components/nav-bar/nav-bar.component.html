@@ -3,10 +3,7 @@
       [attr.role]="(deviceService.isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(deviceService.isHandset$ | async) ? 'over' : 'side'"
       [opened]="(deviceService.isHandset$ | async) === false">
-    <mat-toolbar>
-      <mat-icon class="cake-icon" aria-hidden="false" aria-label="Cake" color="primary">cake</mat-icon>
-      Menu
-    </mat-toolbar>
+    <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list (click)="closeDrawerIfHandset(drawer)">
       <a mat-list-item routerLink="/home">Home</a>
       <a mat-list-item routerLink="/recipes">Recepten</a>
@@ -26,7 +23,7 @@
       <button *ngIf="(deviceService.isHandset$ | async) === false" mat-icon-button aria-label="Back button" (click)="onBackClick()">
         <mat-icon>arrow_back</mat-icon>
       </button>
-      <span fxFlex>Cookboek</span>
+      <span fxFlex class="center-content">Cookboek</span>
       <div *ngIf="auth.user$ | async as user; else login" fxLayout="row" class="avatar-circle">
         <img fxFlex [matMenuTriggerFor]="userMenu" [src]="user.photoURL + '=s32'" alt="Profiel foto">
         <mat-menu #userMenu="matMenu">
