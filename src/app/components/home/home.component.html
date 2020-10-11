@@ -4,6 +4,6 @@
 
   <div *ngIf="newestRecipe$ | async as newRecipe" class="recipe-container">
     <h3>Bekijk nu het nieuwste recept:</h3>
-    <cobo-recipe-card [recipe]="newRecipe"></cobo-recipe-card>
+    <cobo-recipe-card [recipe]="newRecipe" (click)="onRecipeClick(newRecipe)"></cobo-recipe-card>
   </div>
 </div>
