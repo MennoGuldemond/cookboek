@@ -3,7 +3,10 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Montserrat, "Helvetica Neue", sans-serif; }
 
-.mat-stroked-button, .mat-raised-button {
+.mat-stroked-button,
+.mat-raised-button,
+.mat-menu-panel,
+mat-card {
     border-radius: 16px !important;
 }
 

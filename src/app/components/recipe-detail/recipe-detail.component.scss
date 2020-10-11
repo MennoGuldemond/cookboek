@@ -4,6 +4,12 @@
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  color: #fff;
+
+  & > h2, h4 {
+    padding: 0 8px;
+    margin: 0;
+  }
 }
 
 .desktop-actions {
