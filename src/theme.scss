@@ -2,7 +2,7 @@
 @include mat-core();
 
 $cobo-primary: mat-palette($mat-grey);
-$cobo-accent: mat-palette($mat-deep-orange, 100, 500, A100);
+$cobo-accent: mat-palette($mat-teal);
 $cobo-warn: mat-palette($mat-pink);
 
 $cobo-theme: mat-light-theme($cobo-primary, $cobo-accent, $cobo-warn);
