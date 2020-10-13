@@ -29,7 +29,7 @@
               [formGroupName]="i" appearance="outline" (keyup.enter)="onListEnter($event, addIngredientBtn)">
               <mat-label for="ingredient{{i}}">Ingredi&#235;nt {{i + 1}}</mat-label>
               <input matInput placeholder="Bijv. 200 gram bloem" type="text" formControlName="ingredient">
-              <mat-icon matSuffix aria-label="Remove" class="delete-icon" (click)="removeIngredient(i)">clear</mat-icon>
+              <mat-icon *ngIf="i > 0" matSuffix aria-label="Remove" class="delete-icon" (click)="removeIngredient(i)">clear</mat-icon>
             </mat-form-field>
           </div>
 
@@ -49,7 +49,7 @@
               appearance="outline" (keyup.enter)="onListEnter($event, addStepBtn)">
               <mat-label for="step{{i}}">Stap {{i + 1}}</mat-label>
               <input matInput placeholder="Bijv. Voeg nu het ei toe" type="text" formControlName="step">
-              <mat-icon matSuffix aria-label="Remove" class="delete-icon" (click)="removeStep(i)">clear</mat-icon>
+              <mat-icon *ngIf="i > 0" matSuffix aria-label="Remove" class="delete-icon" (click)="removeStep(i)">clear</mat-icon>
             </mat-form-field>
           </div>
 
