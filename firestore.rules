@@ -14,6 +14,7 @@ service cloud.firestore {
       allow read;
       allow update: if signedIn();
       allow create: if signedIn();
+      allow delete: if signedIn();
     }
   }
 }
