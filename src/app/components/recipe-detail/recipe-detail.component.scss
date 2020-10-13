@@ -27,5 +27,12 @@
 @media only screen and (min-width: 700px) {
   .recipe-image {
     height: 800px;
+
+    & > h2 {
+      padding: 16px 0 0 16px;
+    }
+    & > h4 {
+      padding-left: 16px;
+    }
   }
 }
