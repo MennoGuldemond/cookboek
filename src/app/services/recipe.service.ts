@@ -64,6 +64,19 @@ export class RecipeService {
     }));
   }
 
+  delete(id: string): Observable<boolean> {
+    return from (
+      this.afs.collection('recipes').doc(id).delete()
+        .catch(err => {
+          console.log(err);
+          return false;
+        }).then(() => {
+          return true;
+        })
+      )
+    ;
+  }
+
   addLike(recipe: Recipe, userUid: string): void {
     let recipeRef = this.afs.collection("recipes").doc(recipe.id);
     recipeRef.get().subscribe(doc => {

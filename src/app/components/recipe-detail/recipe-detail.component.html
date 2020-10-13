@@ -22,6 +22,9 @@
         <button *ngIf="(auth.user$ | async)?.uid === recipe.ownerId" mat-icon-button color="primary" aria-label="Edit button" (click)="onEditClick(recipe.id)">
           <mat-icon>edit</mat-icon>
         </button>
+        <button *ngIf="(auth.user$ | async)?.uid === recipe.ownerId" mat-icon-button color="primary" aria-label="Delete button" (click)="onDeleteClick(recipe.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
       </div>
       <p>Recept aangemaakt op: {{ recipe.createdOn.toDate() | date: 'dd MMMM yyyy' }}</p>
       <p>{{ recipe.description }}</p>

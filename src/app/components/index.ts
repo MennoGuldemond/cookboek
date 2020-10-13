@@ -7,3 +7,4 @@ export { NotFoundComponent } from './not-found/not-found.component';
 export { LoginComponent } from './login/login.component';
 export { AccountComponent } from './account/account.component';
 export { RecipeCardComponent } from './recipe-card/recipe-card.component';
+export { YesNoDialogComponent } from './yes-no-dialog/yes-no-dialog.component';

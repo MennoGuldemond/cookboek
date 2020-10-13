@@ -23,7 +23,8 @@ import {
   NotFoundComponent,
   LoginComponent,
   AccountComponent,
-  RecipeCardComponent
+  RecipeCardComponent,
+  YesNoDialogComponent,
 } from './components';
 
 @NgModule({
@@ -38,6 +39,7 @@ import {
     LoginComponent,
     AccountComponent,
     RecipeCardComponent,
+    YesNoDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,8 +55,9 @@ import {
     MaterialModule,
   ],
   providers: [
-    { provide: BUCKET, useValue: environment.firebase.storageBucket }
+    { provide: BUCKET, useValue: environment.firebase.storageBucket },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [YesNoDialogComponent],
 })
-export class AppModule { }
+export class AppModule {}

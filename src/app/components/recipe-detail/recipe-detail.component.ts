@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { RecipeService, DeviceService, AuthService } from '../../services';
 import { Recipe } from '../../models';
+import { YesNoDialogComponent } from '../../components';
 
 @Component({
   selector: 'cobo-recipe-detail',
@@ -20,6 +23,8 @@ export class RecipeDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private recipeService: RecipeService,
     private router: Router,
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -32,6 +37,26 @@ export class RecipeDetailComponent implements OnInit {
 
   onEditClick(id: string): void {
     this.router.navigate([`recipe-edit/${id}`]);
+  }
+
+  onDeleteClick(id: string): void {
+    this.dialog.open(YesNoDialogComponent, {
+      data: {
+        title: 'Recept verwijderen',
+        text: 'Weet je zeker dat je het recept wilt verijderen?'
+      }
+    }).afterClosed().subscribe(clickedYes => {
+      if (clickedYes) {
+        this.recipeService.delete(id).subscribe(succeeded => {
+          if (succeeded) {
+            this.snackBar.open('Het recept is verwijderd', 'Oke', { duration: 3000 });
+            this.router.navigate(['recipes']);
+          } else {
+            this.snackBar.open('Verwijderen mislukt', 'Oke', { duration: 3000 });
+          }
+        });
+      }
+    });
   }
 
   onClickShare(title: string): void {
