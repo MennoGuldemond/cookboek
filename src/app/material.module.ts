@@ -11,6 +11,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [],
@@ -27,6 +28,7 @@ import { MatChipsModule } from '@angular/material/chips';
     MatMenuModule,
     MatBadgeModule,
     MatChipsModule,
+    MatDialogModule,
   ],
   exports: [
     MatToolbarModule,
@@ -40,6 +42,7 @@ import { MatChipsModule } from '@angular/material/chips';
     MatMenuModule,
     MatBadgeModule,
     MatChipsModule,
+    MatDialogModule,
   ],
   providers: [],
 })
