@@ -5,7 +5,7 @@
       <h4>van {{ recipe.ownerName }}</h4>
     </div>
     <mat-card-content>
-      <div *ngIf="(deviceService.isHandset$ | async)" class="mobile-actions">
+      <div class="actions">
         <button *ngIf="deviceService.isSafari()" mat-icon-button color="primary" aria-label="Share button" (click)="onClickShare(recipe.title)">
           <mat-icon>share</mat-icon>
         </button>
