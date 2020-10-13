@@ -37,6 +37,9 @@ export class RecipeEditComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // TODO: find a better fix for this
+    window.scrollTo(0, 0);
+
     this.route.params.subscribe(params => {
       if (params.id) {
         this.recipeService.getById(params.id).subscribe(recipe => {
