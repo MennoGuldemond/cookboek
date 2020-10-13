@@ -181,6 +181,7 @@ export class RecipeEditComponent implements OnInit {
     return this.editRecipeForm.value.steps[lastStepIndex].step != '';
   }
 
+  // This function tries to focus on the next input
   onListEnter(event, addButton): void {
     event.preventDefault();
     
