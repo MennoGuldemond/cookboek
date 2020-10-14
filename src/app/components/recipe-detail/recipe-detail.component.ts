@@ -69,7 +69,7 @@ export class RecipeDetailComponent implements OnInit {
         url: window.location.href
       });
     } catch (error) {
-      console.log('This browser does not support the share function.');
+      console.error('This browser does not support the share function.');
     }
   }
 

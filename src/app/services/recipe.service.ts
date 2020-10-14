@@ -68,7 +68,7 @@ export class RecipeService {
     return from (
       this.afs.collection('recipes').doc(recipe.id).delete()
         .catch(err => {
-          console.log(err);
+          console.error(err);
           return false;
         }).then(() => {
           return true;
