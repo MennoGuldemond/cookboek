@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { RecipeService, DeviceService, AuthService } from '../../services';
+import { RecipeService, DeviceService, AuthService, PhotoService } from '../../services';
 import { Recipe } from '../../models';
 import { YesNoDialogComponent } from '../../components';
 
@@ -22,6 +22,7 @@ export class RecipeDetailComponent implements OnInit {
     public auth: AuthService,
     private route: ActivatedRoute,
     private recipeService: RecipeService,
+    private photoService: PhotoService,
     private router: Router,
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
@@ -39,7 +40,7 @@ export class RecipeDetailComponent implements OnInit {
     this.router.navigate([`recipe-edit/${id}`]);
   }
 
-  onDeleteClick(id: string): void {
+  onDeleteClick(recipe: Recipe): void {
     this.dialog.open(YesNoDialogComponent, {
       data: {
         title: 'Recept verwijderen',
@@ -47,10 +48,12 @@ export class RecipeDetailComponent implements OnInit {
       }
     }).afterClosed().subscribe(clickedYes => {
       if (clickedYes) {
-        this.recipeService.delete(id).subscribe(succeeded => {
+        this.recipeService.delete(recipe).subscribe(succeeded => {
           if (succeeded) {
-            this.snackBar.open('Het recept is verwijderd', 'Oke', { duration: 3000 });
-            this.router.navigate(['recipes']);
+            this.photoService.delete(recipe).subscribe(x => {
+              this.snackBar.open('Het recept is verwijderd', 'Oke', { duration: 3000 });
+              this.router.navigate(['recipes']);
+            });         
           } else {
             this.snackBar.open('Verwijderen mislukt', 'Oke', { duration: 3000 });
           }

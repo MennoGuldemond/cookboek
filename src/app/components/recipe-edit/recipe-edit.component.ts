@@ -87,7 +87,7 @@ export class RecipeEditComponent implements OnInit {
 
   onSubmit(): void {
     if (this.photoFile) {
-      this.photoService.uploadPhoto(this.photoFile).subscribe(uploadResult => {
+      this.photoService.upload(this.photoFile).subscribe(uploadResult => {
         uploadResult.downloadURL$.subscribe(url => {
           this.recipe.photoURL = url;
           this.saveRecipe();

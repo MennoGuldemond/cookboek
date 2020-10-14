@@ -64,9 +64,9 @@ export class RecipeService {
     }));
   }
 
-  delete(id: string): Observable<boolean> {
+  delete(recipe: Recipe): Observable<boolean> {
     return from (
-      this.afs.collection('recipes').doc(id).delete()
+      this.afs.collection('recipes').doc(recipe.id).delete()
         .catch(err => {
           console.log(err);
           return false;

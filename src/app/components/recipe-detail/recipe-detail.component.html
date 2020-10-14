@@ -22,7 +22,7 @@
         <button *ngIf="(auth.user$ | async)?.uid === recipe.ownerId" mat-icon-button color="primary" aria-label="Edit button" (click)="onEditClick(recipe.id)">
           <mat-icon>edit</mat-icon>
         </button>
-        <button *ngIf="(auth.user$ | async)?.uid === recipe.ownerId" mat-icon-button color="primary" aria-label="Delete button" (click)="onDeleteClick(recipe.id)">
+        <button *ngIf="(auth.user$ | async)?.uid === recipe.ownerId" mat-icon-button color="primary" aria-label="Delete button" (click)="onDeleteClick(recipe)">
           <mat-icon>delete</mat-icon>
         </button>
       </div>
