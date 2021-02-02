@@ -9,10 +9,9 @@ import { Recipe } from '../../models';
 @Component({
   selector: 'cobo-recipe-edit',
   templateUrl: './recipe-edit.component.html',
-  styleUrls: ['./recipe-edit.component.scss']
+  styleUrls: ['./recipe-edit.component.scss'],
 })
 export class RecipeEditComponent implements OnInit {
-
   recipe: Recipe;
   photoFile: File;
   editRecipeForm: FormGroup;
@@ -33,16 +32,16 @@ export class RecipeEditComponent implements OnInit {
     private authService: AuthService,
     private route: ActivatedRoute,
     private router: Router,
-    private snackBar: MatSnackBar,
-  ) { }
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     // TODO: find a better fix for this
     window.scrollTo(0, 0);
 
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe((params) => {
       if (params.id) {
-        this.recipeService.getById(params.id).subscribe(recipe => {
+        this.recipeService.getById(params.id).subscribe((recipe) => {
           if (recipe) {
             this.recipe = recipe;
             this.buildForm();
@@ -63,32 +62,42 @@ export class RecipeEditComponent implements OnInit {
 
     if (this.recipe.ingredients.length) {
       for (const ingredient of this.recipe.ingredients) {
-        ingredientsArray.push(this.formBuilder.group({ ingredient: [ingredient, [Validators.required]] }));
+        ingredientsArray.push(
+          this.formBuilder.group({
+            ingredient: [ingredient, [Validators.required]],
+          })
+        );
       }
     } else {
-      ingredientsArray.push(this.formBuilder.group({ ingredient: ['', [Validators.required]] }));
+      ingredientsArray.push(
+        this.formBuilder.group({ ingredient: ['', [Validators.required]] })
+      );
     }
 
     if (this.recipe.steps.length) {
       for (const step of this.recipe.steps) {
-        stepsArray.push(this.formBuilder.group({ step: [step, [Validators.required]] }));
+        stepsArray.push(
+          this.formBuilder.group({ step: [step, [Validators.required]] })
+        );
       }
     } else {
-      stepsArray.push(this.formBuilder.group({ step: ['', [Validators.required]] }));
+      stepsArray.push(
+        this.formBuilder.group({ step: ['', [Validators.required]] })
+      );
     }
 
     this.editRecipeForm = this.formBuilder.group({
       title: [this.recipe.title, [Validators.required]],
       description: this.recipe.description,
       ingredients: this.formBuilder.array(ingredientsArray),
-      steps: this.formBuilder.array(stepsArray)
+      steps: this.formBuilder.array(stepsArray),
     });
   }
 
   onSubmit(): void {
     if (this.photoFile) {
-      this.photoService.upload(this.photoFile).subscribe(uploadResult => {
-        uploadResult.downloadURL$.subscribe(url => {
+      this.photoService.upload(this.photoFile).subscribe((uploadResult) => {
+        uploadResult.downloadURL$.subscribe((url) => {
           this.recipe.photoURL = url;
           this.saveRecipe();
         });
@@ -100,18 +109,20 @@ export class RecipeEditComponent implements OnInit {
   }
 
   saveRecipe(): void {
-    this.authService.user$.subscribe(user => {
+    this.authService.user$.subscribe((user) => {
       const toSave: Recipe = {
         ...this.recipe,
         title: this.editRecipeForm.value.title,
         description: this.editRecipeForm.value.description,
-        ingredients: this.editRecipeForm.value.ingredients.map(x => x.ingredient),
-        steps: this.editRecipeForm.value.steps.map(x => x.step)
+        ingredients: this.editRecipeForm.value.ingredients.map(
+          (x) => x.ingredient
+        ),
+        steps: this.editRecipeForm.value.steps.map((x) => x.step),
       };
 
       if (this.recipe.id) {
         // Existing recipe
-        this.recipeService.update(toSave).subscribe(id => {
+        this.recipeService.update(toSave).subscribe((id) => {
           console.log(id);
           if (id) {
             this.snackBar.open('Recept Bijgewerkt', 'Oke', { duration: 3000 });
@@ -127,7 +138,7 @@ export class RecipeEditComponent implements OnInit {
         toSave.likes = [];
         toSave.createdOn = new Date();
 
-        this.recipeService.save(toSave).subscribe(id => {
+        this.recipeService.save(toSave).subscribe((id) => {
           if (id) {
             this.snackBar.open('Recept Opgeslagen', 'Oke', { duration: 3000 });
             this.router.navigate([`recipe/${id}`]);
@@ -154,7 +165,9 @@ export class RecipeEditComponent implements OnInit {
   }
 
   addIngredient(): void {
-    this.ingredientsFormArray.push(this.formBuilder.group({ ingredient: ['', [Validators.required]] }));
+    this.ingredientsFormArray.push(
+      this.formBuilder.group({ ingredient: ['', [Validators.required]] })
+    );
   }
 
   removeIngredient(index: number): void {
@@ -162,7 +175,9 @@ export class RecipeEditComponent implements OnInit {
   }
 
   addStep(): void {
-    this.stepsFormArray.push(this.formBuilder.group({ step: ['', [Validators.required]] }));
+    this.stepsFormArray.push(
+      this.formBuilder.group({ step: ['', [Validators.required]] })
+    );
   }
 
   removeStep(index: number): void {
@@ -170,9 +185,13 @@ export class RecipeEditComponent implements OnInit {
   }
 
   canAddIngredient(): boolean {
-    const lastIngredientIndex = this.editRecipeForm.value.ingredients.length - 1;
+    const lastIngredientIndex =
+      this.editRecipeForm.value.ingredients.length - 1;
     // tslint:disable-next-line:triple-equals
-    return this.editRecipeForm.value.ingredients[lastIngredientIndex].ingredient != '';
+    return (
+      this.editRecipeForm.value.ingredients[lastIngredientIndex].ingredient !=
+      ''
+    );
   }
 
   canAddStep(): boolean {
@@ -184,20 +203,20 @@ export class RecipeEditComponent implements OnInit {
   // This function tries to focus on the next input
   onListEnter(event, addButton): void {
     event.preventDefault();
-    
+    event.stopPropagation();
+
     if (addButton) {
       addButton._elementRef.nativeElement.click();
     }
 
     // TODO: fix this trickery
     setTimeout(() => {
-      let element = event.srcElement.parentElement.parentElement.parentElement.parentElement.nextElementSibling.getElementsByTagName('input')[0];
-      if(element == null)
-        return;
-      else
+      let element = event.srcElement.parentElement.parentElement.parentElement.parentElement.nextElementSibling.getElementsByTagName(
+        'input'
+      )[0];
+      if (element == null) return;
       // focus if the next input is found
-        element.focus();
-      }, 1);
-}
-
+      else element.focus();
+    }, 1);
+  }
 }
