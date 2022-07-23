@@ -2,8 +2,8 @@ import { AngularFireUploadTask, AngularFireStorageReference } from '@angular/fir
 import { Observable } from 'rxjs';
 
 export class UploadResult {
-    uploadTask: AngularFireUploadTask;
-    fileRef: AngularFireStorageReference;
-    uploadPercentage$: Observable<number>;
-    downloadURL$: Observable<any>;
+  uploadTask: AngularFireUploadTask;
+  fileRef: AngularFireStorageReference;
+  uploadPercentage$: Observable<number>;
+  downloadURL$: Observable<any>;
 }
