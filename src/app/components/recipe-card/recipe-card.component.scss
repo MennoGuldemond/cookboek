@@ -9,9 +9,16 @@ mat-card {
   background-repeat: no-repeat;
   color: #fff;
 
-  & > h2, h4 {
-    padding: 0 8px;
-    margin: 0;
+  & > div {
+    padding: 1rem;
+    width: fit-content;
+    background-color: #009688;
+    border-radius: 16px 0px 50px;
+    opacity: 0.9;
+    & > h4,
+    h2 {
+      margin: 0;
+    }
   }
 }
 

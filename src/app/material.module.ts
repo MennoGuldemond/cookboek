@@ -12,6 +12,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [],
@@ -29,6 +30,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatBadgeModule,
     MatChipsModule,
     MatDialogModule,
+    MatSlideToggleModule,
   ],
   exports: [
     MatToolbarModule,
@@ -43,6 +45,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatBadgeModule,
     MatChipsModule,
     MatDialogModule,
+    MatSlideToggleModule,
   ],
   providers: [],
 })

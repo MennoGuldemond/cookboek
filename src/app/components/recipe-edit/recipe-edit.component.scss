@@ -34,6 +34,10 @@
   }
 }
 
+mat-slide-toggle {
+  padding-bottom: 1em;
+}
+
 @media only screen and (max-width: 700px) {
   .image-and-description-container {
     align-items: center;
@@ -47,5 +51,4 @@
   .image-preview {
     margin-bottom: 32px;
   }
-
 }

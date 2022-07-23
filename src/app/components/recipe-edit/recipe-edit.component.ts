@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -69,29 +69,29 @@ export class RecipeEditComponent implements OnInit {
         );
       }
     } else {
-      ingredientsArray.push(
-        this.formBuilder.group({ ingredient: ['', [Validators.required]] })
-      );
+      ingredientsArray.push(this.formBuilder.group({ ingredient: ['', [Validators.required]] }));
     }
 
     if (this.recipe.steps.length) {
       for (const step of this.recipe.steps) {
-        stepsArray.push(
-          this.formBuilder.group({ step: [step, [Validators.required]] })
-        );
+        stepsArray.push(this.formBuilder.group({ step: [step, [Validators.required]] }));
       }
     } else {
-      stepsArray.push(
-        this.formBuilder.group({ step: ['', [Validators.required]] })
-      );
+      stepsArray.push(this.formBuilder.group({ step: ['', [Validators.required]] }));
     }
 
     this.editRecipeForm = this.formBuilder.group({
-      title: [this.recipe.title, [Validators.required]],
-      description: this.recipe.description,
+      title: new FormControl(this.recipe.title, [Validators.required]),
+      description: new FormControl(this.recipe.description),
+      isTextOnly: new FormControl(this.recipe.isTextOnly),
+      text: new FormControl(this.recipe.text, [Validators.required]),
       ingredients: this.formBuilder.array(ingredientsArray),
       steps: this.formBuilder.array(stepsArray),
     });
+
+    if (!this.recipe.isTextOnly) {
+      this.editRecipeForm.get('text').disable();
+    }
   }
 
   onSubmit(): void {
@@ -114,10 +114,12 @@ export class RecipeEditComponent implements OnInit {
         ...this.recipe,
         title: this.editRecipeForm.value.title,
         description: this.editRecipeForm.value.description,
-        ingredients: this.editRecipeForm.value.ingredients.map(
-          (x) => x.ingredient
-        ),
-        steps: this.editRecipeForm.value.steps.map((x) => x.step),
+        isTextOnly: this.editRecipeForm.value.isTextOnly,
+        text: this.editRecipeForm.value.text,
+        ingredients: this.editRecipeForm.value.ingredients
+          ? this.editRecipeForm.value.ingredients.map((x) => x.ingredient)
+          : [],
+        steps: this.editRecipeForm.value.steps ? this.editRecipeForm.value.steps.map((x) => x.step) : [],
       };
 
       if (this.recipe.id) {
@@ -164,10 +166,20 @@ export class RecipeEditComponent implements OnInit {
     }
   }
 
+  onToggleChange(): void {
+    if (this.editRecipeForm.value.isTextOnly) {
+      this.editRecipeForm.get('text').enable();
+      this.editRecipeForm.get('steps').disable();
+      this.editRecipeForm.get('ingredients').disable();
+    } else {
+      this.editRecipeForm.get('text').disable();
+      this.editRecipeForm.get('steps').enable();
+      this.editRecipeForm.get('ingredients').enable();
+    }
+  }
+
   addIngredient(): void {
-    this.ingredientsFormArray.push(
-      this.formBuilder.group({ ingredient: ['', [Validators.required]] })
-    );
+    this.ingredientsFormArray.push(this.formBuilder.group({ ingredient: ['', [Validators.required]] }));
   }
 
   removeIngredient(index: number): void {
@@ -175,9 +187,7 @@ export class RecipeEditComponent implements OnInit {
   }
 
   addStep(): void {
-    this.stepsFormArray.push(
-      this.formBuilder.group({ step: ['', [Validators.required]] })
-    );
+    this.stepsFormArray.push(this.formBuilder.group({ step: ['', [Validators.required]] }));
   }
 
   removeStep(index: number): void {
@@ -185,18 +195,12 @@ export class RecipeEditComponent implements OnInit {
   }
 
   canAddIngredient(): boolean {
-    const lastIngredientIndex =
-      this.editRecipeForm.value.ingredients.length - 1;
-    // tslint:disable-next-line:triple-equals
-    return (
-      this.editRecipeForm.value.ingredients[lastIngredientIndex].ingredient !=
-      ''
-    );
+    const lastIngredientIndex = this.editRecipeForm.value.ingredients.length - 1;
+    return this.editRecipeForm.value.ingredients[lastIngredientIndex].ingredient != '';
   }
 
   canAddStep(): boolean {
     const lastStepIndex = this.editRecipeForm.value.steps.length - 1;
-    // tslint:disable-next-line:triple-equals
     return this.editRecipeForm.value.steps[lastStepIndex].step != '';
   }
 
@@ -211,9 +215,10 @@ export class RecipeEditComponent implements OnInit {
 
     // TODO: fix this trickery
     setTimeout(() => {
-      let element = event.srcElement.parentElement.parentElement.parentElement.parentElement.nextElementSibling.getElementsByTagName(
-        'input'
-      )[0];
+      let element =
+        event.srcElement.parentElement.parentElement.parentElement.parentElement.nextElementSibling.getElementsByTagName(
+          'input'
+        )[0];
       if (element == null) return;
       // focus if the next input is found
       else element.focus();

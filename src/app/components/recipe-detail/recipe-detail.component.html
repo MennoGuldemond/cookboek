@@ -1,45 +1,79 @@
 <div class="page-padding">
   <mat-card *ngIf="recipe$ | async as recipe">
-    <div mat-card-image class="recipe-image" [ngStyle]="{'background-image': getImageURLStyle(recipe.photoURL)}">
-      <h2>{{ recipe.title }}</h2>
-      <h4>van {{ recipe.ownerName }}</h4>
+    <div mat-card-image class="recipe-image" [ngStyle]="{ 'background-image': getImageURLStyle(recipe.photoURL) }">
+      <div>
+        <h2>{{ recipe.title }}</h2>
+        <h4>van {{ recipe.ownerName }}</h4>
+      </div>
     </div>
     <mat-card-content>
       <div class="actions">
-        <button *ngIf="deviceService.isSafari()" mat-icon-button color="primary" aria-label="Share button" (click)="onClickShare(recipe.title)">
+        <button
+          *ngIf="deviceService.isSafari()"
+          mat-icon-button
+          color="primary"
+          aria-label="Share button"
+          (click)="onClickShare(recipe.title)"
+        >
           <mat-icon>share</mat-icon>
         </button>
         <span *ngIf="auth.user$ | async as user">
-          <button *ngIf="recipe.likes?.includes(user.uid); else notLiked" mat-icon-button color="primary" aria-label="Like button" (click)="onUnlikeClick($event, recipe)">
+          <button
+            *ngIf="recipe.likes?.includes(user.uid); else notLiked"
+            mat-icon-button
+            color="primary"
+            aria-label="Like button"
+            (click)="onUnlikeClick($event, recipe)"
+          >
             <mat-icon>favorite</mat-icon>
           </button>
-          <ng-template #notLiked>        
+          <ng-template #notLiked>
             <button mat-icon-button color="primary" aria-label="Like button" (click)="onLikeClick($event, recipe)">
               <mat-icon>favorite_border</mat-icon>
             </button>
           </ng-template>
         </span>
-        <button *ngIf="(auth.user$ | async)?.uid === recipe.ownerId" mat-icon-button color="primary" aria-label="Edit button" (click)="onEditClick(recipe.id)">
+        <button
+          *ngIf="(auth.user$ | async)?.uid === recipe.ownerId"
+          mat-icon-button
+          color="primary"
+          aria-label="Edit button"
+          (click)="onEditClick(recipe.id)"
+        >
           <mat-icon>edit</mat-icon>
         </button>
-        <button *ngIf="(auth.user$ | async)?.uid === recipe.ownerId" mat-icon-button color="primary" aria-label="Delete button" (click)="onDeleteClick(recipe)">
+        <button
+          *ngIf="(auth.user$ | async)?.uid === recipe.ownerId"
+          mat-icon-button
+          color="primary"
+          aria-label="Delete button"
+          (click)="onDeleteClick(recipe)"
+        >
           <mat-icon>delete</mat-icon>
         </button>
       </div>
+
       <p>Recept aangemaakt op: {{ recipe.createdOn.toDate() | date: 'dd MMMM yyyy' }}</p>
       <p>{{ recipe.description }}</p>
-      <h3>Ingredi&#235;nten</h3>
-      <ul>
-        <li *ngFor="let ingredient of recipe.ingredients" [hidden]="ingredient == ''">
-          {{ ingredient }}
-        </li>
-      </ul>
-      <h3>Stappen</h3>
-      <ol>
-        <li *ngFor="let step of recipe.steps" [hidden]="step == ''">
-          {{ step }}
-        </li>
-      </ol>
+
+      <p *ngIf="recipe.isTextOnly; else detailed">
+        {{ recipe.text }}
+      </p>
+
+      <ng-template #detailed>
+        <h3>Ingredi&#235;nten</h3>
+        <ul>
+          <li *ngFor="let ingredient of recipe.ingredients" [hidden]="ingredient == ''">
+            {{ ingredient }}
+          </li>
+        </ul>
+        <h3>Stappen</h3>
+        <ol>
+          <li *ngFor="let step of recipe.steps" [hidden]="step == ''">
+            {{ step }}
+          </li>
+        </ol>
+      </ng-template>
     </mat-card-content>
   </mat-card>
 </div>
