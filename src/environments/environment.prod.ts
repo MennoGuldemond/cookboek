@@ -7,7 +7,7 @@ export const environment = {
     projectId: 'cookboek-45150',
     storageBucket: 'cookboek-45150.appspot.com',
     messagingSenderId: '135413077856',
-    appId: '1:135413077856:web:a9cef45c36d2ed2297f005',
-    measurementId: 'G-VP7VB2YDQC'
-  }
+    appId: '1:135413077856:web:f00958cfaee4963897f005',
+    measurementId: 'G-XG8NBTBCPE',
+  },
 };
