@@ -33,7 +33,8 @@
       >
         <mat-icon aria-label="menu icon">menu</mat-icon>
       </button>
-      <cobo-user-quick-menu></cobo-user-quick-menu>
+      <span class="center-content">Cookboek</span>
+      <cobo-user-quick-menu [user]="user$ | async"></cobo-user-quick-menu>
     </mat-toolbar>
 
     <!-- Router outlet -->

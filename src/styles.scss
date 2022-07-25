@@ -37,6 +37,26 @@ $custom-typography: mat-typography-config(
   padding: 1rem;
 }
 
+.mat-stroked-button,
+.mat-raised-button,
+.mat-menu-panel,
+mat-card,
+mat-dialog-container {
+  border-radius: 16px !important;
+}
+
+.center-content {
+  text-align: center;
+}
+
+.align-content-right {
+  text-align: right;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
 @media screen and (min-width: $desktop-breakpoint) {
   .padded {
     padding: 2rem;

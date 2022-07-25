@@ -10,6 +10,6 @@ export class RecipeCardComponent {
   @Input() recipe: Recipe;
 
   getImageURLStyle(recipe: Recipe): string {
-    return `url(${recipe.photoURL});`;
+    return `url(${recipe.photoURL})`;
   }
 }
