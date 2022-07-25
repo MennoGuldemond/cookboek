@@ -1,0 +1,16 @@
+<button mat-icon-button [matMenuTriggerFor]="userMenu" aria-label="user toolbar menu">
+  <mat-icon>more_vert</mat-icon>
+</button>
+<mat-menu #userMenu="matMenu">
+  <button mat-menu-item [matMenuTriggerFor]="themeMenu">Thema</button>
+  <mat-menu #themeMenu="matMenu">
+    <button mat-menu-item [disabled]="(currentTheme$ | async) == 'light-theme'" (click)="setTheme('light-theme')">
+      <mat-icon>light_mode</mat-icon>
+      <span>Licht</span>
+    </button>
+    <button mat-menu-item [disabled]="(currentTheme$ | async) == 'dark-theme'" (click)="setTheme('dark-theme')">
+      <mat-icon>dark_mode</mat-icon>
+      <span>Donker</span>
+    </button>
+  </mat-menu>
+</mat-menu>

@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "cookboek-45150": {
+      "hosting": {
+        "cookboek": [
+          "cookboek-45150"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "cookboek-45150"
+  }
+}

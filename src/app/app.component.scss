@@ -1,0 +1,26 @@
+@import '../vars.scss';
+
+mat-sidenav-container {
+  height: 100%;
+}
+mat-sidenav {
+  width: 15em;
+}
+
+.mat-toolbar {
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  z-index: 99;
+  height: $toolbar-height;
+}
+
+@media screen and (min-width: $desktop-breakpoint) {
+  // toolbar to top on larger screens
+  .mat-toolbar {
+    position: sticky;
+    top: 0;
+  }
+}

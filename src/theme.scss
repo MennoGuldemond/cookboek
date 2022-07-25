@@ -1,0 +1,79 @@
+@use '@angular/material' as mat;
+@include mat.core();
+@import './vars.scss';
+
+$cobo-green-palette: (
+  50: $cobo-green,
+  100: $cobo-green,
+  200: $cobo-green,
+  300: $cobo-green,
+  400: $cobo-green,
+  500: $cobo-green,
+  600: $cobo-green,
+  700: $cobo-green,
+  800: $cobo-green,
+  900: $cobo-green,
+  contrast: (
+    50: white,
+    100: white,
+    200: white,
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  ),
+);
+
+$cobo-blue-palette: (
+  50: $cobo-blue,
+  100: $cobo-blue,
+  200: $cobo-blue,
+  300: $cobo-blue,
+  400: $cobo-blue,
+  500: $cobo-blue,
+  600: $cobo-blue,
+  700: $cobo-blue,
+  800: $cobo-blue,
+  900: $cobo-blue,
+  contrast: (
+    50: white,
+    100: white,
+    200: white,
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  ),
+);
+
+$cobo-primary: mat.define-palette($cobo-green-palette);
+$cobo-accent: mat.define-palette($cobo-blue-palette);
+$light-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $cobo-primary,
+      accent: $cobo-accent,
+    ),
+  )
+);
+
+$dark-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: $cobo-primary,
+      accent: $cobo-accent,
+    ),
+  )
+);
+
+@include mat.all-component-themes($light-theme);
+
+.dark-theme {
+  @include mat.all-component-colors($dark-theme);
+}

@@ -1,1 +1,47 @@
-/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/theming';
+@import './vars.scss';
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+}
+
+// Overwrite material default font
+$custom-typography: mat-typography-config(
+  $font-family: '"Poppins", sans-serif;',
+);
+@include angular-material-typography($custom-typography);
+
+// Side nav menu layout
+.mat-drawer-inner-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  & mat-nav-list:nth-child(2) {
+    flex: 1;
+  }
+}
+
+.page-container {
+  box-sizing: border-box;
+  max-height: calc(100vh - $toolbar-height);
+  height: auto;
+  overflow-y: auto;
+}
+
+.padded {
+  padding: 1rem;
+}
+
+@media screen and (min-width: $desktop-breakpoint) {
+  .padded {
+    padding: 2rem;
+  }
+  .padded-desktop {
+    padding: 2rem;
+  }
+}

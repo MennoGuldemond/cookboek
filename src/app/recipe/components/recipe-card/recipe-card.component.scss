@@ -1,0 +1,39 @@
+@import '../../../../vars.scss';
+
+mat-card {
+  text-align: start;
+}
+
+.recipe-image {
+  height: 200px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #fff;
+
+  & > div {
+    padding: 1rem 2rem 1rem 1rem;
+    width: fit-content;
+    background-color: $cobo-green;
+    border-radius: 16px 0px 50px;
+    opacity: 0.9;
+    & > h4,
+    h2 {
+      margin: 0;
+    }
+  }
+}
+
+// Only on larger screens
+@media only screen and (min-width: $desktop-breakpoint) {
+  .recipe-image {
+    height: 400px;
+
+    & > h2 {
+      padding: 16px 0 0 16px;
+    }
+    & > h4 {
+      padding-left: 16px;
+    }
+  }
+}

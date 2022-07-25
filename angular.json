@@ -12,7 +12,7 @@
       },
       "root": "",
       "sourceRoot": "src",
-      "prefix": "app",
+      "prefix": "cobo",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -28,7 +28,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/theme.scss"
             ],
             "scripts": []
           },
@@ -100,8 +101,21 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "cookboek:build:production",
+            "firebaseProject": "cookboek-45150",
+            "firebaseHostingSite": "cookboek-45150"
+          }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "8992b508-4baf-4ab0-8936-df14f48f8b74"
   }
 }
