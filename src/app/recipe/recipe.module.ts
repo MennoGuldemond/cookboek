@@ -3,10 +3,10 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '@app/shared';
 import { RecipeRoutingModule } from './recipe-routing.module';
 import { RecipeComponent } from './recipe.component';
-import { RecipeCardComponent, RecipeDetailComponent, RecipeListComponent } from './components';
+import { RecipeCardComponent, RecipeDetailComponent, RecipeEditComponent, RecipeListComponent } from './components';
 
 @NgModule({
-  declarations: [RecipeComponent, RecipeListComponent, RecipeCardComponent, RecipeDetailComponent],
+  declarations: [RecipeComponent, RecipeListComponent, RecipeCardComponent, RecipeDetailComponent, RecipeEditComponent],
   imports: [SharedModule, RecipeRoutingModule],
   bootstrap: [RecipeRoutingModule],
 })

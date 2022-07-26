@@ -21,7 +21,7 @@ $custom-typography: mat-typography-config(
   flex-direction: column;
   justify-content: flex-end;
 
-  & mat-nav-list:nth-child(2) {
+  & mat-nav-list:nth-child(1) {
     flex: 1;
   }
 }

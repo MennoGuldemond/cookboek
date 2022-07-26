@@ -7,18 +7,13 @@
     [mode]="(browserUtils.isHandset$ | async) ? 'over' : 'side'"
     [opened]="(browserUtils.isHandset$ | async) === false"
   >
-    <img class="logo" src="../assets/Logo v1.png" alt="Cookboek logo" />
+    <!-- <img class="logo" src="../assets/Logo v1.png" alt="Cookboek logo" /> -->
     <mat-nav-list (click)="closeSideNavIfHandset(sideNav)">
       <a mat-list-item [routerLink]="['/']">Home</a>
       <a mat-list-item [routerLink]="['recepten']">Recepten</a>
-    </mat-nav-list>
-    <mat-nav-list (click)="closeSideNavIfHandset(sideNav)">
-      <a *ngIf="user$ | async; else showLogin" mat-list-item (click)="logout()">Uitloggen</a>
       <a *ngIf="user$ | async" mat-list-item [routerLink]="['profiel']">Mijn Account</a>
-      <ng-template #showLogin>
-        <a mat-list-item (click)="login()">Inloggen</a>
-      </ng-template>
     </mat-nav-list>
+    <p class="version-text">Cookboek {{ version }}</p>
   </mat-sidenav>
 
   <!-- Main section -->

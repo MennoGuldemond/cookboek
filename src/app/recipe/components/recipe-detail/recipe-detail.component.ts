@@ -43,7 +43,7 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   onEditClick(id: string): void {
-    this.router.navigate([`recipe-edit/${id}`]);
+    this.router.navigate([`recepten/maak/${id}`]);
   }
 
   onDeleteClick(recipe: Recipe): void {

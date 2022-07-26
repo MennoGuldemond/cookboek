@@ -19,9 +19,9 @@ export class AuthGuard implements CanActivate {
         if (user) {
           return true;
         } else {
-          if (next.routeConfig.path) {
+          if (state.url) {
             // Save the url the user was navigating to.
-            localStorage.setItem('urlBeforeLogin', next.routeConfig.path);
+            localStorage.setItem('urlBeforeLogin', state.url);
           }
           this.router.navigate(['login']);
           return false;

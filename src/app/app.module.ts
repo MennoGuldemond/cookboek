@@ -51,6 +51,7 @@ registerLocaleData(localeNl);
     AngularFireStorageModule,
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'nl-NL' }],
-  bootstrap: [AppComponent, YesNoDialogComponent],
+  bootstrap: [AppComponent],
+  entryComponents: [YesNoDialogComponent],
 })
 export class AppModule {}

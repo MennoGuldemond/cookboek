@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { User } from './models';
 import { BrowserUtilService } from './services';
+import { environment } from '@env/environment';
 
 @Component({
   selector: 'cobo-app',
@@ -14,6 +15,7 @@ import { BrowserUtilService } from './services';
 })
 export class AppComponent implements OnInit {
   user$: Observable<User>;
+  version: string = environment.version;
 
   constructor(public browserUtils: BrowserUtilService, private store: Store<AuthState>) {}
 

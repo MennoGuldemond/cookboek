@@ -21,11 +21,11 @@ export class RecipeListComponent implements OnInit {
 
   onRecipeClick(recipe: Recipe): void {
     if (recipe) {
-      this.router.navigate([`recepten/${recipe.id}`]);
+      this.router.navigate([`recepten/detail/${recipe.id}`]);
     }
   }
 
   onClickAdd(): void {
-    this.router.navigate(['recipe-edit']);
+    this.router.navigate(['recepten/maak']);
   }
 }

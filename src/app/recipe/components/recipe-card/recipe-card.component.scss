@@ -12,14 +12,24 @@ mat-card {
   color: #fff;
 
   & > div {
-    padding: 1rem 2rem 1rem 1rem;
-    width: fit-content;
+    padding: 0.5rem 1rem;
     background-color: $cobo-green;
-    border-radius: 16px 0px 50px;
     opacity: 0.9;
-    & > h4,
-    h2 {
+    & > h2 {
+      font-size: 1.3rem;
       margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 80%;
+      text-overflow: ellipsis;
+    }
+    & > h4 {
+      font-size: 0.8rem;
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 80%;
+      text-overflow: ellipsis;
     }
   }
 }
@@ -29,11 +39,19 @@ mat-card {
   .recipe-image {
     height: 400px;
 
-    & > h2 {
-      padding: 16px 0 0 16px;
-    }
-    & > h4 {
-      padding-left: 16px;
+    & > div {
+      width: fit-content;
+      border-radius: 16px 0px 50px;
+      padding: 1rem 2rem 1rem 1rem;
+
+      & > h2 {
+        padding: 16px 0 0 16px;
+        width: 98%;
+      }
+      & > h4 {
+        padding-left: 16px;
+        width: 98%;
+      }
     }
   }
 }

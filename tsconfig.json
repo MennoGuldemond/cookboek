@@ -25,7 +25,9 @@
       "@recipe/*": ["src/app/recipe/*"],
       "@auth/*": ["src/app/auth/*"],
       "@app/*": ["src/app/*"]
-    }
+    },
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

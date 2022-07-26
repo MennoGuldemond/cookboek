@@ -1,7 +1,10 @@
 @import '../../../../vars.scss';
 
 .recipe-list {
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  display: grid;
+  align-items: center;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
 }
 
 .add-button {
@@ -20,5 +23,10 @@
   .add-button {
     right: 30px;
     bottom: 30px;
+  }
+
+  .recipe-list {
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
   }
 }

@@ -1,3 +1,5 @@
+import packageJson from '../../package.json';
+
 export const environment = {
   firebase: {
     projectId: 'cookboek-45150',
@@ -11,4 +13,5 @@ export const environment = {
     measurementId: 'G-XG8NBTBCPE',
   },
   production: true,
+  version: packageJson.version,
 };

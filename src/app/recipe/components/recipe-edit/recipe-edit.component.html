@@ -1,0 +1,55 @@
+<div class="page-container padded">
+  <form *ngIf="recipe" [formGroup]="editRecipeForm" (ngSubmit)="onSubmit()" fxLayout="column">
+    <mat-form-field appearance="outline">
+      <mat-label for="title">Titel</mat-label>
+      <input matInput placeholder="Bijv. Chocolade koekjes" type="text" formControlName="title" />
+    </mat-form-field>
+
+    <div class="image-and-description-container">
+      <mat-form-field appearance="outline">
+        <mat-label for="description">Beschrijving</mat-label>
+        <textarea matInput placeholder="Vertel iets over jouw recept" formControlName="description" rows="5"></textarea>
+      </mat-form-field>
+      <input
+        #imageInput
+        hidden
+        type="file"
+        onclick="this.value=null"
+        (change)="onFileInputChange($event)"
+        accept="image/png, image/jpeg"
+      />
+      <div *ngIf="!imagePreviewSrc && !recipe.photoURL" class="image-preview" (click)="imageInput.click()">
+        <h4>Foto uploaden</h4>
+      </div>
+      <img
+        *ngIf="imagePreviewSrc || recipe.photoURL"
+        [src]="imagePreviewSrc ? imagePreviewSrc : recipe.photoURL"
+        class="image-preview"
+        (click)="imageInput.click()"
+      />
+    </div>
+
+    <div class="textareas">
+      <mat-form-field appearance="outline">
+        <mat-label for="text">Ingrediënten</mat-label>
+        <textarea matInput placeholder="Voer de ingrediënten in" formControlName="ingredients" rows="10"></textarea>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label for="text">Instructies</mat-label>
+        <textarea
+          matInput
+          placeholder="Beschrijf de uitvoering van het recept in een tekst"
+          formControlName="instructions"
+          rows="10"
+        ></textarea>
+      </mat-form-field>
+    </div>
+
+    <div class="align-content-right">
+      <button mat-raised-button color="primary" class="save-button" type="submit" [disabled]="editRecipeForm.invalid">
+        Opslaan
+      </button>
+    </div>
+  </form>
+</div>
