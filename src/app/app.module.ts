@@ -25,6 +25,7 @@ import {
   NotFoundComponent,
   YesNoDialogComponent,
 } from './components';
+import { RecipeModule } from '@recipe/recipe.module';
 
 registerLocaleData(localeNl);
 
@@ -49,6 +50,7 @@ registerLocaleData(localeNl);
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
+    RecipeModule,
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'nl-NL' }],
   bootstrap: [AppComponent],

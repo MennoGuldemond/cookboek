@@ -7,6 +7,7 @@ import { RecipeCardComponent, RecipeDetailComponent, RecipeEditComponent, Recipe
 
 @NgModule({
   declarations: [RecipeComponent, RecipeListComponent, RecipeCardComponent, RecipeDetailComponent, RecipeEditComponent],
+  exports: [RecipeCardComponent],
   imports: [SharedModule, RecipeRoutingModule],
   bootstrap: [RecipeRoutingModule],
 })
