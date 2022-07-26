@@ -1,11 +1,10 @@
 <div class="page-container padded">
   <mat-card *ngIf="recipe$ | async as recipe">
-    <div mat-card-image class="recipe-image" [ngStyle]="{ 'background-image': getImageURLStyle(recipe.photoURL) }">
-      <div>
-        <h2>{{ recipe.title }}</h2>
-        <h4>van {{ recipe.ownerName }}</h4>
-      </div>
-    </div>
+    <div
+      mat-card-image
+      class="recipe-image"
+      [ngStyle]="{ 'background-image': getImageURLStyle(recipe.photoURL) }"
+    ></div>
     <mat-card-content>
       <div class="actions">
         <button
@@ -53,6 +52,9 @@
         </button>
         <p>{{ recipe.createdOn.toDate() | date: 'dd MMMM yyyy' }}</p>
       </div>
+
+      <h1>{{ recipe.title }}</h1>
+      <h3>van {{ recipe.ownerName }}</h3>
 
       <p [innerHtml]="recipe.description"></p>
 

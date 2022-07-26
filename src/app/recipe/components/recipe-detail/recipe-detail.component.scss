@@ -14,10 +14,6 @@
     background-color: #009688;
     border-radius: 16px 0px 50px;
     opacity: 0.9;
-    & > h4,
-    h2 {
-      margin: 0;
-    }
   }
 }
 
@@ -30,24 +26,27 @@
     flex: 1;
   }
   & p {
+    color: $cobo-mid-grey;
     margin: auto;
   }
 }
 
+h1 {
+  margin: 0;
+  color: $cobo-green;
+}
 h2 {
   margin: 2em 0 0.3em 0;
+  color: $cobo-green;
+}
+h3 {
+  margin: 0 0 2em 0;
+  color: $cobo-mid-grey;
 }
 
 // Only on larger screens
 @media only screen and (min-width: $desktop-breakpoint) {
   .recipe-image {
     height: 800px;
-
-    & > h2 {
-      padding: 16px 0 0 16px;
-    }
-    & > h4 {
-      padding-left: 16px;
-    }
   }
 }
