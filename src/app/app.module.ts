@@ -18,12 +18,25 @@ import { environment } from '@env/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared';
 import { AppComponent } from './app.component';
-import { HomeComponent, UserQuickMenuComponent, AccountComponent, NotFoundComponent } from './components';
+import {
+  HomeComponent,
+  UserQuickMenuComponent,
+  AccountComponent,
+  NotFoundComponent,
+  YesNoDialogComponent,
+} from './components';
 
 registerLocaleData(localeNl);
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, UserQuickMenuComponent, AccountComponent, NotFoundComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    UserQuickMenuComponent,
+    AccountComponent,
+    NotFoundComponent,
+    YesNoDialogComponent,
+  ],
   imports: [
     BrowserAnimationsModule,
     AppRoutingModule,
@@ -38,6 +51,6 @@ registerLocaleData(localeNl);
     AngularFireStorageModule,
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'nl-NL' }],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent, YesNoDialogComponent],
 })
 export class AppModule {}

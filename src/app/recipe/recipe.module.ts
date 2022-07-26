@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from '@app/shared';
-import { RecipeComponent } from './recipe.component';
 import { RecipeRoutingModule } from './recipe-routing.module';
-import { RecipeCardComponent, RecipeListComponent } from './components';
+import { RecipeComponent } from './recipe.component';
+import { RecipeCardComponent, RecipeDetailComponent, RecipeListComponent } from './components';
 
 @NgModule({
-  declarations: [RecipeComponent, RecipeListComponent, RecipeCardComponent],
+  declarations: [RecipeComponent, RecipeListComponent, RecipeCardComponent, RecipeDetailComponent],
   imports: [SharedModule, RecipeRoutingModule],
   bootstrap: [RecipeRoutingModule],
 })

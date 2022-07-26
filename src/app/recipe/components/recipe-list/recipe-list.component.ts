@@ -21,7 +21,7 @@ export class RecipeListComponent implements OnInit {
 
   onRecipeClick(recipe: Recipe): void {
     if (recipe) {
-      this.router.navigate([`recipe/${recipe.id}`]);
+      this.router.navigate([`recepten/${recipe.id}`]);
     }
   }
 

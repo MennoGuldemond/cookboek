@@ -11,7 +11,7 @@ export class Recipe {
   steps: string[];
   photoURL: string;
   likes: string[];
-  createdOn: Date;
+  createdOn: any;
 
   isTextOnly: boolean;
   text: string;

@@ -1,13 +1,10 @@
 @import '../vars.scss';
 
-mat-toolbar,
-mat-sidenav-content {
-  background-color: white;
-}
-
 mat-toolbar {
   display: flex;
+  background-color: #fff;
   color: $cobo-mid-grey;
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
 
   & > span {
     flex: 1 1 0%;
@@ -21,22 +18,4 @@ mat-sidenav-container {
 mat-sidenav {
   width: 15em;
   border-radius: 0 20px 20px 0;
-}
-
-.mat-toolbar {
-  display: flex;
-  justify-content: space-between;
-  overflow: hidden;
-  position: fixed;
-  bottom: 0;
-  z-index: 99;
-  height: $toolbar-height;
-}
-
-@media screen and (min-width: $desktop-breakpoint) {
-  // toolbar to top on larger screens
-  .mat-toolbar {
-    position: sticky;
-    top: 0;
-  }
 }
