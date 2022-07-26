@@ -3,6 +3,9 @@
 mat-toolbar {
   display: flex;
   background-color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 99;
   color: $cobo-mid-grey;
   box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
 
