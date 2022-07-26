@@ -1,7 +1,9 @@
+@import '../../../vars.scss';
+
 .hero-bg {
   display: flex;
   align-items: flex-end;
-  background-image: linear-gradient(to right, #009ffb, #3b00fb);
+  background-image: linear-gradient(to right, $cobo-grey, $cobo-green);
   clip-path: polygon(100% 5%, 100% 89%, 0 100%, 0 18%);
 
   h1 {
