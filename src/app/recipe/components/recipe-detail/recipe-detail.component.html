@@ -51,14 +51,14 @@
         >
           <mat-icon>delete</mat-icon>
         </button>
+        <p>{{ recipe.createdOn.toDate() | date: 'dd MMMM yyyy' }}</p>
       </div>
 
-      <p>Recept aangemaakt op: {{ recipe.createdOn.toDate() | date: 'dd MMMM yyyy' }}</p>
       <p [innerHtml]="recipe.description"></p>
 
-      <h3>Ingrediënten</h3>
+      <h2>Ingrediënten</h2>
       <p [innerHtml]="recipe.ingredients"></p>
-      <h3>Instructies</h3>
+      <h2>Instructies</h2>
       <p [innerHtml]="recipe.instructions"></p>
     </mat-card-content>
   </mat-card>
