@@ -95,7 +95,6 @@ export class RecipeEditComponent implements OnInit {
       if (this.recipe.id) {
         // Existing recipe
         this.recipeService.update(toSave).subscribe((id) => {
-          console.log(id);
           if (id) {
             this.snackBar.open('Recept Bijgewerkt', 'Oke', { duration: 3000 });
             this.router.navigate([`recepten/detail/${id}`]);
