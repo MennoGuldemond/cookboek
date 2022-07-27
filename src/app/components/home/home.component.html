@@ -1,12 +1,11 @@
 <section class="hero-bg">
-  <h1>Cookboek</h1>
+  <h1 class="handwritten">Cookboek</h1>
+  <h2 class="handwritten">Vind en deel recepten</h2>
 </section>
 
 <div class="center-content padded">
-  <h2>De app om recepten de delen en te vinden</h2>
-
   <div *ngIf="newestRecipe$ | async as newRecipe" class="recipe-container">
-    <h3>Bekijk het nieuwste recept</h3>
+    <h2>Bekijk het nieuwste recept</h2>
     <cobo-recipe-card [recipe]="newRecipe" (click)="onRecipeClick(newRecipe)"></cobo-recipe-card>
   </div>
 </div>

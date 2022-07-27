@@ -15,6 +15,10 @@ $custom-typography: mat-typography-config(
 );
 @include angular-material-typography($custom-typography);
 
+.handwritten {
+  font-family: 'Satisfy', cursive !important;
+}
+
 // Side nav menu layout
 .mat-drawer-inner-container {
   display: flex;
