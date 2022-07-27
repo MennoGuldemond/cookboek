@@ -1,7 +1,7 @@
 @import '../../../../vars.scss';
 
-mat-card {
-  text-align: start;
+.mat-card-image {
+  margin-bottom: 0;
 }
 
 .recipe-image {
@@ -9,49 +9,37 @@ mat-card {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  color: #fff;
+}
 
-  & > div {
-    padding: 0.5rem 1rem;
-    background-color: $cobo-green;
-    opacity: 0.9;
-    & > h2 {
-      font-size: 1.3rem;
-      margin: 0;
-      white-space: nowrap;
-      overflow: hidden;
-      width: 80%;
-      text-overflow: ellipsis;
-    }
-    & > h4 {
-      font-size: 0.8rem;
-      margin: 0;
-      white-space: nowrap;
-      overflow: hidden;
-      width: 80%;
-      text-overflow: ellipsis;
+.recipe-info {
+  display: flex;
+
+  & > mat-icon {
+    margin: 0.8em 0 0 1em;
+  }
+
+  & > h2 {
+    flex: 1;
+    color: $cobo-green;
+    margin: 0;
+    line-height: 1em;
+    font-size: 1.3rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 0.5em;
+
+    & .subtitle {
+      display: block;
+      font-size: 1rem;
+      color: $cobo-mid-grey;
     }
   }
 }
 
 // Only on larger screens
 @media only screen and (min-width: $desktop-breakpoint) {
-  .recipe-image {
-    height: 400px;
-
-    & > div {
-      width: fit-content;
-      border-radius: 16px 0px 50px;
-      padding: 1rem 2rem 1rem 1rem;
-
-      & > h2 {
-        padding: 16px 0 0 16px;
-        width: 98%;
-      }
-      & > h4 {
-        padding-left: 16px;
-        width: 98%;
-      }
-    }
+  .recipe-info h2 {
+    font-size: 1.5rem;
   }
 }
