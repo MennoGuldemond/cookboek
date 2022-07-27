@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { map, take } from 'rxjs/operators';
 import { AuthState, selectUser } from '@auth/store/auth.selectors';
 import { Store } from '@ngrx/store';
+import { login } from '@auth/store/auth.actions';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(private store: Store<AuthState>, private router: Router) {}
+  constructor(private store: Store<AuthState>) {}
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     return this.store.select(selectUser).pipe(
@@ -23,7 +24,7 @@ export class AuthGuard implements CanActivate {
             // Save the url the user was navigating to.
             localStorage.setItem('urlBeforeLogin', state.url);
           }
-          this.router.navigate(['login']);
+          this.store.dispatch(login());
           return false;
         }
       })
