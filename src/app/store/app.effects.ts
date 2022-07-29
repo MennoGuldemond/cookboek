@@ -11,7 +11,7 @@ export class AppEffects {
     this.actions$.pipe(
       ofType(setTheme),
       mergeMap((action) => {
-        this.themingService.applyTheme(action.value);
+        this.themingService.applyTheme(action.theme);
         return of({ type: 'NO_ACTION' });
       })
     )

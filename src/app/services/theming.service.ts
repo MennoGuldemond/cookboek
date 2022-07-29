@@ -23,13 +23,13 @@ export class ThemingService {
 
     // If dark mode is enabled then directly switch to the dark-theme
     if (darkModeOn) {
-      this.store.dispatch(setTheme({ value: 'dark-theme' }));
+      this.store.dispatch(setTheme({ theme: 'dark-theme' }));
     }
 
     // Watch for changes of the preference
     window.matchMedia('(prefers-color-scheme: dark)').addListener((e) => {
       const turnOn = e.matches;
-      this.store.dispatch(setTheme({ value: turnOn ? 'dark-theme' : 'light-theme' }));
+      this.store.dispatch(setTheme({ theme: turnOn ? 'dark-theme' : 'light-theme' }));
 
       // Trigger refresh of UI
       this.appRef.tick();

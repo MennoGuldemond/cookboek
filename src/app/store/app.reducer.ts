@@ -9,11 +9,11 @@ export const initialState: AppState = {
 
 const _appReducer = createReducer(
   initialState,
-  on(setTheme, (state, { value }) => {
-    return { ...state, theme: value };
+  on(setTheme, (state, { theme }) => {
+    return { ...state, theme: theme };
   }),
-  on(setUserPreferences, (state, { value }) => {
-    return { ...state, userPreferences: value };
+  on(setUserPreferences, (state, { userPreferences }) => {
+    return { ...state, userPreferences: userPreferences };
   })
 );
 
