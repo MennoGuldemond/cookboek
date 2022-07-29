@@ -32,9 +32,9 @@ $custom-typography: mat-typography-config(
 
 .page-container {
   box-sizing: border-box;
-  max-height: calc(100vh - $toolbar-height);
-  height: auto;
-  overflow-y: auto;
+  // max-height: calc(100vh - $toolbar-height);
+  // height: auto;
+  // overflow-y: auto;
 }
 
 .padded {
