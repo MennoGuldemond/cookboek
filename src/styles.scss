@@ -40,12 +40,19 @@ $custom-typography: mat-typography-config(
 .padded {
   padding: 1rem;
 }
+.padded-x {
+  padding: 0 1rem;
+}
+.padded-y {
+  padding: 1rem 0;
+}
 
 .mat-stroked-button,
 .mat-raised-button,
 .mat-menu-panel,
 mat-card,
-mat-dialog-container {
+mat-dialog-container,
+mat-button-toggle-group {
   border-radius: 16px !important;
 }
 
@@ -65,7 +72,19 @@ mat-dialog-container {
   .padded {
     padding: 2rem;
   }
+  .padded-x {
+    padding: 0 2rem;
+  }
+  .padded-y {
+    padding: 2rem 0;
+  }
   .padded-desktop {
     padding: 2rem;
+  }
+  .padded-desktop-x {
+    padding: 0 2rem;
+  }
+  .padded-desktop-y {
+    padding: 2rem 1;
   }
 }
