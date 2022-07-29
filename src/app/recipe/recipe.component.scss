@@ -1,0 +1,8 @@
+.filter-bar {
+  display: flex;
+  gap: 1em;
+
+  & > span {
+    flex: 1;
+  }
+}

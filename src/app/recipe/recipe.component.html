@@ -1,3 +1,18 @@
-<div class="page-container padded">
-  <cobo-recipe-list></cobo-recipe-list>
+<div class="page-container">
+  <div class="filter-bar padded">
+    <span></span>
+    <mat-button-toggle-group [value]="viewType" (change)="changeView($event)" #group="matButtonToggleGroup">
+      <mat-button-toggle value="grid" aria-label="Grid weergave">
+        <mat-icon>grid_view</mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle value="list" aria-label="Lijst weergave">
+        <mat-icon>list</mat-icon>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+
+  <cobo-recipe-grid *ngIf="viewType === 'grid'; else listView" [recipes]="recipes$ | async"></cobo-recipe-grid>
+  <ng-template #listView>
+    <cobo-recipe-list [recipes]="recipes$ | async"></cobo-recipe-list>
+  </ng-template>
 </div>
