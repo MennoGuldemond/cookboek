@@ -3,13 +3,12 @@ import { Router } from '@angular/router';
 import { Recipe } from '@app/models';
 
 @Component({
-  selector: 'cobo-recipe-list',
-  templateUrl: './recipe-list.component.html',
-  styleUrls: ['./recipe-list.component.scss'],
+  selector: 'cobo-recipe-grid',
+  templateUrl: './recipe-grid.component.html',
+  styleUrls: ['./recipe-grid.component.scss'],
 })
-export class RecipeListComponent {
+export class RecipeGridComponent {
   @Input() recipes: Recipe[];
-  displayedColumns: string[] = ['name', 'createdOn'];
 
   constructor(private router: Router) {}
 

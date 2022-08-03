@@ -9,15 +9,27 @@ import { Recipe } from '@app/models';
   providedIn: 'root',
 })
 export class RecipeService {
+  // save first document in snapshot of items received
+  firstInResponse: any = [];
+  // save last document in snapshot of items received
+  lastInResponse: any = [];
+
   constructor(private afs: AngularFirestore) {}
 
-  getAll(): Observable<Recipe[]> {
+  get(): Observable<Recipe[]> {
     return this.afs
-      .collection<Recipe>('recipes')
+      .collection<Recipe>('recipes', (ref) =>
+        ref.limit(10).orderBy('createdOn', 'desc').startAfter(this.lastInResponse)
+      )
       .snapshotChanges()
       .pipe(
-        map((recipes) => {
-          return recipes.map((r) => {
+        map((response) => {
+          if (!response.length) {
+            console.warn('no recipes found');
+          }
+          this.firstInResponse = response[0].payload.doc;
+          this.lastInResponse = response[response.length - 1].payload.doc;
+          return response.map((r) => {
             const data = r.payload.doc.data() as Recipe;
             const id = r.payload.doc.id;
             return { id, ...data };

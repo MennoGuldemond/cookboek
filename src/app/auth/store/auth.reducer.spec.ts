@@ -15,11 +15,11 @@ describe('AuthReducer', () => {
 
   it('should load data', () => {
     const props = {
-      value: mockUser,
+      user: mockUser,
     };
     const action = fromActions.setUser(props);
     const state = fromReducer.authReducer(fromReducer.initialState, action);
 
-    expect(state.user).toEqual(props.value);
+    expect(state.user).toEqual(props.user);
   });
 });

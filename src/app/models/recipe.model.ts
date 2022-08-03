@@ -6,6 +6,7 @@ export class Recipe {
   createdOn: any;
   instructions: string;
   ingredients: string;
+  categories: string[];
 
   likes: string[];
 

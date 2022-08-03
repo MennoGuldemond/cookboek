@@ -1,12 +1,5 @@
 @import '../../../../vars.scss';
 
-.recipe-list {
-  display: grid;
-  align-items: center;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-}
-
 .add-button {
   position: fixed;
   bottom: 20px;
@@ -14,8 +7,12 @@
   color: white;
 }
 
-.recipe-container {
-  padding-bottom: 10px;
+table {
+  width: 100%;
+
+  & .date-column {
+    min-width: 10ch;
+  }
 }
 
 // Only on larger screens
@@ -23,10 +20,5 @@
   .add-button {
     right: 30px;
     bottom: 30px;
-  }
-
-  .recipe-list {
-    gap: 2rem;
-    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
   }
 }

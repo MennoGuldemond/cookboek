@@ -1,0 +1,32 @@
+@import '../../../../vars.scss';
+
+.recipe-grid {
+  display: grid;
+  align-items: center;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.add-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  color: white;
+}
+
+.recipe-container {
+  padding-bottom: 10px;
+}
+
+// Only on larger screens
+@media only screen and (min-width: $desktop-breakpoint) {
+  .add-button {
+    right: 30px;
+    bottom: 30px;
+  }
+
+  .recipe-grid {
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  }
+}

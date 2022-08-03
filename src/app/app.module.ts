@@ -2,6 +2,7 @@ import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import localeNl from '@angular/common/locales/nl';
+import { NgxImageCompressService } from 'ngx-image-compress';
 
 import { AuthModule } from '@auth/auth.module';
 import { AngularFireModule } from '@angular/fire/compat';
@@ -52,7 +53,7 @@ registerLocaleData(localeNl);
     AngularFireStorageModule,
     RecipeModule,
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'nl-NL' }],
+  providers: [{ provide: LOCALE_ID, useValue: 'nl-NL' }, NgxImageCompressService],
   bootstrap: [AppComponent],
   entryComponents: [YesNoDialogComponent],
 })

@@ -5,27 +5,27 @@
       <input matInput placeholder="Bijv. Chocolade koekjes" type="text" formControlName="title" />
     </mat-form-field>
 
+    <cobo-chip-autocomplete
+      [options]="allCategories"
+      [startValues]="this.recipe.categories || []"
+      [label]="'Categoriën'"
+      (changed)="onCategoriesChanged($event)"
+    ></cobo-chip-autocomplete>
+
     <div class="image-and-description-container">
       <mat-form-field appearance="outline">
         <mat-label for="description">Beschrijving</mat-label>
         <textarea matInput placeholder="Vertel iets over jouw recept" formControlName="description" rows="5"></textarea>
       </mat-form-field>
-      <input
-        #imageInput
-        hidden
-        type="file"
-        onclick="this.value=null"
-        (change)="onFileInputChange($event)"
-        accept="image/png, image/jpeg"
-      />
-      <div *ngIf="!imagePreviewSrc && !recipe.photoURL" class="image-preview" (click)="imageInput.click()">
+      <input #imageInput hidden type="file" onclick="this.value=null" accept="image/png, image/jpeg" />
+      <div *ngIf="!imagePreviewSrc && !recipe.photoURL" class="image-preview" (click)="compressImage()">
         <h4>Foto uploaden</h4>
       </div>
       <img
         *ngIf="imagePreviewSrc || recipe.photoURL"
         [src]="imagePreviewSrc ? imagePreviewSrc : recipe.photoURL"
         class="image-preview"
-        (click)="imageInput.click()"
+        (click)="compressImage()"
       />
     </div>
 
@@ -47,7 +47,13 @@
     </div>
 
     <div class="align-content-right">
-      <button mat-raised-button color="primary" class="save-button" type="submit" [disabled]="editRecipeForm.invalid">
+      <button
+        mat-raised-button
+        color="primary"
+        class="save-button"
+        type="submit"
+        [disabled]="editRecipeForm.invalid || (!photoFile && !recipe.photoURL)"
+      >
         Opslaan
       </button>
     </div>

@@ -36,6 +36,6 @@ export class UserQuickMenuComponent implements OnInit {
   }
 
   setTheme(theme: string): void {
-    this.store.dispatch(setTheme({ value: theme }));
+    this.store.dispatch(setTheme({ theme: theme }));
   }
 }

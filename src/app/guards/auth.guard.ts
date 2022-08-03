@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { map, take } from 'rxjs/operators';
@@ -11,7 +11,7 @@ import { login } from '@auth/store/auth.actions';
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(private store: Store<AuthState>) {}
+  constructor(private store: Store<AuthState>, private router: Router) {}
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     return this.store.select(selectUser).pipe(
@@ -25,6 +25,7 @@ export class AuthGuard implements CanActivate {
             localStorage.setItem('urlBeforeLogin', state.url);
           }
           this.store.dispatch(login());
+          this.router.navigate(['home']);
           return false;
         }
       })

@@ -9,4 +9,4 @@ export const AUTH_SET_USER = '[Auth] setUser';
 export const login = createAction(AUTH_LOGIN);
 export const logout = createAction(AUTH_LOGOUT);
 export const getUser = createAction(AUTH_GET_USER);
-export const setUser = createAction(AUTH_SET_USER, props<{ value: User }>());
+export const setUser = createAction(AUTH_SET_USER, props<{ user: User }>());

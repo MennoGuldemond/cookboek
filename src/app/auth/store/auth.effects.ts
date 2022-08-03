@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY, pipe } from 'rxjs';
 import { map, mergeMap, catchError, switchMap, take } from 'rxjs/operators';
 import { AuthService } from '@auth/services';
 import { login, logout, AUTH_SET_USER, setUser, AUTH_GET_USER, getUser } from './auth.actions';
-import { GoogleUser } from '@app/models';
-import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthEffects {
@@ -32,7 +31,7 @@ export class AuthEffects {
         this.authService.signOut().pipe(
           map(() => {
             this.router.navigate(['/']);
-            return { type: AUTH_SET_USER, value: null };
+            return { type: AUTH_SET_USER, user: null };
           }),
           catchError(() => EMPTY)
         )
@@ -40,7 +39,7 @@ export class AuthEffects {
     )
   );
 
-  private _getUser$ = createEffect(() =>
+  getUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(getUser),
       switchMap(() => {
@@ -49,17 +48,11 @@ export class AuthEffects {
       pipe(
         take(1),
         map((user) => {
-          return { type: AUTH_SET_USER, value: user };
+          return { type: AUTH_SET_USER, user: user };
         })
       )
     )
   );
-  public get getUser$() {
-    return this._getUser$;
-  }
-  public set getUser$(value) {
-    this._getUser$ = value;
-  }
 
   setUser$ = createEffect(
     () =>
@@ -71,8 +64,8 @@ export class AuthEffects {
             this.router.navigate([urlBeforeLogin]);
             localStorage.removeItem('urlBeforeLogin');
           }
-          if (action.value) {
-            this.authService.updateUserData(action.value).subscribe((x) => x);
+          if (action.user) {
+            this.authService.updateUserData(action.user).subscribe((x) => x);
           }
         })
       ),

@@ -15,11 +15,11 @@ describe('AppReducer', () => {
 
   it('should load data', () => {
     const props = {
-      value: 'test-theme',
+      theme: 'test-theme',
     };
     const action = fromActions.setTheme(props);
     const state = fromReducer.appReducer(fromReducer.initialState, action);
 
-    expect(state.theme).toEqual(props.value);
+    expect(state.theme).toEqual(props.theme);
   });
 });
