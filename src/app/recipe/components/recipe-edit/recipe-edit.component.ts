@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
-import { Recipe } from '@app/models';
-import { PhotoService } from '@app/services';
-import { RecipeService } from '../../services';
 import { Store } from '@ngrx/store';
+import { DataUrl, NgxImageCompressService, UploadResponse } from 'ngx-image-compress';
+
+import { Recipe, categories } from '@app/models';
+import { PhotoService } from '@app/services';
 import { AuthState, selectUser } from '@auth/store/auth.selectors';
+import { RecipeService } from '../../services';
 
 @Component({
   selector: 'cobo-recipe-edit',
@@ -19,6 +20,10 @@ export class RecipeEditComponent implements OnInit {
   photoFile: File;
   editRecipeForm: FormGroup;
   imagePreviewSrc: string;
+  allCategories = categories;
+
+  imgResultBeforeCompress: DataUrl = '';
+  imgResultAfterCompress: DataUrl = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -27,7 +32,8 @@ export class RecipeEditComponent implements OnInit {
     private store: Store<AuthState>,
     private route: ActivatedRoute,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private imageCompress: NgxImageCompressService
   ) {}
 
   ngOnInit(): void {
@@ -78,7 +84,7 @@ export class RecipeEditComponent implements OnInit {
       });
     } else {
       // TODO: Do we want to let users save without a photo?
-      this.saveRecipe();
+      // this.saveRecipe();
     }
   }
 
@@ -121,18 +127,24 @@ export class RecipeEditComponent implements OnInit {
     });
   }
 
-  onFileInputChange(data: any): void {
-    if (data.target.files) {
-      this.photoFile = data.target.files[0];
-      const reader = new FileReader();
-      reader.readAsDataURL(this.photoFile);
+  compressImage(): void {
+    this.imageCompress.uploadFile().then(({ image, orientation, fileName }: UploadResponse) => {
+      this.imageCompress.compressFile(image, orientation, 50, 100, 1024, 1024).then((dataUrl: DataUrl) => {
+        this.imagePreviewSrc = dataUrl;
 
-      reader.onload = () => {
-        this.imagePreviewSrc = reader.result as string;
-      };
-    } else {
-      this.photoFile = null;
-    }
+        let arr = dataUrl.split(',');
+        let mimeType = arr[0].match(/:(.*?);/)[1];
+        let bstr = atob(arr[1]);
+        let n = bstr.length;
+        let u8arr = new Uint8Array(n);
+
+        while (n--) {
+          u8arr[n] = bstr.charCodeAt(n);
+        }
+
+        this.photoFile = new File([u8arr], fileName, { type: mimeType });
+      });
+    });
   }
 
   // This function tries to focus on the next input
@@ -144,7 +156,6 @@ export class RecipeEditComponent implements OnInit {
       addButton._elementRef.nativeElement.click();
     }
 
-    // TODO: fix this trickery
     setTimeout(() => {
       let element =
         event.srcElement.parentElement.parentElement.parentElement.parentElement.nextElementSibling.getElementsByTagName(
@@ -154,5 +165,9 @@ export class RecipeEditComponent implements OnInit {
       // focus if the next input is found
       else element.focus();
     }, 1);
+  }
+
+  onCategoriesChanged(currentCategories: string[]): void {
+    this.recipe.categories = currentCategories;
   }
 }
