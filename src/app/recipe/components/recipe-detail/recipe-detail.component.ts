@@ -61,7 +61,7 @@ export class RecipeDetailComponent implements OnInit {
             if (succeeded) {
               this.photoService.delete(recipe).subscribe((x) => {
                 this.snackBar.open('Het recept is verwijderd', 'Oke', { duration: 3000 });
-                this.router.navigate(['recipes']);
+                this.router.navigate(['recepten']);
               });
             } else {
               this.snackBar.open('Verwijderen mislukt', 'Oke', { duration: 3000 });
