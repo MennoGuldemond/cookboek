@@ -17,7 +17,7 @@ export class AuthService {
     return this.auth.authState.pipe(
       switchMap((user) => {
         if (user) {
-          return this.firestore.doc<User>(`users/${user.uid}`).valueChanges();
+          return this.firestore.doc<User>(`users/${user.uid}`).valueChanges().pipe(take(1));
         } else {
           return of(null);
         }
