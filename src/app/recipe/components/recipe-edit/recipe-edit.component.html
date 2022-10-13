@@ -49,10 +49,10 @@
     <div class="align-content-right">
       <button
         mat-raised-button
-        color="primary"
+        color="accent"
         class="save-button"
         type="submit"
-        [disabled]="editRecipeForm.invalid || (!photoFile && !recipe.photoURL)"
+        [disabled]="editRecipeForm.invalid || (!editRecipeForm.dirty && !photoFile) || (!photoFile && !recipe.photoURL)"
       >
         Opslaan
       </button>

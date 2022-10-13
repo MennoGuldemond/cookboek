@@ -82,9 +82,8 @@ export class RecipeEditComponent implements OnInit {
           this.saveRecipe();
         });
       });
-    } else {
-      // TODO: Do we want to let users save without a photo?
-      // this.saveRecipe();
+    } else if (this.recipe?.photoURL) {
+      this.saveRecipe();
     }
   }
 
