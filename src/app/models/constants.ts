@@ -1,6 +1,10 @@
 export const categories = [
   'Aziatisch',
+  'Cocktail',
+  'Deeg',
   'Frituur',
+  'Grieks',
+  'Groente',
   'Kip',
   'Oven',
   'Rund',
@@ -10,5 +14,4 @@ export const categories = [
   'Vegetarisch',
   'Vis',
   'Vlees',
-  'groente',
 ];
