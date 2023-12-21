@@ -1,7 +1,8 @@
+import { SocialUser } from '@abacritt/angularx-social-login';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { IUser } from '@app/models';
-import { login, logout } from '@auth/store/auth.actions';
+import { logout } from '@auth/store/auth.actions';
+import { selectUser } from '@auth/store/auth.selectors';
 import { Store } from '@ngrx/store';
 import { setTheme } from '@store/app.actions';
 import { AppState, selectTheme } from '@store/app.selectors';
@@ -13,7 +14,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./user-quick-menu.component.scss'],
 })
 export class UserQuickMenuComponent implements OnInit {
-  @Input() user: IUser;
+  @Input() user: SocialUser;
 
   currentTheme$: Observable<string>;
 
@@ -21,10 +22,6 @@ export class UserQuickMenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentTheme$ = this.store.select(selectTheme);
-  }
-
-  login(): void {
-    this.store.dispatch(login());
   }
 
   logout(): void {

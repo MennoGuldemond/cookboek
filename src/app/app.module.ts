@@ -3,7 +3,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import localeNl from '@angular/common/locales/nl';
 import { NgxImageCompressService } from 'ngx-image-compress';
-
+import { SocialLoginModule, SocialAuthServiceConfig, GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
+import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
 import { AuthModule } from '@auth/auth.module';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -37,6 +38,8 @@ registerLocaleData(localeNl);
   ],
   imports: [
     BrowserAnimationsModule,
+    SocialLoginModule,
+    GoogleSigninButtonModule,
     AppRoutingModule,
     SharedModule,
     StoreModule.forRoot({ app: appReducer }),
@@ -45,7 +48,25 @@ registerLocaleData(localeNl);
     AuthModule,
     RecipeModule,
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'nl-NL' }, NgxImageCompressService],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'nl-NL' },
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(environment.google.clientId),
+          },
+        ],
+        onError: (err) => {
+          console.error(err);
+        },
+      } as SocialAuthServiceConfig,
+    },
+    NgxImageCompressService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

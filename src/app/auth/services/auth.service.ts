@@ -1,12 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { from, fromEvent, Observable, of } from 'rxjs';
-import { map, switchMap, take } from 'rxjs/operators';
-
+import { Store } from '@ngrx/store';
+import { GoogleLoginProvider, SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
+import { from, Observable } from 'rxjs';
 import { IUser } from '@app/models';
 import { environment } from '@env/environment';
-import { Store } from '@ngrx/store';
-import { setUser } from '@auth/store/auth.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -14,44 +12,28 @@ import { setUser } from '@auth/store/auth.actions';
 export class AuthService {
   baseUrl = environment.api.url;
 
-  constructor(private http: HttpClient, private store: Store) {}
+  constructor(private http: HttpClient, private authService: SocialAuthService, private store: Store) {}
 
-  googleSignin() {
-    const temp = window.open(
-      `${this.baseUrl}/auth/google`,
-      'mywindow',
-      'location=1,status=1,scrollbars=1, width=800,height=800'
-    );
-    window.addEventListener('message', (message: MessageEvent) => {
-      // Message will contain google user and details
-      const userData: { user: IUser; accessToken: string } = message.data.user;
-      this.store.dispatch(setUser(userData));
-      console.log(userData);
+  googleSignin(): Observable<SocialUser> {
+    return from(this.authService.signIn(GoogleLoginProvider.PROVIDER_ID));
+  }
+
+  getAccessToken(): void {
+    this.authService.getAccessToken(GoogleLoginProvider.PROVIDER_ID).then((token) => {
+      console.log(token);
     });
+  }
+
+  refreshToken(): void {
+    this.authService.refreshAccessToken(GoogleLoginProvider.PROVIDER_ID);
   }
 
   getUserById(id: string): Observable<IUser> {
     return this.http.get<IUser>(`${this.baseUrl}/users/${id}`);
   }
 
-  // getUser(): Observable<User> {
-  //   return this.auth.authState.pipe(
-  //     switchMap((user) => {
-  //       if (user) {
-  //         return this.firestore.doc<User>(`users/${user.uid}`).valueChanges().pipe(take(1));
-  //       } else {
-  //         return of(null);
-  //       }
-  //     })
-  //   );
-  // }
-
-  // googleSignin(): Observable<firebase.auth.UserCredential> {
-  //   return from(this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()));
-  // }
-
   signOut(): Observable<void> {
-    return of(null);
+    return from(this.authService.signOut());
   }
 
   // updateUserData(user: GoogleUser): Observable<any> {

@@ -39,7 +39,7 @@ export class RecipeDetailComponent implements OnInit {
       }
     });
 
-    this.user$ = this.store.select(selectUser);
+    // this.user$ = this.store.select(selectUser);
   }
 
   onEditClick(id: string): void {

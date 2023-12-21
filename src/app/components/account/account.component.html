@@ -1,8 +1,8 @@
 <div class="page-container padded">
-  <mat-card *ngIf="user$ | async as user">
+  <mat-card *ngIf="user$ | async; let user">
     <mat-card-header>
       <mat-card-title>{{ user.name }}</mat-card-title>
-      <mat-card-subtitle>Lid sinds: {{ user.createdAt | date : 'dd MMMM yyyy' }}</mat-card-subtitle>
+      <!-- <mat-card-subtitle>Lid sinds: {{ user.createdAt | date : 'dd MMMM yyyy' }}</mat-card-subtitle> -->
     </mat-card-header>
     <mat-card-content>
       <!-- <p>Aantal recepten: {{ user.recipeIds.length }}</p> -->

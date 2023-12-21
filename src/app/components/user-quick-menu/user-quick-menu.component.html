@@ -1,5 +1,5 @@
 <div *ngIf="user; else loginButton" fxLayout="row" class="avatar-circle">
-  <img [matMenuTriggerFor]="userMenu" [src]="user.photoUrl + '=s32'" alt="Profiel foto" />
+  <img [matMenuTriggerFor]="userMenu" [src]="user.photoUrl" referrerpolicy="no-referrer" />
   <mat-menu #userMenu="matMenu">
     <button mat-menu-item (click)="navigateToAccount()">Mijn Account</button>
     <button mat-menu-item (click)="logout()">Uitloggen</button>
@@ -17,5 +17,5 @@
   </mat-menu>
 </div>
 <ng-template #loginButton>
-  <button mat-stroked-button (click)="login()">Inloggen</button>
+  <asl-google-signin-button type="icon" shape="circle" size="medium"></asl-google-signin-button>
 </ng-template>

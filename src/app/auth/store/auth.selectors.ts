@@ -1,8 +1,8 @@
-import { IUser } from '@app/models';
+import { SocialUser } from '@abacritt/angularx-social-login';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 export interface AuthState {
-  user: IUser;
+  user: SocialUser;
 }
 
 export const selectAuthState = createFeatureSelector<AuthState>('auth');
