@@ -3,7 +3,7 @@ export class Recipe {
   title: string;
   description: string;
   photoURL: string;
-  createdOn: any;
+  createdAt: any;
   instructions: string;
   ingredients: string;
   categories: string[];

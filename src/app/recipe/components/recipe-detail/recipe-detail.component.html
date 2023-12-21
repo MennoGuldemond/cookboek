@@ -18,7 +18,7 @@
         </button>
         <span *ngIf="user$ | async as user">
           <button
-            *ngIf="recipe.likes?.includes(user.uid); else notLiked"
+            *ngIf="recipe.likes?.includes(user.id); else notLiked"
             mat-icon-button
             color="primary"
             aria-label="Like button"
@@ -33,7 +33,7 @@
           </ng-template>
         </span>
         <button
-          *ngIf="(user$ | async)?.uid === recipe.ownerId"
+          *ngIf="(user$ | async)?.id === recipe.ownerId"
           mat-icon-button
           color="primary"
           aria-label="Edit button"
@@ -42,7 +42,7 @@
           <mat-icon>edit</mat-icon>
         </button>
         <button
-          *ngIf="(user$ | async)?.uid === recipe.ownerId"
+          *ngIf="(user$ | async)?.id === recipe.ownerId"
           mat-icon-button
           color="primary"
           aria-label="Delete button"
@@ -51,7 +51,7 @@
           <mat-icon>delete</mat-icon>
         </button>
         <span class="filler"></span>
-        <p>{{ recipe.createdOn.toDate() | date: 'dd MMMM yyyy' }}</p>
+        <p>{{ recipe.createdAt.toDate() | date : 'dd MMMM yyyy' }}</p>
       </div>
 
       <h1>{{ recipe.title }}</h1>

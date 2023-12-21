@@ -1,8 +1,9 @@
-import { User } from '@app/models';
+import { IUser } from '@app/models';
 
-export const mockUser: User = {
-  uid: '',
+export const mockUser: IUser = {
+  id: '',
+  name: '',
   email: '',
-  recipeIds: [],
-  createdOn: undefined,
+  createdAt: undefined,
+  provider: '',
 };

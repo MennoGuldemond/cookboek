@@ -4,7 +4,7 @@ import { getUser, login, logout } from '@auth/store/auth.actions';
 import { AuthState, selectUser } from '@auth/store/auth.selectors';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { User } from './models';
+import { IUser } from './models';
 import { BrowserUtilService } from './services';
 import { environment } from '@env/environment';
 
@@ -14,7 +14,7 @@ import { environment } from '@env/environment';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  user$: Observable<User>;
+  user$: Observable<IUser>;
   version: string = environment.version;
 
   constructor(public browserUtils: BrowserUtilService, private store: Store<AuthState>) {}

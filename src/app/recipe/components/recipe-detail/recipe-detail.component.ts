@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 
 import { RecipeService } from '../../services';
 
-import { Recipe, User } from '@app/models';
+import { Recipe, IUser } from '@app/models';
 import { YesNoDialogComponent } from '@app/components';
 import { BrowserUtilService, PhotoService } from '@app/services';
 import { AuthState, selectUser } from '@auth/store/auth.selectors';
@@ -19,7 +19,7 @@ import { Store } from '@ngrx/store';
 })
 export class RecipeDetailComponent implements OnInit {
   recipe$: Observable<Recipe>;
-  user$: Observable<User>;
+  user$: Observable<IUser>;
 
   constructor(
     public browserUtil: BrowserUtilService,
@@ -57,16 +57,16 @@ export class RecipeDetailComponent implements OnInit {
       .afterClosed()
       .subscribe((clickedYes) => {
         if (clickedYes) {
-          this.recipeService.delete(recipe).subscribe((succeeded) => {
-            if (succeeded) {
-              this.photoService.delete(recipe).subscribe((x) => {
-                this.snackBar.open('Het recept is verwijderd', 'Oke', { duration: 3000 });
-                this.router.navigate(['recepten']);
-              });
-            } else {
-              this.snackBar.open('Verwijderen mislukt', 'Oke', { duration: 3000 });
-            }
-          });
+          // this.recipeService.delete(recipe).subscribe((succeeded) => {
+          //   if (succeeded) {
+          //     this.photoService.delete(recipe).subscribe((x) => {
+          //       this.snackBar.open('Het recept is verwijderd', 'Oke', { duration: 3000 });
+          //       this.router.navigate(['recepten']);
+          //     });
+          //   } else {
+          //     this.snackBar.open('Verwijderen mislukt', 'Oke', { duration: 3000 });
+          //   }
+          // });
         }
       });
   }
@@ -88,15 +88,15 @@ export class RecipeDetailComponent implements OnInit {
 
   onLikeClick(event: MouseEvent, recipe: Recipe): void {
     event.stopPropagation();
-    this.user$.subscribe((user) => {
-      this.recipeService.addLike(recipe, user.uid);
-    });
+    // this.user$.subscribe((user) => {
+    //   this.recipeService.addLike(recipe, user.id);
+    // });
   }
 
   onUnlikeClick(event: MouseEvent, recipe: Recipe): void {
     event.stopPropagation();
-    this.user$.subscribe((user) => {
-      this.recipeService.removeLike(recipe, user.uid);
-    });
+    // this.user$.subscribe((user) => {
+    //   this.recipeService.removeLike(recipe, user.id);
+    // });
   }
 }

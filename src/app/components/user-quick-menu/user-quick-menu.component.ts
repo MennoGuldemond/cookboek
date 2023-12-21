@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '@app/models';
+import { IUser } from '@app/models';
 import { login, logout } from '@auth/store/auth.actions';
 import { Store } from '@ngrx/store';
 import { setTheme } from '@store/app.actions';
@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./user-quick-menu.component.scss'],
 })
 export class UserQuickMenuComponent implements OnInit {
-  @Input() user: User;
+  @Input() user: IUser;
 
   currentTheme$: Observable<string>;
 

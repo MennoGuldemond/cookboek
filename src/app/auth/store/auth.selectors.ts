@@ -1,8 +1,8 @@
-import { User } from '@app/models';
+import { IUser } from '@app/models';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 export interface AuthState {
-  user: User;
+  user: IUser;
 }
 
 export const selectAuthState = createFeatureSelector<AuthState>('auth');

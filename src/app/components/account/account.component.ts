@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '@app/models';
+import { IUser } from '@app/models';
 import { AuthState, selectUser } from '@auth/store/auth.selectors';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./account.component.scss'],
 })
 export class AccountComponent implements OnInit {
-  user$: Observable<User>;
+  user$: Observable<IUser>;
 
   constructor(private store: Store<AuthState>) {}
 

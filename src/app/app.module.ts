@@ -5,10 +5,6 @@ import localeNl from '@angular/common/locales/nl';
 import { NgxImageCompressService } from 'ngx-image-compress';
 
 import { AuthModule } from '@auth/auth.module';
-import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireStorageModule } from '@angular/fire/compat/storage';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
@@ -47,10 +43,6 @@ registerLocaleData(localeNl);
     EffectsModule.forRoot([AppEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     AuthModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
-    AngularFireAuthModule,
-    AngularFireStorageModule,
     RecipeModule,
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'nl-NL' }, NgxImageCompressService],
