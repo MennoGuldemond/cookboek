@@ -1,4 +1,3 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
   "compilerOptions": {
@@ -18,26 +17,13 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "es2020",
-    "lib": [
-      "es2020",
-      "dom"
-    ],
+    "lib": ["es2020", "dom"],
     "paths": {
-      "@store/*": [
-        "src/app/store/*"
-      ],
-      "@env/*": [
-        "src/environments/*"
-      ],
-      "@recipe/*": [
-        "src/app/recipe/*"
-      ],
-      "@auth/*": [
-        "src/app/auth/*"
-      ],
-      "@app/*": [
-        "src/app/*"
-      ]
+      "@store/*": ["src/app/store/*"],
+      "@env/*": ["src/environments/*"],
+      "@recipe/*": ["src/app/recipe/*"],
+      "@auth/*": ["src/app/auth/*"],
+      "@app/*": ["src/app/*"]
     },
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,

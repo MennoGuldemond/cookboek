@@ -47,6 +47,5 @@ registerLocaleData(localeNl);
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'nl-NL' }, NgxImageCompressService],
   bootstrap: [AppComponent],
-  entryComponents: [YesNoDialogComponent],
 })
 export class AppModule {}

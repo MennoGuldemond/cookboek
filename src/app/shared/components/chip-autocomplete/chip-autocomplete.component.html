@@ -1,6 +1,6 @@
 <mat-form-field appearance="outline">
   <mat-label>{{ label }}</mat-label>
-  <mat-chip-list #chipList aria-label="selectie">
+  <mat-chip-grid #chipList aria-label="selectie">
     <mat-chip
       *ngFor="let option of currentOptions"
       selected
@@ -20,7 +20,7 @@
       [matChipInputAddOnBlur]="true"
       (matChipInputTokenEnd)="add($event)"
     />
-  </mat-chip-list>
+  </mat-chip-grid>
   <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
     <mat-option *ngFor="let option of filteredOptions" [value]="option">
       {{ option }}

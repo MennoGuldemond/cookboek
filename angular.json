@@ -64,10 +64,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "cookboek:build:production"
+              "buildTarget": "cookboek:build:production"
             },
             "development": {
-              "browserTarget": "cookboek:build:development"
+              "buildTarget": "cookboek:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -75,7 +75,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "cookboek:build"
+            "buildTarget": "cookboek:build"
           }
         },
         "test": {
@@ -96,7 +96,7 @@
           "options": {
             "prerender": false,
             "ssr": false,
-            "browserTarget": "cookboek:build:production",
+            "buildTarget": "cookboek:build:production",
             "firebaseProject": "cookboek-45150",
             "firebaseHostingSite": "cookboek-45150"
           }

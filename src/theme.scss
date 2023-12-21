@@ -7,9 +7,14 @@
 //  If you don't need the default component typographies but still want the hierarchy styles,
 //  you can delete this line and instead use:
 //    `@include mat.legacy-typography-hierarchy(mat.define-legacy-typography-config());`
-@include mat.all-legacy-component-typographies();
-@include mat.legacy-core();
+@include mat.all-component-typographies();
+@include mat.core();
 @import './vars.scss';
+
+// Overwrite material default font
+$cobo-typography: mat.define-typography-config(
+  $font-family: '"Poppins", sans-serif;',
+);
 
 $cobo-green-palette: (
   50: $cobo-green,
@@ -69,6 +74,7 @@ $light-theme: mat.define-light-theme(
       primary: $cobo-primary,
       accent: $cobo-accent,
     ),
+    typography: $cobo-typography,
   )
 );
 
@@ -78,11 +84,12 @@ $dark-theme: mat.define-dark-theme(
       primary: $cobo-primary,
       accent: $cobo-accent,
     ),
+    typography: $cobo-typography,
   )
 );
 
-@include mat.all-legacy-component-themes($light-theme);
+@include mat.all-component-themes($light-theme);
 
 .dark-theme {
-  @include mat.all-legacy-component-colors($dark-theme);
+  @include mat.all-component-colors($dark-theme);
 }

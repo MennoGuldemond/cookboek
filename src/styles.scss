@@ -1,4 +1,3 @@
-@import '~@angular/material/theming';
 @import './vars.scss';
 
 html,
@@ -8,12 +7,6 @@ body {
 body {
   margin: 0;
 }
-
-// Overwrite material default font
-$custom-typography: mat-typography-config(
-  $font-family: '"Poppins", sans-serif;',
-);
-@include angular-material-typography($custom-typography);
 
 .handwritten {
   font-family: 'Satisfy', cursive !important;
