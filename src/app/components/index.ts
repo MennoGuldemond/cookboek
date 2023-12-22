@@ -3,3 +3,4 @@ export { UserQuickMenuComponent } from './user-quick-menu/user-quick-menu.compon
 export { AccountComponent } from './account/account.component';
 export { NotFoundComponent } from './not-found/not-found.component';
 export { YesNoDialogComponent } from './yes-no-dialog/yes-no-dialog.component';
+export { LoginComponent } from './login/login.component';

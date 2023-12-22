@@ -1,0 +1,10 @@
+<div class="page-container padded">
+  <mat-card *ngIf="(isLoggedIn$ | async) === false">
+    <mat-card-header class="center">
+      <mat-card-title>Gebruik een account</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="center">
+      <asl-google-signin-button type="standard" shape="pill"></asl-google-signin-button>
+    </mat-card-content>
+  </mat-card>
+</div>

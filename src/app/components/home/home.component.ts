@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Recipe } from '@app/models';
-import { AuthService } from '@auth/services';
-import { UserService } from '@auth/services/user.service';
 import { RecipeService } from '@recipe/services';
 import { Observable } from 'rxjs';
 
@@ -14,7 +12,7 @@ import { Observable } from 'rxjs';
 export class HomeComponent implements OnInit {
   newestRecipe$: Observable<Recipe>;
 
-  constructor(private recipeService: RecipeService, private router: Router, private userService: UserService) {}
+  constructor(private recipeService: RecipeService, private router: Router) {}
 
   ngOnInit(): void {
     this.newestRecipe$ = this.recipeService.getNewest();
@@ -24,11 +22,5 @@ export class HomeComponent implements OnInit {
     if (recipe) {
       this.router.navigate([`recepten/detail/${recipe.id}`]);
     }
-  }
-
-  test() {
-    console.log('test');
-    this.userService.getUsers().subscribe((x) => console.log(x));
-    // this.auth.SignIn();
   }
 }

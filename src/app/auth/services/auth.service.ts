@@ -35,29 +35,4 @@ export class AuthService {
   signOut(): Observable<void> {
     return from(this.authService.signOut());
   }
-
-  // updateUserData(user: GoogleUser): Observable<any> {
-  //   const userRef: AngularFirestoreDocument<GoogleUser> = this.firestore.doc(`users/${user.uid}`);
-
-  //   return userRef.valueChanges().pipe(
-  //     take(1),
-  //     switchMap((savedUser: User) => {
-  //       const data: any = {
-  //         uid: user.uid,
-  //         email: user.email,
-  //         displayName: user.displayName,
-  //         photoURL: user.photoURL,
-  //       };
-
-  //       if (savedUser == null) {
-  //         // New user, initialize some values.
-  //         data.recipeIds = [];
-  //         data.createdOn = new Date();
-  //         return userRef.set(data);
-  //       }
-
-  //       return userRef.set(data, { merge: true });
-  //     })
-  //   );
-  // }
 }

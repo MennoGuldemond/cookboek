@@ -40,12 +40,12 @@ body {
   padding: 1rem 0;
 }
 
-.mat-stroked-button,
+// TODO: update these classes/components
+.mdc-button--outlined,
 .mat-raised-button,
 .mat-menu-panel,
 mat-card,
-mat-dialog-container,
-mat-button-toggle-group {
+mat-dialog-container {
   border-radius: 16px !important;
 }
 

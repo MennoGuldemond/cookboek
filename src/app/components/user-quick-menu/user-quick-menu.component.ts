@@ -24,6 +24,10 @@ export class UserQuickMenuComponent implements OnInit {
     this.currentTheme$ = this.store.select(selectTheme);
   }
 
+  login(): void {
+    this.router.navigate(['login']);
+  }
+
   logout(): void {
     this.store.dispatch(logout());
   }

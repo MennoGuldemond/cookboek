@@ -22,6 +22,7 @@ import {
   AccountComponent,
   NotFoundComponent,
   YesNoDialogComponent,
+  LoginComponent,
 } from './components';
 import { RecipeModule } from '@recipe/recipe.module';
 
@@ -31,6 +32,7 @@ registerLocaleData(localeNl);
   declarations: [
     AppComponent,
     HomeComponent,
+    LoginComponent,
     UserQuickMenuComponent,
     AccountComponent,
     NotFoundComponent,

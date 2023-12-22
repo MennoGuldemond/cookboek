@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AccountComponent, HomeComponent, NotFoundComponent } from './components';
+import { AccountComponent, HomeComponent, LoginComponent, NotFoundComponent } from './components';
 import { AuthGuard } from './guards';
 
 const routes: Routes = [
   { path: 'home', title: 'CB | Home', component: HomeComponent },
+  { path: 'login', title: 'CB | Login', component: LoginComponent },
   { path: 'profiel', title: 'CB | Profiel', component: AccountComponent, canActivate: [AuthGuard] },
   {
     path: 'recepten',
