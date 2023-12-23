@@ -1,5 +1,5 @@
 import { SocialUser } from '@abacritt/angularx-social-login';
-import { IUser } from '@app/models';
+import { User } from '@app/models';
 import { createAction, props } from '@ngrx/store';
 
 export const AUTH_LOGOUT = '[Auth] logout';
@@ -12,4 +12,4 @@ export const logout = createAction(AUTH_LOGOUT);
 export const getUser = createAction(AUTH_GET_USER);
 export const setUser = createAction(AUTH_SET_USER, props<{ user: SocialUser }>());
 export const getUserData = createAction(AUTH_GET_USER_DATA);
-export const setUserData = createAction(AUTH_SET_USER_DATA, props<{ userData: IUser }>());
+export const setUserData = createAction(AUTH_SET_USER_DATA, props<{ userData: User }>());

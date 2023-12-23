@@ -2,9 +2,9 @@
   <div mat-card-image class="recipe-image" [ngStyle]="{ 'background-image': getImageURLStyle(recipe) }"></div>
   <div class="recipe-info">
     <h2>
-      {{ recipe.title }}<span class="subtitle">{{ recipe.ownerName }}</span>
+      {{ recipe.title }}<span class="subtitle">{{ recipe.author?.name }}</span>
     </h2>
-    <mat-icon [matBadge]="recipe.likes?.length" matBadgeColor="accent" matBadgeSize="small" color="primary"
+    <mat-icon [matBadge]="recipe.likes" matBadgeColor="accent" matBadgeSize="small" color="primary" aria-hidden="false"
       >favorite</mat-icon
     >
   </div>

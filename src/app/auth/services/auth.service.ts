@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { GoogleLoginProvider, SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { from, Observable } from 'rxjs';
-import { IUser } from '@app/models';
+import { User } from '@app/models';
 import { environment } from '@env/environment';
 
 @Injectable({
@@ -28,8 +28,8 @@ export class AuthService {
     this.authService.refreshAccessToken(GoogleLoginProvider.PROVIDER_ID);
   }
 
-  getUserById(id: string): Observable<IUser> {
-    return this.http.get<IUser>(`${this.baseUrl}/users/${id}`);
+  getUserById(id: string): Observable<User> {
+    return this.http.get<User>(`${this.baseUrl}/users/${id}`);
   }
 
   signOut(): Observable<void> {

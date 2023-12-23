@@ -1,6 +1,6 @@
 import { Recipe } from './recipe.model';
 
-export interface IUser {
+export interface User {
   id: string;
   email: string;
   name: string;

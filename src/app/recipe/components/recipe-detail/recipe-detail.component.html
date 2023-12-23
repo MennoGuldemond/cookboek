@@ -6,7 +6,7 @@
       [ngStyle]="{ 'background-image': getImageURLStyle(recipe.photoURL) }"
     ></div>
     <mat-card-content>
-      <div class="actions">
+      <!-- <div class="actions">
         <button
           *ngIf="browserUtil.isSafari()"
           mat-icon-button
@@ -52,10 +52,10 @@
         </button>
         <span class="filler"></span>
         <p>{{ recipe.createdAt.toDate() | date : 'dd MMMM yyyy' }}</p>
-      </div>
+      </div> -->
 
       <h1>{{ recipe.title }}</h1>
-      <h3>van {{ recipe.ownerName }}</h3>
+      <!-- <h3>van {{ recipe.ownerName }}</h3> -->
 
       <p [innerHtml]="recipe.description"></p>
 

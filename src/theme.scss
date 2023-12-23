@@ -13,8 +13,9 @@
 
 // Overwrite material default font
 $cobo-typography: mat.define-typography-config(
-  $font-family: '"Poppins", sans-serif;',
+  $font-family: Poppins,
 );
+@include mat.typography-hierarchy($cobo-typography);
 
 $cobo-green-palette: (
   50: $cobo-green,

@@ -14,9 +14,10 @@
 .recipe-info {
   text-align: start;
   display: flex;
+  padding: 0.5em 1em;
 
   & > mat-icon {
-    margin: 0.8em 0 0 1em;
+    margin: 0.5em 0 0 1em;
   }
 
   & > h2 {
@@ -28,7 +29,6 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin-top: 0.5em;
 
     & .subtitle {
       display: block;

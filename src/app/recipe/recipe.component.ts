@@ -18,5 +18,6 @@ export class RecipeComponent {
   ngOnInit(): void {
     this.store.dispatch(getRecipes());
     this.recipes$ = this.store.select(selectRecipes);
+    this.recipes$.subscribe((x) => console.log(x));
   }
 }

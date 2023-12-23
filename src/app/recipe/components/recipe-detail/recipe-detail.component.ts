@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 
 import { RecipeService } from '../../services';
 
-import { Recipe, IUser } from '@app/models';
+import { Recipe, User } from '@app/models';
 import { YesNoDialogComponent } from '@app/components';
 import { BrowserUtilService, PhotoService } from '@app/services';
 import { AuthState, selectUser } from '@auth/store/auth.selectors';
@@ -19,7 +19,7 @@ import { Store } from '@ngrx/store';
 })
 export class RecipeDetailComponent implements OnInit {
   recipe$: Observable<Recipe>;
-  user$: Observable<IUser>;
+  user$: Observable<User>;
 
   constructor(
     public browserUtil: BrowserUtilService,
