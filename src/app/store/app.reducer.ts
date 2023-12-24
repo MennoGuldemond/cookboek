@@ -1,10 +1,11 @@
 import { createReducer, on } from '@ngrx/store';
-import { setTheme, setUserPreferences } from './app.actions';
+import { setCategories, setTheme, setUserPreferences } from './app.actions';
 import { AppState } from './app.selectors';
 
 export const initialState: AppState = {
   theme: 'light-theme',
   userPreferences: { theme: '' },
+  categories: [],
 };
 
 const _appReducer = createReducer(
@@ -14,6 +15,9 @@ const _appReducer = createReducer(
   }),
   on(setUserPreferences, (state, { userPreferences }) => {
     return { ...state, userPreferences: userPreferences };
+  }),
+  on(setCategories, (state, { categories }) => {
+    return { ...state, categories: categories };
   })
 );
 

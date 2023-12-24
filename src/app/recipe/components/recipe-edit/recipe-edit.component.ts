@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 import { DataUrl, NgxImageCompressService, UploadResponse } from 'ngx-image-compress';
 
-import { Recipe, categories } from '@app/models';
+import { Recipe } from '@app/models';
 import { PhotoService } from '@app/services';
 import { AuthState, selectUser } from '@auth/store/auth.selectors';
 import { RecipeService } from '../../services';
@@ -20,7 +20,7 @@ export class RecipeEditComponent implements OnInit {
   photoFile: File;
   editRecipeForm: FormGroup;
   imagePreviewSrc: string;
-  allCategories = categories;
+  allCategories = [];
 
   imgResultBeforeCompress: DataUrl = '';
   imgResultAfterCompress: DataUrl = '';

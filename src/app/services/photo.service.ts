@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
-import { last, map } from 'rxjs/operators';
-
-import { Recipe, UploadResult } from '../models';
-import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { environment } from '@env/environment';
+import { UploadResult } from '../models';
 
 @Injectable({
   providedIn: 'root',

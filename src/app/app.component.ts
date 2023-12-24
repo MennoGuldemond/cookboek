@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { BrowserUtilService } from './services';
 import { environment } from '@env/environment';
 import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
+import { getCategories } from '@store/app.actions';
 
 @Component({
   selector: 'cobo-app',
@@ -24,11 +25,12 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // TODO: make sure we stay logged in when possible
-
+    // TODO: make sure we stay logged in after a refresh
     this.authService.authState.subscribe((user) => {
       this.store.dispatch(setUser({ user }));
     });
+
+    this.store.dispatch(getCategories());
 
     this.user$ = this.store.select(selectUser);
   }
