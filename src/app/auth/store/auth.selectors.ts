@@ -10,4 +10,5 @@ export interface AuthState {
 export const selectAuthState = createFeatureSelector<AuthState>('auth');
 
 export const selectUser = createSelector(selectAuthState, (state) => state.user);
+export const selectUserData = createSelector(selectAuthState, (state) => state.userData);
 export const selectIsLoggedIn = createSelector(selectAuthState, (state) => state.user != null);

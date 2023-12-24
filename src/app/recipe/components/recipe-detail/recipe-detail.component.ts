@@ -9,7 +9,7 @@ import { RecipeService } from '../../services';
 import { Recipe, User } from '@app/models';
 import { YesNoDialogComponent } from '@app/components';
 import { BrowserUtilService, PhotoService } from '@app/services';
-import { AuthState, selectUser } from '@auth/store/auth.selectors';
+import { AuthState, selectUserData } from '@auth/store/auth.selectors';
 import { Store } from '@ngrx/store';
 
 @Component({
@@ -39,7 +39,7 @@ export class RecipeDetailComponent implements OnInit {
       }
     });
 
-    // this.user$ = this.store.select(selectUser);
+    this.user$ = this.store.select(selectUserData);
   }
 
   onEditClick(id: string): void {
@@ -57,16 +57,14 @@ export class RecipeDetailComponent implements OnInit {
       .afterClosed()
       .subscribe((clickedYes) => {
         if (clickedYes) {
-          // this.recipeService.delete(recipe).subscribe((succeeded) => {
-          //   if (succeeded) {
-          //     this.photoService.delete(recipe).subscribe((x) => {
-          //       this.snackBar.open('Het recept is verwijderd', 'Oke', { duration: 3000 });
-          //       this.router.navigate(['recepten']);
-          //     });
-          //   } else {
-          //     this.snackBar.open('Verwijderen mislukt', 'Oke', { duration: 3000 });
-          //   }
-          // });
+          this.recipeService.delete(recipe.id).subscribe((succeeded) => {
+            if (succeeded) {
+              this.snackBar.open('Het recept is verwijderd', 'Oke', { duration: 3000 });
+              this.router.navigate(['recepten']);
+            } else {
+              this.snackBar.open('Verwijderen mislukt', 'Oke', { duration: 3000 });
+            }
+          });
         }
       });
   }

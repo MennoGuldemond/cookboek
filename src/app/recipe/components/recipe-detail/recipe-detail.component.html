@@ -6,18 +6,12 @@
       [ngStyle]="{ 'background-image': getImageURLStyle(recipe.photoURL) }"
     ></div>
     <mat-card-content>
-      <!-- <div class="actions">
-        <button
-          *ngIf="browserUtil.isSafari()"
-          mat-icon-button
-          color="primary"
-          aria-label="Share button"
-          (click)="onClickShare(recipe.title)"
-        >
+      <div class="actions">
+        <button mat-icon-button color="primary" aria-label="Share button" (click)="onClickShare(recipe.title)">
           <mat-icon>share</mat-icon>
         </button>
         <span *ngIf="user$ | async as user">
-          <button
+          <!-- <button
             *ngIf="recipe.likes?.includes(user.id); else notLiked"
             mat-icon-button
             color="primary"
@@ -25,7 +19,7 @@
             (click)="onUnlikeClick($event, recipe)"
           >
             <mat-icon>favorite</mat-icon>
-          </button>
+          </button> -->
           <ng-template #notLiked>
             <button mat-icon-button color="primary" aria-label="Like button" (click)="onLikeClick($event, recipe)">
               <mat-icon>favorite_border</mat-icon>
@@ -33,7 +27,7 @@
           </ng-template>
         </span>
         <button
-          *ngIf="(user$ | async)?.id === recipe.ownerId"
+          *ngIf="(user$ | async)?.id === recipe.authorId"
           mat-icon-button
           color="primary"
           aria-label="Edit button"
@@ -42,7 +36,7 @@
           <mat-icon>edit</mat-icon>
         </button>
         <button
-          *ngIf="(user$ | async)?.id === recipe.ownerId"
+          *ngIf="(user$ | async)?.id === recipe.authorId"
           mat-icon-button
           color="primary"
           aria-label="Delete button"
@@ -51,11 +45,11 @@
           <mat-icon>delete</mat-icon>
         </button>
         <span class="filler"></span>
-        <p>{{ recipe.createdAt.toDate() | date : 'dd MMMM yyyy' }}</p>
-      </div> -->
+        <p>{{ recipe.createdAt | date : 'dd MMMM yyyy' }}</p>
+      </div>
 
       <h1>{{ recipe.title }}</h1>
-      <!-- <h3>van {{ recipe.ownerName }}</h3> -->
+      <h3>van {{ recipe.author.name }}</h3>
 
       <p [innerHtml]="recipe.description"></p>
 

@@ -33,8 +33,8 @@ export class RecipeService {
     return this.http.post<Recipe>(`${this.baseUrl}`, recipe);
   }
 
-  delete(recipe: Recipe): Observable<boolean> {
-    return of(null);
+  delete(recipeId: string): Observable<boolean> {
+    return this.http.delete<boolean>(`${this.baseUrl}/${recipeId}`);
   }
 
   // addLike(recipe: Recipe, userUid: string): void {
