@@ -77,10 +77,8 @@ export class RecipeEditComponent implements OnInit {
   onSubmit(): void {
     if (this.photoFile) {
       this.photoService.upload(this.photoFile).subscribe((uploadResult) => {
-        uploadResult.downloadURL$.subscribe((url) => {
-          this.recipe.photoURL = url;
-          this.saveRecipe();
-        });
+        this.recipe.photoURL = uploadResult.photoURL;
+        this.saveRecipe();
       });
     } else if (this.recipe?.photoURL) {
       this.saveRecipe();
@@ -99,24 +97,21 @@ export class RecipeEditComponent implements OnInit {
 
       if (this.recipe.id) {
         // Existing recipe
-        this.recipeService.update(toSave).subscribe((id) => {
-          if (id) {
+        this.recipeService.save(toSave).subscribe((receipeResult) => {
+          if (receipeResult?.id) {
             this.snackBar.open('Recept Bijgewerkt', 'Oke', { duration: 3000 });
-            this.router.navigate([`recepten/detail/${id}`]);
+            this.router.navigate([`recepten/detail/${receipeResult.id}`]);
           } else {
             this.snackBar.open('Bijwerken mislukt', 'Oke', { duration: 3000 });
           }
         });
       } else {
         // New recipe
-        // toSave.ownerId = user.id;
-        // toSave.ownerName = user.name;
-        // toSave.likes = [];
-
-        this.recipeService.save(toSave).subscribe((id) => {
-          if (id) {
+        toSave.authorId = user.id;
+        this.recipeService.save(toSave).subscribe((receipeResult) => {
+          if (receipeResult?.id) {
             this.snackBar.open('Recept Opgeslagen', 'Oke', { duration: 3000 });
-            this.router.navigate([`recepten/detail/${id}`]);
+            this.router.navigate([`recepten/detail/${receipeResult.id}`]);
           } else {
             this.snackBar.open('Opslaan mislukt', 'Oke', { duration: 3000 });
           }
@@ -166,6 +161,6 @@ export class RecipeEditComponent implements OnInit {
   }
 
   onCategoriesChanged(currentCategories: string[]): void {
-    this.recipe.categories = currentCategories;
+    // this.recipe.categoryIds = currentCategories;
   }
 }

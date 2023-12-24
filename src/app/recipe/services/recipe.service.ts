@@ -8,7 +8,8 @@ import { environment } from '@env/environment';
   providedIn: 'root',
 })
 export class RecipeService {
-  baseUrl = environment.api.url;
+  baseUrl = `${environment.api.url}/recipes`;
+
   // save first document in snapshot of items received
   firstInResponse: any = [];
   // save last document in snapshot of items received
@@ -17,23 +18,19 @@ export class RecipeService {
   constructor(private http: HttpClient) {}
 
   get(): Observable<Recipe[]> {
-    return this.http.get<Recipe[]>(`${this.baseUrl}/recipes`);
+    return this.http.get<Recipe[]>(`${this.baseUrl}`);
   }
 
   getById(id: string): Observable<Recipe> {
-    return of(null);
+    return this.http.get<Recipe>(`${this.baseUrl}/${id}`);
   }
 
   getNewest(): Observable<Recipe> {
-    return this.http.get<Recipe>(`${this.baseUrl}/recipes/newest`);
+    return this.http.get<Recipe>(`${this.baseUrl}/newest`);
   }
 
-  save(recipe: Recipe): Observable<string> {
-    return of(null);
-  }
-
-  update(recipe: Recipe): Observable<string> {
-    return of(null);
+  save(recipe: Recipe): Observable<Recipe> {
+    return this.http.post<Recipe>(`${this.baseUrl}`, recipe);
   }
 
   delete(recipe: Recipe): Observable<boolean> {

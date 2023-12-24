@@ -5,12 +5,12 @@
       <input matInput placeholder="Bijv. Chocolade koekjes" type="text" formControlName="title" />
     </mat-form-field>
 
-    <cobo-chip-autocomplete
+    <!-- <cobo-chip-autocomplete
       [options]="allCategories"
       [startValues]="this.recipe.categories || []"
       [label]="'Categoriën'"
       (changed)="onCategoriesChanged($event)"
-    ></cobo-chip-autocomplete>
+    ></cobo-chip-autocomplete> -->
 
     <div class="image-and-description-container">
       <mat-form-field appearance="outline">
@@ -56,6 +56,7 @@
       >
         Opslaan
       </button>
+      <!-- <button mat-raised-button color="accent" class="save-button" type="submit">Opslaan</button> -->
     </div>
   </form>
 </div>
