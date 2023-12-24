@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { GoogleLoginProvider, SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { from, Observable } from 'rxjs';
 import { User } from '@app/models';
@@ -12,7 +11,7 @@ import { environment } from '@env/environment';
 export class AuthService {
   baseUrl = environment.api.url;
 
-  constructor(private http: HttpClient, private authService: SocialAuthService, private store: Store) {}
+  constructor(private http: HttpClient, private authService: SocialAuthService) {}
 
   googleSignin(): Observable<SocialUser> {
     return from(this.authService.signIn(GoogleLoginProvider.PROVIDER_ID));

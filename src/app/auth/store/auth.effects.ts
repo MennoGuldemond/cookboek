@@ -36,7 +36,7 @@ export class AuthEffects {
       ofType(setUser),
       map((action) => {
         const urlBeforeLogin = localStorage.getItem('urlBeforeLogin');
-        if (action.user.idToken) {
+        if (action.user?.idToken) {
           localStorage.setItem('id_token', action.user.idToken);
         }
         if (urlBeforeLogin) {

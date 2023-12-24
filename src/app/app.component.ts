@@ -24,6 +24,8 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // TODO: make sure we stay logged in when possible
+
     this.authService.authState.subscribe((user) => {
       this.store.dispatch(setUser({ user }));
     });
