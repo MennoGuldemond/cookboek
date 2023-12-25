@@ -43,6 +43,12 @@ h3 {
   margin: 0 0 2em 0;
   color: $cobo-mid-grey;
 }
+h4 {
+  color: $cobo-mid-grey;
+}
+p {
+  overflow-wrap: break-word;
+}
 
 // Only on larger screens
 @media only screen and (min-width: $desktop-breakpoint) {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Recipe } from '@app/models';
+import { RecipeInfo } from '@app/models';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { getRecipes } from './store/recipe.actions';
@@ -11,7 +11,7 @@ import { RecipeState, selectRecipes } from './store/recipe.selectors';
   styleUrls: ['./recipe.component.scss'],
 })
 export class RecipeComponent {
-  recipes$: Observable<Recipe[]>;
+  recipes$: Observable<RecipeInfo[]>;
 
   constructor(private store: Store<RecipeState>) {}
 

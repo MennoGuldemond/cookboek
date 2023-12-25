@@ -17,3 +17,12 @@ export class Recipe {
   categories: Category[] | CategoryRecipe[];
   likes: Like[];
 }
+
+export class RecipeInfo {
+  id: string;
+  title: string;
+  numberOfLikes: number;
+  authorName: string;
+  photoURL: string;
+  createdAt: Date;
+}

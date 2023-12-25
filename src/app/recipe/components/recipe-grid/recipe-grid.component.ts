@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { Recipe } from '@app/models';
+import { RecipeInfo } from '@app/models';
 
 @Component({
   selector: 'cobo-recipe-grid',
@@ -8,11 +8,11 @@ import { Recipe } from '@app/models';
   styleUrls: ['./recipe-grid.component.scss'],
 })
 export class RecipeGridComponent {
-  @Input() recipes: Recipe[];
+  @Input() recipes: RecipeInfo[];
 
   constructor(private router: Router) {}
 
-  onRecipeClick(recipe: Recipe): void {
+  onRecipeClick(recipe: RecipeInfo): void {
     if (recipe) {
       this.router.navigate([`recepten/detail/${recipe.id}`]);
     }

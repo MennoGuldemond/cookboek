@@ -1,8 +1,8 @@
-import { Recipe } from '@app/models';
+import { RecipeInfo } from '@app/models';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 export interface RecipeState {
-  recipes: Recipe[];
+  recipes: RecipeInfo[];
 }
 
 export const selectRecipeState = createFeatureSelector<RecipeState>('recipe');

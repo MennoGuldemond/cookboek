@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Recipe } from '@app/models';
+import { RecipeInfo } from '@app/models';
 
 @Component({
   selector: 'cobo-recipe-card',
@@ -7,9 +7,9 @@ import { Recipe } from '@app/models';
   styleUrls: ['./recipe-card.component.scss'],
 })
 export class RecipeCardComponent {
-  @Input() recipe: Recipe;
+  @Input() recipe: RecipeInfo;
 
-  getImageURLStyle(recipe: Recipe): string {
+  getImageURLStyle(recipe: RecipeInfo): string {
     return `url(${recipe.photoURL})`;
   }
 }
