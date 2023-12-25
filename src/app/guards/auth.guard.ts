@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { AuthState, selectIsLoggedIn, selectUser } from '@auth/store/auth.selectors';
 import { Store } from '@ngrx/store';
+import { LocalStorageKeys } from '@app/models';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +22,7 @@ export class AuthGuard implements CanActivate {
         } else {
           if (state.url) {
             // Save the url the user was navigating to.
-            localStorage.setItem('urlBeforeLogin', state.url);
+            localStorage.setItem(LocalStorageKeys.urlBeforeLogin, state.url);
           }
           this.router.navigate(['login']);
           return false;

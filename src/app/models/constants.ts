@@ -15,3 +15,8 @@ export const categories = [
   'Vis',
   'Vlees',
 ];
+
+export enum LocalStorageKeys {
+  idToken = 'id_token',
+  urlBeforeLogin = 'urlBeforeLogin',
+}

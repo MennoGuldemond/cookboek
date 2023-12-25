@@ -1,6 +1,7 @@
 import { SocialUser } from '@abacritt/angularx-social-login';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LocalStorageKeys } from '@app/models';
 import { logout } from '@auth/store/auth.actions';
 import { selectUser } from '@auth/store/auth.selectors';
 import { Store } from '@ngrx/store';
@@ -25,6 +26,8 @@ export class UserQuickMenuComponent implements OnInit {
   }
 
   login(): void {
+    // Set url before login to return to after loggin in
+    localStorage.setItem(LocalStorageKeys.urlBeforeLogin, this.router.url);
     this.router.navigate(['login']);
   }
 

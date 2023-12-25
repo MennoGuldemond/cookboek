@@ -5,6 +5,7 @@ import { EMPTY } from 'rxjs';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 import { AuthService, UserService } from '@auth/services';
 import { logout, AUTH_SET_USER, setUser, AUTH_GET_USER_DATA, getUserData, AUTH_SET_USER_DATA } from './auth.actions';
+import { LocalStorageKeys } from '@app/models';
 
 @Injectable()
 export class AuthEffects {
@@ -21,7 +22,7 @@ export class AuthEffects {
       mergeMap(() =>
         this.authService.signOut().pipe(
           map(() => {
-            localStorage.removeItem('id_token');
+            localStorage.removeItem(LocalStorageKeys.idToken);
             this.router.navigate(['/']);
             return { type: AUTH_SET_USER, user: null };
           }),
@@ -35,13 +36,13 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(setUser),
       map((action) => {
-        const urlBeforeLogin = localStorage.getItem('urlBeforeLogin');
+        const urlBeforeLogin = localStorage.getItem(LocalStorageKeys.urlBeforeLogin);
         if (action.user?.idToken) {
-          localStorage.setItem('id_token', action.user.idToken);
+          localStorage.setItem(LocalStorageKeys.idToken, action.user.idToken);
         }
         if (urlBeforeLogin) {
           this.router.navigate([urlBeforeLogin]);
-          localStorage.removeItem('urlBeforeLogin');
+          localStorage.removeItem(LocalStorageKeys.urlBeforeLogin);
         } else {
           this.router.navigate(['home']);
         }

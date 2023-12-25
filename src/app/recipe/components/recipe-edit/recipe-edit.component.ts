@@ -5,10 +5,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 import { DataUrl, NgxImageCompressService, UploadResponse } from 'ngx-image-compress';
 
-import { Recipe } from '@app/models';
+import { Category, CategoryRecipe, Recipe } from '@app/models';
 import { PhotoService } from '@app/services';
 import { AuthState, selectUser } from '@auth/store/auth.selectors';
 import { RecipeService } from '../../services';
+import { selectCategories } from '@store/app.selectors';
+import { Observable, combineLatest, map, take } from 'rxjs';
 
 @Component({
   selector: 'cobo-recipe-edit',
@@ -20,7 +22,8 @@ export class RecipeEditComponent implements OnInit {
   photoFile: File;
   editRecipeForm: FormGroup;
   imagePreviewSrc: string;
-  allCategories = [];
+  categoryNames$: Observable<string[]>;
+  categories$: Observable<Category[]>;
 
   imgResultBeforeCompress: DataUrl = '';
   imgResultAfterCompress: DataUrl = '';
@@ -39,6 +42,9 @@ export class RecipeEditComponent implements OnInit {
   ngOnInit(): void {
     // TODO: find a better fix for this
     window.scrollTo(0, 0);
+
+    this.categories$ = this.store.select(selectCategories);
+    this.categoryNames$ = this.categories$.pipe(map((categories) => categories.map((c) => c.name)));
 
     this.route.params.subscribe((params) => {
       if (params['id']) {
@@ -72,6 +78,18 @@ export class RecipeEditComponent implements OnInit {
         [Validators.required]
       ),
     });
+  }
+
+  getInitalCategories(): Observable<string[]> {
+    return this.categories$.pipe(
+      take(1),
+      map((categories) => {
+        const initialCategories = categories.filter((c) =>
+          this.recipe.categories.find((rc: CategoryRecipe) => rc.categoryId === c.id)
+        );
+        return initialCategories.map((ic) => ic.name);
+      })
+    );
   }
 
   onSubmit(): void {
@@ -161,6 +179,8 @@ export class RecipeEditComponent implements OnInit {
   }
 
   onCategoriesChanged(currentCategories: string[]): void {
-    // this.recipe.categoryIds = currentCategories;
+    this.categories$.pipe(take(1)).subscribe((categories) => {
+      this.recipe.categories = categories.filter((c) => currentCategories.find((name) => name === c.name));
+    });
   }
 }

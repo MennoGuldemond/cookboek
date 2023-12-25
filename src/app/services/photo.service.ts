@@ -15,7 +15,6 @@ export class PhotoService {
   upload(image: File): Observable<UploadResult> {
     // TODO: Remove spaces from name
     // const photoName = image.name.replace(/\s/g, '');
-
     let formData = new FormData();
     formData.append('file', image);
 

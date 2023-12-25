@@ -2,15 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-
-import { RecipeService } from '../../services';
 
 import { Recipe, User } from '@app/models';
 import { YesNoDialogComponent } from '@app/components';
-import { BrowserUtilService, PhotoService } from '@app/services';
 import { AuthState, selectUserData } from '@auth/store/auth.selectors';
-import { Store } from '@ngrx/store';
+import { RecipeService } from '@recipe/services';
 
 @Component({
   selector: 'cobo-recipe-detail',
@@ -22,11 +20,9 @@ export class RecipeDetailComponent implements OnInit {
   user$: Observable<User>;
 
   constructor(
-    public browserUtil: BrowserUtilService,
     private store: Store<AuthState>,
     private route: ActivatedRoute,
     private recipeService: RecipeService,
-    private photoService: PhotoService,
     private router: Router,
     private snackBar: MatSnackBar,
     private dialog: MatDialog

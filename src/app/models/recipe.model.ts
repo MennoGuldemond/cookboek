@@ -1,3 +1,5 @@
+import { CategoryRecipe } from './category-recipe.model';
+import { Category } from './category.model';
 import { User } from './user.model';
 
 export class Recipe {
@@ -12,5 +14,5 @@ export class Recipe {
   authorId: string;
   createdAt: Date;
   author: User;
-  // categories: any;
+  categories: Category[] | CategoryRecipe[];
 }
