@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { Recipe, RecipeInfo } from '@app/models';
+import { Observable } from 'rxjs';
+import { PaginationSettings, Recipe, RecipeInfo } from '@app/models';
 import { environment } from '@env/environment';
 
 @Injectable({
@@ -17,8 +17,19 @@ export class RecipeService {
 
   constructor(private http: HttpClient) {}
 
-  get(): Observable<RecipeInfo[]> {
-    return this.http.get<RecipeInfo[]>(`${this.baseUrl}`);
+  get(paginationSettings: PaginationSettings = null): Observable<RecipeInfo[]> {
+    const skip = paginationSettings?.skip || 0;
+    const take = paginationSettings?.take || 30;
+    let uri = `${this.baseUrl}?skip=${skip}&take=${take}`;
+
+    if (paginationSettings?.name) {
+      uri += `&name=${paginationSettings.name}`;
+    }
+    if (paginationSettings?.authorId) {
+      uri += `&authorId=${paginationSettings.authorId}`;
+    }
+
+    return this.http.get<RecipeInfo[]>(`${this.baseUrl}?skip=${skip}&take=${take}`);
   }
 
   getById(id: string): Observable<Recipe> {

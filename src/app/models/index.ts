@@ -6,3 +6,4 @@ export { Category } from './category.model';
 export { LocalStorageKeys } from './constants';
 export { CategoryRecipe } from './category-recipe.model';
 export { Like } from './like.model';
+export { PaginationSettings } from './pagination-settings.model';

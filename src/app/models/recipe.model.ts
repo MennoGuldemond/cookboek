@@ -23,6 +23,7 @@ export class RecipeInfo {
   title: string;
   numberOfLikes: number;
   authorName: string;
+  authorId: string;
   photoURL: string;
   createdAt: Date;
 }
