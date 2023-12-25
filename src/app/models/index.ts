@@ -5,3 +5,4 @@ export { UploadResult } from './upload-result.model';
 export { Category } from './category.model';
 export { LocalStorageKeys } from './constants';
 export { CategoryRecipe } from './category-recipe.model';
+export { Like } from './like.model';

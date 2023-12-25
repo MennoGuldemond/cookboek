@@ -11,17 +11,22 @@
           <mat-icon>share</mat-icon>
         </button>
         <span *ngIf="user$ | async as user">
-          <!-- <button
-            *ngIf="recipe.likes?.includes(user.id); else notLiked"
+          <button
+            *ngIf="isLikedByUser(user, recipe); else notLiked"
             mat-icon-button
             color="primary"
             aria-label="Like button"
-            (click)="onUnlikeClick($event, recipe)"
+            (click)="onUnlikeClick($event, recipe, user)"
           >
             <mat-icon>favorite</mat-icon>
-          </button> -->
+          </button>
           <ng-template #notLiked>
-            <button mat-icon-button color="primary" aria-label="Like button" (click)="onLikeClick($event, recipe)">
+            <button
+              mat-icon-button
+              color="primary"
+              aria-label="Like button"
+              (click)="onLikeClick($event, recipe, user)"
+            >
               <mat-icon>favorite_border</mat-icon>
             </button>
           </ng-template>

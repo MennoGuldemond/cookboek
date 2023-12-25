@@ -3,12 +3,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, map, take } from 'rxjs';
 
 import { Recipe, User } from '@app/models';
 import { YesNoDialogComponent } from '@app/components';
 import { AuthState, selectUserData } from '@auth/store/auth.selectors';
 import { RecipeService } from '@recipe/services';
+import { LikeService } from '@app/services';
 
 @Component({
   selector: 'cobo-recipe-detail',
@@ -23,6 +24,7 @@ export class RecipeDetailComponent implements OnInit {
     private store: Store<AuthState>,
     private route: ActivatedRoute,
     private recipeService: RecipeService,
+    private likeService: LikeService,
     private router: Router,
     private snackBar: MatSnackBar,
     private dialog: MatDialog
@@ -80,17 +82,24 @@ export class RecipeDetailComponent implements OnInit {
     return `url(${url})`;
   }
 
-  onLikeClick(event: MouseEvent, recipe: Recipe): void {
-    event.stopPropagation();
-    // this.user$.subscribe((user) => {
-    //   this.recipeService.addLike(recipe, user.id);
-    // });
+  isLikedByUser(user: User, recipe: Recipe): boolean {
+    return recipe.likes.find((l) => l.userId === user.id) != null;
   }
 
-  onUnlikeClick(event: MouseEvent, recipe: Recipe): void {
+  onLikeClick(event: MouseEvent, recipe: Recipe, user: User): void {
     event.stopPropagation();
-    // this.user$.subscribe((user) => {
-    //   this.recipeService.removeLike(recipe, user.id);
-    // });
+    this.likeService.save(recipe.id, user.id).subscribe((like) => {
+      this.recipe$ = this.recipe$.pipe(take(1));
+    });
+  }
+
+  onUnlikeClick(event: MouseEvent, recipe: Recipe, user: User): void {
+    event.stopPropagation();
+    const like = recipe.likes.find((l) => l.userId === user.id);
+    this.likeService.delete(like.id).subscribe((success) => {
+      if (success) {
+        this.recipe$ = this.recipe$.pipe(take(1));
+      }
+    });
   }
 }
