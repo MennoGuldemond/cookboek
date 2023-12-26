@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { RecipeInfo } from '@app/models';
-import { Store } from '@ngrx/store';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { getRecipes } from './store/recipe.actions';
-import { RecipeState, selectRecipes } from './store/recipe.selectors';
+import { PaginationSettings, RecipeInfo } from '@app/models';
+import { RecipeService } from './services';
 
 @Component({
   selector: 'cobo-recipe',
@@ -12,11 +11,26 @@ import { RecipeState, selectRecipes } from './store/recipe.selectors';
 })
 export class RecipeComponent {
   recipes$: Observable<RecipeInfo[]>;
+  searchForm: FormGroup;
 
-  constructor(private store: Store<RecipeState>) {}
+  constructor(private recipeService: RecipeService) {}
 
   ngOnInit(): void {
-    this.store.dispatch(getRecipes());
-    this.recipes$ = this.store.select(selectRecipes);
+    this.searchForm = new FormGroup({
+      searchTerm: new FormControl('', [Validators.minLength(2)]),
+    });
+
+    this.recipes$ = this.recipeService.get(null);
+  }
+
+  onSubmit(): void {
+    const paginationSettings: PaginationSettings = {
+      name: this.searchForm.value.searchTerm,
+      authorId: null,
+      skip: 0,
+      take: 30,
+    };
+
+    this.recipes$ = this.recipeService.get(paginationSettings);
   }
 }

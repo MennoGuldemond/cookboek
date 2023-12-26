@@ -29,7 +29,7 @@ export class RecipeService {
       uri += `&authorId=${paginationSettings.authorId}`;
     }
 
-    return this.http.get<RecipeInfo[]>(`${this.baseUrl}?skip=${skip}&take=${take}`);
+    return this.http.get<RecipeInfo[]>(uri);
   }
 
   getById(id: string): Observable<Recipe> {

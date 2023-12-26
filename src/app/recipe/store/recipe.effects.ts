@@ -24,8 +24,8 @@ export class RecipeEffects {
   getRecipes$ = createEffect(() =>
     this.actions$.pipe(
       ofType(getRecipes),
-      switchMap(() => {
-        return this.recipeService.get();
+      switchMap((action) => {
+        return this.recipeService.get(action.pagination);
       }),
       pipe(
         map((recipes) => {

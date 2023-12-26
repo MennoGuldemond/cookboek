@@ -85,7 +85,7 @@ export class RecipeEditComponent implements OnInit {
       take(1),
       map((categories) => {
         const initialCategories = categories.filter((c) =>
-          this.recipe.categories.find((rc: CategoryRecipe) => rc.categoryId === c.id)
+          this.recipe.categories?.find((rc: CategoryRecipe) => rc.categoryId === c.id)
         );
         return initialCategories.map((ic) => ic.name);
       })
