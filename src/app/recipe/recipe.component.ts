@@ -17,7 +17,7 @@ export class RecipeComponent {
 
   ngOnInit(): void {
     this.searchForm = new FormGroup({
-      searchTerm: new FormControl('', [Validators.minLength(2)]),
+      searchTerm: new FormControl('', [Validators.minLength(3)]),
     });
 
     this.recipes$ = this.recipeService.get(null);
