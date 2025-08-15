@@ -13,9 +13,10 @@ import { selectCategories } from '@store/app.selectors';
 import { Observable, combineLatest, map, take } from 'rxjs';
 
 @Component({
-  selector: 'cobo-recipe-edit',
-  templateUrl: './recipe-edit.component.html',
-  styleUrls: ['./recipe-edit.component.scss'],
+    selector: 'cobo-recipe-edit',
+    templateUrl: './recipe-edit.component.html',
+    styleUrls: ['./recipe-edit.component.scss'],
+    standalone: false
 })
 export class RecipeEditComponent implements OnInit {
   recipe: Recipe;

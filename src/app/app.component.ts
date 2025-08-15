@@ -10,9 +10,10 @@ import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { getCategories } from '@store/app.actions';
 
 @Component({
-  selector: 'cobo-app',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+    selector: 'cobo-app',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    standalone: false
 })
 export class AppComponent implements OnInit {
   user$: Observable<SocialUser>;

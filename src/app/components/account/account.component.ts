@@ -4,9 +4,10 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'cobo-account',
-  templateUrl: './account.component.html',
-  styleUrls: ['./account.component.scss'],
+    selector: 'cobo-account',
+    templateUrl: './account.component.html',
+    styleUrls: ['./account.component.scss'],
+    standalone: false
 })
 export class AccountComponent implements OnInit {
   authState$: Observable<AuthState>;

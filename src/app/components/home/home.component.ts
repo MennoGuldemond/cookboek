@@ -5,9 +5,10 @@ import { RecipeService } from '@recipe/services';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'cobo-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+    selector: 'cobo-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.scss'],
+    standalone: false
 })
 export class HomeComponent implements OnInit {
   newestRecipe$: Observable<RecipeInfo>;

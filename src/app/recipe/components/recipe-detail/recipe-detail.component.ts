@@ -12,9 +12,10 @@ import { RecipeService } from '@recipe/services';
 import { LikeService } from '@app/services';
 
 @Component({
-  selector: 'cobo-recipe-detail',
-  templateUrl: './recipe-detail.component.html',
-  styleUrls: ['./recipe-detail.component.scss'],
+    selector: 'cobo-recipe-detail',
+    templateUrl: './recipe-detail.component.html',
+    styleUrls: ['./recipe-detail.component.scss'],
+    standalone: false
 })
 export class RecipeDetailComponent implements OnInit {
   recipe$: Observable<Recipe>;

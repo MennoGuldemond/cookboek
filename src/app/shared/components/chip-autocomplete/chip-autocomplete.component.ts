@@ -5,9 +5,10 @@ import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material
 import { MatChipInputEvent } from '@angular/material/chips';
 
 @Component({
-  selector: 'cobo-chip-autocomplete',
-  templateUrl: './chip-autocomplete.component.html',
-  styleUrls: ['./chip-autocomplete.component.scss'],
+    selector: 'cobo-chip-autocomplete',
+    templateUrl: './chip-autocomplete.component.html',
+    styleUrls: ['./chip-autocomplete.component.scss'],
+    standalone: false
 })
 export class ChipAutocompleteComponent implements OnInit {
   @Input() startValues: string[] = [];

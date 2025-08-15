@@ -5,9 +5,10 @@ import { PaginationSettings, RecipeInfo } from '@app/models';
 import { RecipeService } from './services';
 
 @Component({
-  selector: 'cobo-recipe',
-  templateUrl: './recipe.component.html',
-  styleUrls: ['./recipe.component.scss'],
+    selector: 'cobo-recipe',
+    templateUrl: './recipe.component.html',
+    styleUrls: ['./recipe.component.scss'],
+    standalone: false
 })
 export class RecipeComponent {
   recipes$: Observable<RecipeInfo[]>;

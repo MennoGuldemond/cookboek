@@ -2,9 +2,10 @@ import { Component, Input } from '@angular/core';
 import { RecipeInfo } from '@app/models';
 
 @Component({
-  selector: 'cobo-recipe-card',
-  templateUrl: './recipe-card.component.html',
-  styleUrls: ['./recipe-card.component.scss'],
+    selector: 'cobo-recipe-card',
+    templateUrl: './recipe-card.component.html',
+    styleUrls: ['./recipe-card.component.scss'],
+    standalone: false
 })
 export class RecipeCardComponent {
   @Input() recipe: RecipeInfo;

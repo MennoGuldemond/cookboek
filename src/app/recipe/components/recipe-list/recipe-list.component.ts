@@ -3,9 +3,10 @@ import { Router } from '@angular/router';
 import { Recipe } from '@app/models';
 
 @Component({
-  selector: 'cobo-recipe-list',
-  templateUrl: './recipe-list.component.html',
-  styleUrls: ['./recipe-list.component.scss'],
+    selector: 'cobo-recipe-list',
+    templateUrl: './recipe-list.component.html',
+    styleUrls: ['./recipe-list.component.scss'],
+    standalone: false
 })
 export class RecipeListComponent {
   @Input() recipes: Recipe[];

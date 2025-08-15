@@ -5,9 +5,10 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'cobo-login',
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss',
+    selector: 'cobo-login',
+    templateUrl: './login.component.html',
+    styleUrl: './login.component.scss',
+    standalone: false
 })
 export class LoginComponent implements OnInit {
   isLoggedIn$: Observable<boolean>;
