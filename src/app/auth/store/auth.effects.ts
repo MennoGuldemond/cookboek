@@ -4,7 +4,17 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY } from 'rxjs';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 import { AuthService, UserService } from '@auth/services';
-import { logout, AUTH_SET_USER, setUser, AUTH_GET_USER_DATA, getUserData, AUTH_SET_USER_DATA } from './auth.actions';
+import { Store } from '@ngrx/store';
+import {
+  logout,
+  AUTH_SET_USER,
+  setUser,
+  AUTH_GET_USER_DATA,
+  getUserData,
+  AUTH_SET_USER_DATA,
+  AUTH_SET_USER_INFO,
+  setUserData,
+} from './auth.actions';
 import { LocalStorageKeys } from '@app/models';
 
 @Injectable()
@@ -13,7 +23,8 @@ export class AuthEffects {
     private actions$: Actions,
     private authService: AuthService,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private store: Store
   ) {}
 
   logout$ = createEffect(() =>
@@ -62,6 +73,20 @@ export class AuthEffects {
           catchError(() => EMPTY)
         )
       )
+    )
+  );
+
+  setUserData$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(setUserData),
+      mergeMap((action) => {
+        return this.userService.getInfo(action.userData.id).pipe(
+          map((userInfo) => {
+            return { type: AUTH_SET_USER_INFO, userInfo: userInfo };
+          }),
+          catchError(() => EMPTY)
+        );
+      })
     )
   );
 }

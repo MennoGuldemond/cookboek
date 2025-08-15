@@ -1,10 +1,11 @@
 import { createReducer, on } from '@ngrx/store';
-import { setUser, setUserData } from './auth.actions';
+import { setUser, setUserData, setUserInfo } from './auth.actions';
 import { AuthState } from './auth.selectors';
 
 export const initialState: AuthState = {
   user: null,
   userData: null,
+  userInfo: null,
 };
 
 const _authReducer = createReducer(
@@ -14,6 +15,9 @@ const _authReducer = createReducer(
   }),
   on(setUserData, (state, action) => {
     return { ...state, userData: action.userData };
+  }),
+  on(setUserInfo, (state, action) => {
+    return { ...state, userInfo: action.userInfo };
   })
 );
 

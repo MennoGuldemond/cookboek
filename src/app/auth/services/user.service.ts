@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { User } from '@app/models';
+import { User, UserInfo } from '@app/models';
 import { environment } from '@env/environment';
 
 @Injectable({
@@ -14,5 +14,9 @@ export class UserService {
 
   getUser(): Observable<User> {
     return this.http.get<User>(`${this.baseUrl}/users`);
+  }
+
+  getInfo(id: string): Observable<UserInfo> {
+    return this.http.get<UserInfo>(`${this.baseUrl}/users/info/${id}`);
   }
 }
