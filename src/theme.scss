@@ -12,7 +12,7 @@
 @import './vars.scss';
 
 // Overwrite material default font
-$cobo-typography: mat.define-typography-config(
+$cobo-typography: mat.m2-define-typography-config(
   $font-family: Poppins,
 );
 @include mat.typography-hierarchy($cobo-typography);
@@ -67,9 +67,9 @@ $cobo-grey-palette: (
   ),
 );
 
-$cobo-primary: mat.define-palette($cobo-grey-palette);
-$cobo-accent: mat.define-palette($cobo-green-palette);
-$light-theme: mat.define-light-theme(
+$cobo-primary: mat.m2-define-palette($cobo-grey-palette);
+$cobo-accent: mat.m2-define-palette($cobo-green-palette);
+$light-theme: mat.m2-define-light-theme(
   (
     color: (
       primary: $cobo-primary,
@@ -79,7 +79,7 @@ $light-theme: mat.define-light-theme(
   )
 );
 
-$dark-theme: mat.define-dark-theme(
+$dark-theme: mat.m2-define-dark-theme(
   (
     color: (
       primary: $cobo-primary,
