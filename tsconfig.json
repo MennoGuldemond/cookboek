@@ -13,17 +13,30 @@
     "sourceMap": true,
     "declaration": false,
     "experimentalDecorators": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "importHelpers": true,
     "target": "ES2022",
     "module": "es2020",
-    "lib": ["es2020", "dom"],
+    "lib": [
+      "es2020",
+      "dom"
+    ],
     "paths": {
-      "@store/*": ["src/app/store/*"],
-      "@env/*": ["src/environments/*"],
-      "@recipe/*": ["src/app/recipe/*"],
-      "@auth/*": ["src/app/auth/*"],
-      "@app/*": ["src/app/*"]
+      "@store/*": [
+        "src/app/store/*"
+      ],
+      "@env/*": [
+        "src/environments/*"
+      ],
+      "@recipe/*": [
+        "src/app/recipe/*"
+      ],
+      "@auth/*": [
+        "src/app/auth/*"
+      ],
+      "@app/*": [
+        "src/app/*"
+      ]
     },
     "resolveJsonModule": true,
     "useDefineForClassFields": false
