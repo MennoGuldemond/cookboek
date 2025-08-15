@@ -7,7 +7,6 @@ import { SocialLoginModule, SocialAuthServiceConfig, GoogleSigninButtonModule } 
 import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
 import { AuthModule } from '@auth/auth.module';
 import { StoreModule } from '@ngrx/store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { appReducer } from '@store/app.reducer';
 import { AppEffects } from '@store/app.effects';
@@ -46,7 +45,6 @@ registerLocaleData(localeNl);
     SharedModule,
     StoreModule.forRoot({ app: appReducer }),
     EffectsModule.forRoot([AppEffects]),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     AuthModule,
     RecipeModule,
   ],
