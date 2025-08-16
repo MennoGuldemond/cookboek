@@ -1,0 +1,27 @@
+<mat-form-field appearance="outline">
+  <mat-label>{{ label }}</mat-label>
+  <mat-chip-grid #chipList aria-label="selectie">
+    @for (option of currentOptions; track option) {
+    <mat-chip selected color="accent" [removable]="true" (removed)="remove(option)">
+      {{ option }}
+      <mat-icon matChipRemove>cancel</mat-icon>
+    </mat-chip>
+    }
+    <input
+      #optionInput
+      [formControl]="optionControl"
+      [matAutocomplete]="auto"
+      [matChipInputFor]="chipList"
+      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      [matChipInputAddOnBlur]="true"
+      (matChipInputTokenEnd)="add($event)"
+    />
+  </mat-chip-grid>
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+    @for (option of filteredOptions; track option) {
+    <mat-option [value]="option">
+      {{ option }}
+    </mat-option>
+    }
+  </mat-autocomplete>
+</mat-form-field>

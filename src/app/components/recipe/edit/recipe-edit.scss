@@ -1,0 +1,65 @@
+@use '../../../../vars.scss';
+
+.form-array-header {
+  display: inline;
+}
+
+.upload-button {
+  height: 2.6em;
+  max-width: 300px;
+  margin-top: 0.7em;
+}
+
+.delete-icon {
+  color: #bbb;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.image-preview {
+  height: 100px;
+  width: 160px;
+  cursor: pointer;
+  border: 2px dashed #ccc;
+  border-radius: 0.5em;
+  margin: 0.5em 1em 1em 1em;
+  text-align: center;
+
+  & h4 {
+    color: #ccc;
+    padding-top: 40px;
+  }
+}
+
+.image-and-description-container {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.textareas {
+  display: flex;
+  gap: 1.5rem;
+  flex-direction: column;
+}
+
+mat-slide-toggle {
+  padding-bottom: 1em;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+@media only screen and (min-width: vars.$desktop-breakpoint) {
+  .image-and-description-container {
+    align-items: center;
+  }
+
+  .image-preview {
+    margin-bottom: 2em;
+  }
+
+  .textareas {
+    flex-direction: row;
+  }
+}

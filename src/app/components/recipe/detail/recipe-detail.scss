@@ -1,0 +1,58 @@
+@import '../../../../vars.scss';
+
+.recipe-image {
+  height: 200px;
+  margin-bottom: 6px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #fff;
+
+  & > div {
+    padding: 1rem 2rem 1rem 1rem;
+    width: fit-content;
+    background-color: #009688;
+    border-radius: 16px 0px 50px;
+    opacity: 0.9;
+  }
+}
+
+.actions {
+  padding-bottom: 0.5em;
+  margin-left: -0.5em;
+  display: flex;
+
+  & > .filler {
+    flex: 1;
+  }
+  & p {
+    color: $cobo-mid-grey;
+    margin: auto;
+  }
+}
+
+h1 {
+  margin: 0;
+  color: $cobo-green;
+}
+h2 {
+  margin: 2em 0 0.3em 0;
+  color: $cobo-green;
+}
+h3 {
+  margin: 0 0 2em 0;
+  color: $cobo-mid-grey;
+}
+h4 {
+  color: $cobo-mid-grey;
+}
+p {
+  overflow-wrap: break-word;
+}
+
+// Only on larger screens
+@media only screen and (min-width: $desktop-breakpoint) {
+  .recipe-image {
+    height: 800px;
+  }
+}

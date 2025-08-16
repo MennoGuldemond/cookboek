@@ -1,6 +1,6 @@
 {
   "name": "cookboek",
-  "version": "0.0.0",
+  "version": "2.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -22,12 +22,15 @@
   },
   "private": true,
   "dependencies": {
+    "@angular/cdk": "^20.1.6",
     "@angular/common": "^20.1.0",
     "@angular/compiler": "^20.1.0",
     "@angular/core": "^20.1.0",
     "@angular/forms": "^20.1.0",
+    "@angular/material": "^20.1.6",
     "@angular/platform-browser": "^20.1.0",
     "@angular/router": "^20.1.0",
+    "ngx-image-compress": "^18.1.5",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },

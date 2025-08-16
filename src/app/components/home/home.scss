@@ -1,0 +1,23 @@
+@use '../../../vars.scss';
+
+.hero-bg {
+  background-color: vars.$cobo-green;
+  text-align: center;
+
+  & > h1 {
+    font-size: clamp(4rem, 11vw, 15rem);
+    color: #fff;
+    padding: 0.8em 0 0.5em;
+  }
+
+  & h2 {
+    font-size: clamp(2rem, 3vw, 7rem);
+    color: #fff;
+    padding-bottom: 0.7em;
+  }
+}
+
+.recipe-container {
+  max-width: 600px;
+  margin: auto;
+}

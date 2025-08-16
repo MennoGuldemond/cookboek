@@ -1,0 +1,65 @@
+<div class="page-container padded">
+  @if (recipe) {
+  <form [formGroup]="editRecipeForm" (ngSubmit)="onSubmit()" fxLayout="column">
+    <mat-form-field appearance="outline">
+      <mat-label for="title">Titel</mat-label>
+      <input matInput placeholder="Bijv. Chocolade koekjes" type="text" formControlName="title" />
+    </mat-form-field>
+
+    <cobo-chip-autocomplete
+      [options]="categoryNames$ | async"
+      [startValues]="getInitalCategories() | async"
+      [label]="'Categoriën'"
+      (changed)="onCategoriesChanged($event)"
+    ></cobo-chip-autocomplete>
+
+    <div class="image-and-description-container">
+      <mat-form-field appearance="outline">
+        <mat-label for="description">Beschrijving</mat-label>
+        <textarea matInput placeholder="Vertel iets over jouw recept" formControlName="description" rows="5"></textarea>
+      </mat-form-field>
+      <input #imageInput hidden type="file" onclick="this.value=null" accept="image/png, image/jpeg" />
+      @if (!imagePreviewSrc && !recipe.photoURL) {
+      <div class="image-preview" (click)="compressImage()">
+        <h4>Foto uploaden</h4>
+      </div>
+      } @else {
+      <img
+        [src]="imagePreviewSrc ? imagePreviewSrc : recipe.photoURL"
+        class="image-preview"
+        (click)="compressImage()"
+      />
+      }
+    </div>
+
+    <div class="textareas">
+      <mat-form-field appearance="outline">
+        <mat-label for="text">Ingrediënten</mat-label>
+        <textarea matInput placeholder="Voer de ingrediënten in" formControlName="ingredients" rows="10"></textarea>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label for="text">Instructies</mat-label>
+        <textarea
+          matInput
+          placeholder="Beschrijf de uitvoering van het recept in een tekst"
+          formControlName="instructions"
+          rows="10"
+        ></textarea>
+      </mat-form-field>
+    </div>
+
+    <div class="align-content-right">
+      <button
+        mat-raised-button
+        color="accent"
+        class="save-button"
+        type="submit"
+        [disabled]="editRecipeForm.invalid || (!photoFile && !recipe.photoURL)"
+      >
+        Opslaan
+      </button>
+    </div>
+  </form>
+  }
+</div>

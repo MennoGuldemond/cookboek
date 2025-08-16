@@ -1,0 +1,30 @@
+@if (user) {
+<div fxLayout="row" class="avatar-circle">
+  <img [matMenuTriggerFor]="userMenu" [src]="user.imageURL" referrerpolicy="no-referrer" />
+  <mat-menu #userMenu="matMenu">
+    <button mat-menu-item (click)="navigateToAccount()">Mijn Account</button>
+    <button mat-menu-item (click)="logout()">Uitloggen</button>
+    <button mat-menu-item [matMenuTriggerFor]="themeMenu">Thema</button>
+    <mat-menu #themeMenu="matMenu">
+      <button
+        mat-menu-item
+        [disabled]="(currentTheme$ | async) == 'light-theme'"
+        (click)="setTheme('light-theme')"
+      >
+        <mat-icon>light_mode</mat-icon>
+        <span>Licht</span>
+      </button>
+      <button
+        mat-menu-item
+        [disabled]="(currentTheme$ | async) == 'dark-theme'"
+        (click)="setTheme('dark-theme')"
+      >
+        <mat-icon>dark_mode</mat-icon>
+        <span>Donker</span>
+      </button>
+    </mat-menu>
+  </mat-menu>
+</div>
+} @else {
+<button mat-stroked-button color="primary" (click)="login()">Inloggen</button>
+}

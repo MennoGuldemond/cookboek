@@ -1,0 +1,13 @@
+<section class="hero-bg">
+  <h1 class="handwritten">Cookboek</h1>
+  <h2 class="handwritten">Vind en deel recepten</h2>
+</section>
+
+<div class="center-content padded">
+  @if (newestRecipe$ | async; as newRecipe) {
+  <div class="recipe-container">
+    <h2>Bekijk het nieuwste recept</h2>
+    <cobo-recipe-card [recipe]="newRecipe" (click)="onRecipeClick(newRecipe)"></cobo-recipe-card>
+  </div>
+  }
+</div>

@@ -1,0 +1,11 @@
+<div class="page-container">
+  <form [formGroup]="searchForm" (ngSubmit)="onSubmit()" fxLayout="column" class="search-form">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Zoeken</mat-label>
+      <input matInput type="text" formControlName="searchTerm" />
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </form>
+
+  <cobo-recipe-grid [recipes]="recipes$ | async"></cobo-recipe-grid>
+</div>

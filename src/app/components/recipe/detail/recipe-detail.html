@@ -1,0 +1,77 @@
+<div class="page-container padded">
+  @if (recipe$ | async; as recipe) {
+  <mat-card>
+    <div
+      mat-card-image
+      class="recipe-image"
+      [ngStyle]="{ 'background-image': getImageURLStyle(recipe.photoURL) }"
+    ></div>
+    <mat-card-content>
+      <div class="actions">
+        <button
+          mat-icon-button
+          color="primary"
+          aria-label="Share button"
+          (click)="onClickShare(recipe.title)"
+        >
+          <mat-icon>share</mat-icon>
+        </button>
+        @if (user(); as userData) {
+        <span>
+          @if (isLikedByUser(userData, recipe)) {
+          <button
+            mat-icon-button
+            color="primary"
+            aria-label="Like button"
+            (click)="onUnlikeClick($event, recipe, userData)"
+          >
+            <mat-icon>favorite</mat-icon>
+          </button>
+          } @else {
+          <button
+            mat-icon-button
+            color="primary"
+            aria-label="Like button"
+            (click)="onLikeClick($event, recipe, userData)"
+          >
+            <mat-icon>favorite_border</mat-icon>
+          </button>
+
+          }
+        </span>
+        } @if (user()?.id === recipe.authorId) {
+        <button
+          mat-icon-button
+          color="primary"
+          aria-label="Edit button"
+          (click)="onEditClick(recipe.id)"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          color="primary"
+          aria-label="Delete button"
+          (click)="onDeleteClick(recipe)"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+        }
+        <span class="filler"></span>
+        <p>{{ recipe.createdAt | date : 'dd MMMM yyyy' }}</p>
+      </div>
+
+      <h4>{{ recipe.likes.length }} likes</h4>
+      <h1>{{ recipe.title }}</h1>
+      <h3>van {{ recipe.author.name }}</h3>
+
+      <p [innerHtml]="recipe.description"></p>
+
+      <h2>Ingrediënten</h2>
+      <p [innerHtml]="recipe.ingredients"></p>
+      <h2>Instructies</h2>
+      <p [innerHtml]="recipe.instructions"></p>
+    </mat-card-content>
+  </mat-card>
+  }
+</div>

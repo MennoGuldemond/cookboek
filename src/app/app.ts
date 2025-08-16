@@ -1,12 +1,57 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { AfterViewInit, Component, inject, OnInit, Signal } from '@angular/core';
+import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
+import { BrowserUtilService, GoogleAuthService } from './services';
+import { environment } from '@env/environment';
+import { RouterModule, RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { UserQuickMenu } from './components';
 
 @Component({
-  selector: 'app-root',
-  imports: [RouterOutlet],
+  selector: 'cobo-app',
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrls: ['./app.scss'],
+  imports: [
+    CommonModule,
+    RouterModule,
+    RouterOutlet,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatListModule,
+    UserQuickMenu,
+  ],
 })
-export class App {
-  protected readonly title = signal('cookboek');
+export class App implements OnInit, AfterViewInit {
+  user: Signal<any>;
+  version: string = environment.version;
+
+  browserUtils = inject(BrowserUtilService);
+  private authService = inject(GoogleAuthService);
+
+  ngOnInit() {
+    // this.store.dispatch(getCategories());
+    this.user = this.authService.user;
+  }
+
+  ngAfterViewInit(): void {
+    // TODO: make sure we stay logged in after a refresh
+    this.authService.initialize();
+  }
+
+  logout() {
+    this.authService.signOut();
+  }
+
+  closeSideNavIfHandset(sideNav: MatSidenav): void {
+    this.browserUtils.isHandset$.subscribe((isHandset) => {
+      if (isHandset === true) {
+        sideNav.close();
+      }
+    });
+  }
 }

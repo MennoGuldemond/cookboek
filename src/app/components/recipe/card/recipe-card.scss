@@ -1,0 +1,46 @@
+@import '../../../../vars.scss';
+
+.mat-card-image {
+  margin-bottom: 0;
+}
+
+.recipe-image {
+  height: 200px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.recipe-info {
+  text-align: start;
+  display: flex;
+  padding: 0.5em 1em;
+
+  & > mat-icon {
+    margin: 0.5em 0 0 1em;
+  }
+
+  & > h2 {
+    flex: 1;
+    color: $cobo-green;
+    margin: 0;
+    line-height: 1em;
+    font-size: 1.3rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    & .subtitle {
+      display: block;
+      font-size: 1rem;
+      color: $cobo-mid-grey;
+    }
+  }
+}
+
+// Only on larger screens
+@media only screen and (min-width: $desktop-breakpoint) {
+  .recipe-info h2 {
+    font-size: 1.5rem;
+  }
+}
