@@ -13,7 +13,8 @@ export interface User {
   email: string;
   name: string;
   photoUrl: string;
-  recipes: Recipe[];
   createdAt: Date;
   provider: string;
+  numberOfRecipes: number;
+  numberOfLikes: number;
 }

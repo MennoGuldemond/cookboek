@@ -8,13 +8,8 @@
     <h2>
       {{ recipe.title }}<span class="subtitle">{{ recipe.authorName }}</span>
     </h2>
-    <mat-icon
-      [matBadge]="recipe.numberOfLikes"
-      matBadgeColor="accent"
-      matBadgeSize="small"
-      color="primary"
-      aria-hidden="false"
-      >favorite</mat-icon
-    >
+    @if (recipe.numberOfLikes > 0) {
+    <p>{{ recipe.numberOfLikes }} keer favoriet</p>
+    }
   </div>
 </mat-card>
