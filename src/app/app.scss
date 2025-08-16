@@ -1,0 +1,31 @@
+@use '../vars.scss' as vars;
+
+mat-toolbar {
+  display: flex;
+  background-color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  color: vars.$cobo-mid-grey;
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+
+  & > span {
+    flex: 1 1 0%;
+    box-sizing: border-box;
+  }
+}
+
+mat-sidenav-container {
+  background-color: #fff;
+  height: 100%;
+}
+mat-sidenav {
+  background-color: #fff;
+  width: 15em;
+  border-right: 1px solid vars.$cobo-grey;
+}
+
+.version-text {
+  padding: 0 16px;
+  color: vars.$cobo-mid-grey;
+}

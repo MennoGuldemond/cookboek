@@ -1,4 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import {
   FormBuilder,
   FormGroup,
@@ -8,14 +9,14 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { DataUrl, NgxImageCompressService, UploadResponse } from 'ngx-image-compress';
 import { Category, CategoryRecipe, Recipe } from '@app/models';
 import { CategoryService, GoogleAuthService, PhotoService, RecipeService } from '@app/services';
+import { ChipAutocomplete } from '../../chip-autocomplete/chip-autocomplete';
 import { Observable, map, take } from 'rxjs';
-import { CommonModule } from '@angular/common';
-import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { ChipAutocomplete } from '@app/components';
 
 @Component({
   selector: 'cobo-recipe-edit',
@@ -25,8 +26,9 @@ import { ChipAutocomplete } from '@app/components';
     CommonModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    ChipAutocomplete,
+    MatInputModule,
     MatButtonModule,
+    ChipAutocomplete,
   ],
 })
 export class RecipeEdit implements OnInit {
@@ -64,7 +66,7 @@ export class RecipeEdit implements OnInit {
             this.recipe = recipe;
             this.buildForm();
           } else {
-            // TODO: Should I just give an error at this point?
+            console.error('Recipe not found');
           }
         });
       } else {

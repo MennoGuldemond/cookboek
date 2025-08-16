@@ -1,4 +1,4 @@
-@import '../../../../vars.scss';
+@use '../../../../vars.scss' as vars;
 
 .mat-card-image {
   margin-bottom: 0;
@@ -22,7 +22,7 @@
 
   & > h2 {
     flex: 1;
-    color: $cobo-green;
+    color: vars.$cobo-green;
     margin: 0;
     line-height: 1em;
     font-size: 1.3rem;
@@ -33,13 +33,13 @@
     & .subtitle {
       display: block;
       font-size: 1rem;
-      color: $cobo-mid-grey;
+      color: vars.$cobo-mid-grey;
     }
   }
 }
 
 // Only on larger screens
-@media only screen and (min-width: $desktop-breakpoint) {
+@media only screen and (min-width: vars.$desktop-breakpoint) {
   .recipe-info h2 {
     font-size: 1.5rem;
   }

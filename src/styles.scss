@@ -4,15 +4,17 @@
 // Learn more about theming and how to use it for your application's
 // custom components at https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
+@use './vars.scss' as vars;
+@use './theme-colors.scss' as themeColors;
 
 html {
   @include mat.theme(
     (
       color: (
-        primary: mat.$azure-palette,
-        tertiary: mat.$blue-palette,
+        primary: themeColors.$primary-palette,
+        tertiary: themeColors.$tertiary-palette,
       ),
-      typography: Roboto,
+      typography: Poppins,
       density: 0,
     )
   );
@@ -42,5 +44,80 @@ body {
 }
 body {
   margin: 0;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  font-family: Poppins, 'Helvetica Neue', sans-serif;
+}
+
+.handwritten {
+  font-family: 'Satisfy', cursive !important;
+}
+
+// Side nav menu layout
+.mat-drawer-inner-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  & mat-nav-list:nth-child(1) {
+    flex: 1;
+  }
+}
+
+.page-container {
+  box-sizing: border-box;
+  // max-height: calc(100vh - $toolbar-height);
+  // height: auto;
+  // overflow-y: auto;
+}
+
+.padded {
+  padding: 1rem;
+}
+.padded-x {
+  padding: 0 1rem;
+}
+.padded-y {
+  padding: 1rem 0;
+}
+
+.mat-stroked-button,
+.mat-raised-button,
+.mat-menu-panel,
+mat-card,
+mat-dialog-container,
+mat-button-toggle-group {
+  border-radius: 1rem !important;
+  background-color: #fff !important;
+}
+
+.center-content {
+  text-align: center;
+}
+
+.align-content-right {
+  text-align: right;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+@media screen and (min-width: vars.$desktop-breakpoint) {
+  .padded {
+    padding: 2rem;
+  }
+  .padded-x {
+    padding: 0 2rem;
+  }
+  .padded-y {
+    padding: 2rem 0;
+  }
+  .padded-desktop {
+    padding: 2rem;
+  }
+  .padded-desktop-x {
+    padding: 0 2rem;
+  }
+  .padded-desktop-y {
+    padding: 2rem 1;
+  }
 }

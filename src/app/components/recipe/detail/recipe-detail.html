@@ -8,12 +8,7 @@
     ></div>
     <mat-card-content>
       <div class="actions">
-        <button
-          mat-icon-button
-          color="primary"
-          aria-label="Share button"
-          (click)="onClickShare(recipe.title)"
-        >
+        <button mat-icon-button aria-label="Share button" (click)="onClickShare(recipe.title)">
           <mat-icon>share</mat-icon>
         </button>
         @if (user(); as userData) {
@@ -21,7 +16,6 @@
           @if (isLikedByUser(userData, recipe)) {
           <button
             mat-icon-button
-            color="primary"
             aria-label="Like button"
             (click)="onUnlikeClick($event, recipe, userData)"
           >
@@ -30,7 +24,6 @@
           } @else {
           <button
             mat-icon-button
-            color="primary"
             aria-label="Like button"
             (click)="onLikeClick($event, recipe, userData)"
           >
@@ -40,20 +33,10 @@
           }
         </span>
         } @if (user()?.id === recipe.authorId) {
-        <button
-          mat-icon-button
-          color="primary"
-          aria-label="Edit button"
-          (click)="onEditClick(recipe.id)"
-        >
+        <button mat-icon-button aria-label="Edit button" (click)="onEditClick(recipe.id)">
           <mat-icon>edit</mat-icon>
         </button>
-        <button
-          mat-icon-button
-          color="primary"
-          aria-label="Delete button"
-          (click)="onDeleteClick(recipe)"
-        >
+        <button mat-icon-button aria-label="Delete button" (click)="onDeleteClick(recipe)">
           <mat-icon>delete</mat-icon>
         </button>
         }

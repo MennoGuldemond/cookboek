@@ -1,4 +1,4 @@
-@import '../../../../vars.scss';
+@use '../../../../vars.scss' as vars;
 
 .recipe-grid {
   display: grid;
@@ -19,7 +19,7 @@
 }
 
 // Only on larger screens
-@media only screen and (min-width: $desktop-breakpoint) {
+@media only screen and (min-width: vars.$desktop-breakpoint) {
   .add-button {
     right: 30px;
     bottom: 30px;

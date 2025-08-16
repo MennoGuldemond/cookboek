@@ -1,4 +1,4 @@
-@import '../../../../vars.scss';
+@use '../../../../vars.scss' as vars;
 
 .recipe-image {
   height: 200px;
@@ -22,36 +22,40 @@
   margin-left: -0.5em;
   display: flex;
 
+  > button {
+    color: vars.$cobo-green;
+  }
+
   & > .filler {
     flex: 1;
   }
   & p {
-    color: $cobo-mid-grey;
+    color: vars.$cobo-mid-grey;
     margin: auto;
   }
 }
 
 h1 {
   margin: 0;
-  color: $cobo-green;
+  color: vars.$cobo-green;
 }
 h2 {
   margin: 2em 0 0.3em 0;
-  color: $cobo-green;
+  color: vars.$cobo-green;
 }
 h3 {
-  margin: 0 0 2em 0;
-  color: $cobo-mid-grey;
+  margin: 0.5em 0 2em 0;
+  color: vars.$cobo-mid-grey;
 }
 h4 {
-  color: $cobo-mid-grey;
+  color: vars.$cobo-mid-grey;
 }
 p {
   overflow-wrap: break-word;
 }
 
 // Only on larger screens
-@media only screen and (min-width: $desktop-breakpoint) {
+@media only screen and (min-width: vars.$desktop-breakpoint) {
   .recipe-image {
     height: 800px;
   }
