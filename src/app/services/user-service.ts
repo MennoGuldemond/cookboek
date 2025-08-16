@@ -7,10 +7,10 @@ import { environment } from '@env/environment';
   providedIn: 'root',
 })
 export class UserService {
-  baseUrl = environment.api.url;
   userInfo = signal<UserInfo>(undefined);
 
   private http = inject(HttpClient);
+  private baseUrl = environment.api.url;
 
   getInfo(id: string) {
     this.http

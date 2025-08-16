@@ -8,9 +8,8 @@ import { Like } from '@app/models';
   providedIn: 'root',
 })
 export class LikeService {
-  baseUrl = `${environment.api.url}/likes`;
-
   private http = inject(HttpClient);
+  private baseUrl = `${environment.api.url}/likes`;
 
   getByRecipeId(recipeId: string): Observable<Like[]> {
     return this.http.get<Like[]>(`${this.baseUrl}/recipe/${recipeId}`);

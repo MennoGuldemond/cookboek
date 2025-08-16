@@ -8,14 +8,13 @@ import { environment } from '@env/environment';
   providedIn: 'root',
 })
 export class RecipeService {
-  baseUrl = `${environment.api.url}/recipes`;
-
   // save first document in snapshot of items received
   firstInResponse: any = [];
   // save last document in snapshot of items received
   lastInResponse: any = [];
 
   private http = inject(HttpClient);
+  private baseUrl = `${environment.api.url}/recipes`;
 
   get(paginationSettings: PaginationSettings = null): Observable<RecipeInfo[]> {
     const skip = paginationSettings?.skip || 0;

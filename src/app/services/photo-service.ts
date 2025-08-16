@@ -8,9 +8,8 @@ import { UploadResult } from '@app/models';
   providedIn: 'root',
 })
 export class PhotoService {
-  baseUrl = `${environment.api.url}/images`;
-
   private http = inject(HttpClient);
+  private baseUrl = `${environment.api.url}/images`;
 
   upload(image: File): Observable<UploadResult> {
     let formData = new FormData();
