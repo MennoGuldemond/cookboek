@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit, Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormBuilder,
@@ -16,7 +16,6 @@ import { DataUrl, NgxImageCompressService, UploadResponse } from 'ngx-image-comp
 import { Category, CategoryRecipe, Recipe } from '@app/models';
 import { CategoryService, GoogleAuthService, PhotoService, RecipeService } from '@app/services';
 import { ChipAutocomplete } from '../../chip-autocomplete/chip-autocomplete';
-import { Observable, map, take } from 'rxjs';
 
 @Component({
   selector: 'cobo-recipe-edit',
@@ -36,11 +35,12 @@ export class RecipeEdit implements OnInit {
   photoFile: File;
   editRecipeForm: FormGroup;
   imagePreviewSrc: string;
-  categoryNames$: Observable<string[]>;
-  categories$: Observable<Category[]>;
 
   imgResultBeforeCompress: DataUrl = '';
   imgResultAfterCompress: DataUrl = '';
+
+  categories: Signal<Category[]>;
+  categoryNames: Signal<string[]>;
 
   private formBuilder = inject(FormBuilder);
   private photoService = inject(PhotoService);
@@ -51,13 +51,14 @@ export class RecipeEdit implements OnInit {
   private router = inject(Router);
   private snackBar = inject(MatSnackBar);
   private imageCompress = inject(NgxImageCompressService);
+  private cdr = inject(ChangeDetectorRef);
 
   ngOnInit() {
     // TODO: find a better fix for this
     window.scrollTo(0, 0);
 
-    this.categories$ = this.categoriesService.get();
-    this.categoryNames$ = this.categories$.pipe(map((categories) => categories.map((c) => c.name)));
+    this.categories = this.categoriesService.categories;
+    this.categoryNames = this.categoriesService.categoryNames;
 
     this.route.params.subscribe((params) => {
       if (params['id']) {
@@ -65,6 +66,7 @@ export class RecipeEdit implements OnInit {
           if (recipe) {
             this.recipe = recipe;
             this.buildForm();
+            this.cdr.detectChanges();
           } else {
             console.error('Recipe not found');
           }
@@ -93,16 +95,11 @@ export class RecipeEdit implements OnInit {
     });
   }
 
-  getInitalCategories(): Observable<string[]> {
-    return this.categories$.pipe(
-      take(1),
-      map((categories) => {
-        const initialCategories = categories.filter((c) =>
-          this.recipe.categories?.find((rc: CategoryRecipe) => rc.categoryId === c.id)
-        );
-        return initialCategories.map((ic) => ic.name);
-      })
+  getInitalCategories(): string[] {
+    const initialCategories = this.categories().filter((c) =>
+      this.recipe.categories?.find((rc: CategoryRecipe) => rc.categoryId === c.id)
     );
+    return initialCategories.map((ic) => ic.name);
   }
 
   onSubmit() {
@@ -193,10 +190,8 @@ export class RecipeEdit implements OnInit {
   }
 
   onCategoriesChanged(currentCategories: string[]) {
-    this.categories$.pipe(take(1)).subscribe((categories) => {
-      this.recipe.categories = categories.filter((c) =>
-        currentCategories.find((name) => name === c.name)
-      );
-    });
+    this.recipe.categories = this.categories().filter((c) =>
+      currentCategories.find((name) => name === c.name)
+    );
   }
 }

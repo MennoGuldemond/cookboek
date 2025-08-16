@@ -7,8 +7,8 @@
     </mat-form-field>
 
     <cobo-chip-autocomplete
-      [options]="categoryNames$ | async"
-      [startValues]="getInitalCategories() | async"
+      [options]="categoryNames()"
+      [startValues]="getInitalCategories()"
       [label]="'Categoriën'"
       (changed)="onCategoriesChanged($event)"
     ></cobo-chip-autocomplete>

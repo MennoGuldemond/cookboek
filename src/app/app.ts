@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, inject, OnInit, Signal } from '@angular/core';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
-import { BrowserUtilService, GoogleAuthService } from './services';
+import { BrowserUtilService, CategoryService, GoogleAuthService } from './services';
 import { environment } from '@env/environment';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -32,10 +32,11 @@ export class App implements OnInit, AfterViewInit {
 
   browserUtils = inject(BrowserUtilService);
   private authService = inject(GoogleAuthService);
+  private categoriesService = inject(CategoryService);
 
   ngOnInit() {
-    // this.store.dispatch(getCategories());
     this.user = this.authService.user;
+    this.categoriesService.get();
   }
 
   ngAfterViewInit(): void {
