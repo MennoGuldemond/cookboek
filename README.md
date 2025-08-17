@@ -1,11 +1,13 @@
 ## A dutch cooking recipe website
 
-This app uses a nodejs back-end that you can find here
+This app uses a nodejs back-end that you can find [here](https://github.com/MennoGuldemond/cookboek-api)
 
 ## Getting started
 
-- run "npm install"
--
+- Run "npm install"
+- Set the environment variables in environment.ts
+- Run the back-end (it should run on localhost:3000 by default)
+- Run "npm start"
 
 ## TODO
 
