@@ -7,11 +7,16 @@
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
 }
 
-.add-button {
+.mobile-add-button {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  color: white;
+  z-index: 99; // render above other elements
+}
+.desktop-add-button {
+  position: fixed;
+  top: 80px;
+  right: 32px;
 }
 
 .recipe-container {
