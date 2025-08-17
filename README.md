@@ -1,11 +1,15 @@
+## A dutch cooking recipe website
+
+This app uses a nodejs back-end that you can find here
+
 ## Getting started
 
 - run "npm install"
+-
 
 ## TODO
 
 - improve account page
-- incorporate userInfo model into the regular user model
 - check if routes can be nested instead of the modules that were before
 - design good logo/favicon
 - see "my recipes"
