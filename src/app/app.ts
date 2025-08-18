@@ -39,7 +39,7 @@ export class App implements OnInit, AfterViewInit {
     this.categoriesService.get();
   }
 
-  ngAfterViewInit(): void {
+  ngAfterViewInit() {
     // TODO: make sure we stay logged in after a refresh
     this.authService.initialize();
   }
@@ -48,7 +48,7 @@ export class App implements OnInit, AfterViewInit {
     this.authService.signOut();
   }
 
-  closeSideNavIfHandset(sideNav: MatSidenav): void {
+  closeSideNavIfHandset(sideNav: MatSidenav) {
     this.browserUtils.isHandset$.subscribe((isHandset) => {
       if (isHandset === true) {
         sideNav.close();

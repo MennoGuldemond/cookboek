@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { RecipeGrid } from '@app/components/recipe';
 import { PaginationSettings, RecipeInfo } from '@app/models';
 import { RecipeService } from '@app/services';
@@ -11,21 +11,23 @@ import { Observable } from 'rxjs';
   styleUrl: './recipes.scss',
   imports: [CommonModule, RecipeGrid],
 })
-export class AccountRecipes implements OnInit {
+export class AccountRecipes {
   @Input() authorId: string;
 
   recipes$: Observable<RecipeInfo[]>;
+  private loaded = false;
 
   private recipeService = inject(RecipeService);
 
-  ngOnInit(): void {
+  loadRecipes() {
+    if (this.loaded) return;
     const paginationSettings: PaginationSettings = {
       skip: 0,
       take: 30,
       authorId: this.authorId,
       name: '',
     };
-
     this.recipes$ = this.recipeService.get(paginationSettings);
+    this.loaded = true;
   }
 }

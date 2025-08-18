@@ -41,7 +41,7 @@ export class ThemingService {
     });
   }
 
-  applyTheme(theme: string): void {
+  applyTheme(theme: string) {
     if (this.themes.includes(theme)) {
       for (let i = 0; i < this.themes.length; i++) {
         this.renderer.removeClass(document.body, this.themes[i]);

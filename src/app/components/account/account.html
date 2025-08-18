@@ -1,14 +1,20 @@
 @if (user(); as userData) {
-<mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center">
+<mat-tab-group
+  (selectedIndexChange)="onTabChange($event)"
+  mat-stretch-tabs="false"
+  mat-align-tabs="center"
+>
   <mat-tab label="Overzicht">
     <cobo-account-overview [user]="userData"></cobo-account-overview>
   </mat-tab>
   @if (userData.numberOfRecipes > 0) {
-  <mat-tab label="Recepten">
+  <mat-tab label="Mijn Recepten">
     <cobo-account-recipes [authorId]="userData.id"></cobo-account-recipes>
   </mat-tab>
   } @if (userData.numberOfLikes > 0) {
-  <mat-tab label="Favorieten"></mat-tab>
+  <mat-tab label="Favorieten">
+    <cobo-account-favorites></cobo-account-favorites>
+  </mat-tab>
   }
 </mat-tab-group>
 }
