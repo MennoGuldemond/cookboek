@@ -1,0 +1,29 @@
+<div class="page-container padded">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{ user.name }}</mat-card-title>
+      <mat-card-subtitle>Lid sinds: {{ user.createdAt | date : 'dd MMMM yyyy' }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      @if (user.numberOfRecipes === 0) {
+      <div class="no-recipes">
+        <p>Je hebt nog geen recepten toegevoegd.</p>
+        <button mat-raised-button color="primary" routerLink="/recepten/maak">
+          <mat-icon>add_circle</mat-icon>
+          Maak je eerste recept
+        </button>
+        <p class="hint">Klik op de knop hierboven om je eerste recept toe te voegen!</p>
+      </div>
+      } @if (user.numberOfLikes === 0) {
+      <div class="no-likes">
+        <p>Je hebt nog geen favoriete recepten.</p>
+        <button mat-raised-button color="accent" routerLink="/recepten">
+          <mat-icon>favorite_border</mat-icon>
+          Vind een favoriet recept
+        </button>
+        <p class="hint">Ontdek recepten en voeg ze toe aan je favorieten!</p>
+      </div>
+      }
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,7 +1,31 @@
+@use '../../../../vars.scss' as vars;
+
 .page-container {
   padding-top: 1rem;
 }
 
-.search-form {
-  padding: 0 1rem;
+.input-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  gap: 1rem;
+}
+
+.mobile-add-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 99; // render above other elements
+}
+.desktop-add-button {
+  align-self: start;
+}
+
+// Only on larger screens
+@media only screen and (min-width: vars.$desktop-breakpoint) {
+  .mobile-add-button {
+    right: 30px;
+    bottom: 30px;
+  }
 }
