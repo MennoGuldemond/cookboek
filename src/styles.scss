@@ -36,7 +36,6 @@ body {
   // Reset the user agent margin.
   margin: 0;
 }
-/* You can add global styles to this file, and also import other style files */
 
 html,
 body {
@@ -64,9 +63,6 @@ body {
 
 .page-container {
   box-sizing: border-box;
-  // max-height: calc(100vh - $toolbar-height);
-  // height: auto;
-  // overflow-y: auto;
 }
 
 .padded {
@@ -87,6 +83,7 @@ mat-dialog-container,
 mat-button-toggle-group {
   border-radius: 1rem !important;
   background-color: #fff !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08) !important;
 }
 
 .center-content {
