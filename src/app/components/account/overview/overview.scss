@@ -16,6 +16,16 @@ mat-card-content {
   font-weight: 700;
 }
 
+.no-recipes,
+.no-likes {
+  text-align: center;
+  margin: 3rem 0;
+
+  > p:first-of-type {
+    font-size: 1.2em;
+  }
+}
+
 .user-overview-summary {
   display: flex;
   flex-direction: column;
