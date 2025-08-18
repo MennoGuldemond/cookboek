@@ -61,6 +61,7 @@ export class GoogleAuthService {
 
   signOut() {
     this.user.set(null);
+    this.router.navigate(['home']);
     // TODO: revoke token here
   }
 }
