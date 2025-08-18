@@ -1,7 +1,7 @@
 <div class="page-container">
   <div class="input-section">
-    <form [formGroup]="searchForm" (ngSubmit)="onSubmit()" fxLayout="column" class="search-form">
-      <mat-form-field appearance="outline" class="full-width">
+    <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline">
         <mat-label>Zoeken</mat-label>
         <input matInput type="text" formControlName="searchTerm" />
         <mat-icon matSuffix>search</mat-icon>
