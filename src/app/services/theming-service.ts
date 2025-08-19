@@ -23,29 +23,29 @@ export class ThemingService {
     this.renderer = this.rendererFactory.createRenderer(null, null);
 
     // Initially check if dark mode is enabled on system
-    const darkModeOn =
-      window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const darkModeOn = window?.matchMedia('(prefers-color-scheme: dark)').matches;
 
     // If dark mode is enabled then directly switch to the dark-theme
     if (darkModeOn) {
-      this.currentTheme.set('dark-theme');
+      this.setTheme('dark-theme');
     }
 
     // Watch for changes of the preference
     window.matchMedia('(prefers-color-scheme: dark)').addListener((e) => {
-      const turnOn = e.matches;
-      this.currentTheme.set(turnOn ? 'dark-theme' : 'light-theme');
+      const darkMatches = e.matches;
+      this.setTheme(darkMatches ? 'dark-theme' : 'light-theme');
 
       // Trigger refresh of UI
       this.appRef.tick();
     });
   }
 
-  applyTheme(theme: string) {
+  setTheme(theme: string) {
     if (this.themes.includes(theme)) {
       for (let i = 0; i < this.themes.length; i++) {
         this.renderer.removeClass(document.body, this.themes[i]);
         this.renderer.addClass(document.body, theme);
+        this.currentTheme.set(theme);
       }
     }
   }
