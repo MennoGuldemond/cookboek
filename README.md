@@ -12,6 +12,5 @@ This app uses a nodejs back-end that you can find [here](https://github.com/Menn
 ## TODO
 
 - design good logo/favicon
-- Revoke token after signout
 - Improve home page
 - Use AI model to analyse and save ingredients and create a search by ingredients funcion
