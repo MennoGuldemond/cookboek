@@ -39,6 +39,10 @@ export class RecipeService {
     return this.http.get<RecipeInfo>(`${this.baseUrl}/newest`);
   }
 
+  getLiked(): Observable<RecipeInfo[]> {
+    return this.http.get<RecipeInfo[]>(`${this.baseUrl}/liked`);
+  }
+
   save(recipe: Recipe): Observable<Recipe> {
     return this.http.post<Recipe>(`${this.baseUrl}`, recipe);
   }

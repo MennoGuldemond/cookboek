@@ -7,29 +7,12 @@
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
 }
 
-.mobile-add-button {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 99; // render above other elements
-}
-.desktop-add-button {
-  position: fixed;
-  top: 80px;
-  right: 32px;
-}
-
 .recipe-container {
   padding-bottom: 10px;
 }
 
 // Only on larger screens
 @media only screen and (min-width: vars.$desktop-breakpoint) {
-  .add-button {
-    right: 30px;
-    bottom: 30px;
-  }
-
   .recipe-grid {
     gap: 2rem;
     grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));

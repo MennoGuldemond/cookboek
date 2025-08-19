@@ -1,0 +1,91 @@
+@use '../../../../vars.scss' as vars;
+
+mat-card-content {
+  padding: 0 1rem;
+}
+
+.welcome {
+  text-align: center;
+  font-size: 2.2em;
+  line-height: 1em;
+  margin-bottom: 1.2em;
+}
+
+.username {
+  color: vars.$cobo-green;
+  font-weight: 700;
+}
+
+.no-recipes,
+.no-likes {
+  text-align: center;
+  margin: 3rem 0;
+
+  > p:first-of-type {
+    font-size: 1.2em;
+  }
+}
+
+.user-overview-summary {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.stats-row {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 1em;
+  margin: 2rem;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: vars.$cobo-light-grey;
+  gap: 0.6em;
+  border-radius: 1rem;
+  padding: 1em 0.8em;
+  min-width: 110px;
+}
+
+.stat-number {
+  font-size: 1.7em;
+  font-weight: 600;
+}
+
+.stat-label {
+  font-size: 0.95em;
+  color: vars.$cobo-dark-grey;
+}
+
+.member-since {
+  text-align: center;
+  margin: 1.2em 0 0.8em;
+  color: vars.$cobo-mid-grey;
+}
+
+.coming-soon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  margin-top: 1.5em;
+  color: vars.$cobo-mid-grey;
+  font-size: 1em;
+}
+
+.soon {
+  font-style: italic;
+  color: vars.$cobo-green;
+}
+
+// Only on larger screens
+@media only screen and (min-width: vars.$desktop-breakpoint) {
+  .stats-row {
+    flex-direction: row;
+  }
+}

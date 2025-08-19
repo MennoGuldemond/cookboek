@@ -1,0 +1,60 @@
+<div class="page-container padded">
+  <mat-card>
+    <mat-card-content>
+      <h2 class="welcome">
+        Welkom terug, <span class="username">{{ user.name }}</span
+        >!
+      </h2>
+      <p class="member-since">
+        Lid sinds <b>{{ user.createdAt | date : 'MMMM yyyy' }}</b>
+      </p>
+      @if (user.numberOfRecipes === 0) {
+      <div class="no-recipes">
+        <p>Je hebt nog geen recepten toegevoegd.</p>
+        <button mat-raised-button color="primary" routerLink="/recepten/maak">
+          <mat-icon>add_circle</mat-icon>
+          Maak je eerste recept
+        </button>
+        <p class="hint">Klik op de knop hierboven om je eerste recept toe te voegen!</p>
+      </div>
+      } @else {
+      <div class="user-overview-summary">
+        <div class="stats-row">
+          <div class="stat">
+            <mat-icon color="primary">restaurant_menu</mat-icon>
+            <span class="stat-number">{{ user.numberOfRecipes }}</span>
+            <span class="stat-label">Recepten gedeeld</span>
+          </div>
+          <div class="stat">
+            <mat-icon color="warn">favorite</mat-icon>
+            <span class="stat-number">{{ user.numberOfLikesReceived }}</span>
+            <span class="stat-label">Favorieten ontvangen</span>
+          </div>
+          <div class="stat">
+            <mat-icon color="accent">star_rate</mat-icon>
+            <span class="stat-number">{{
+              user.numberOfLikesReceived / user.numberOfRecipes | number : '1.0-1'
+            }}</span>
+            <span class="stat-label">Gem. favorieten per recept</span>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+        <p class="coming-soon">
+          <mat-icon color="primary">settings</mat-icon>
+          Persoonlijke instellingen en profiel bewerken
+          <span class="soon">(binnenkort beschikbaar)</span>
+        </p>
+      </div>
+      } @if (user.numberOfLikesGiven === 0) {
+      <div class="no-likes">
+        <p>Je hebt nog geen favoriete recepten.</p>
+        <button mat-raised-button color="accent" routerLink="/recepten">
+          <mat-icon>favorite_border</mat-icon>
+          Vind een favoriet recept
+        </button>
+        <p class="hint">Ontdek recepten en voeg ze toe aan je favorieten!</p>
+      </div>
+      } @else { }
+    </mat-card-content>
+  </mat-card>
+</div>

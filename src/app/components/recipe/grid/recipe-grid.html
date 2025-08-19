@@ -1,26 +1,5 @@
 <div class="recipe-grid padded-x">
-  @if ((browserUtils.isHandset$ | async) === true) {
-  <button
-    class="mobile-add-button"
-    mat-fab
-    color="primary"
-    aria-label="Add new recipe button"
-    (click)="onClickAdd()"
-  >
-    <mat-icon>add</mat-icon>
-  </button>
-  } @else {
-  <button
-    class="desktop-add-button"
-    matFab
-    extended
-    aria-label="Add new recipe button"
-    (click)="onClickAdd()"
-  >
-    <mat-icon>add</mat-icon>
-    Nieuw recept
-  </button>
-  } @for (recipe of recipes; track recipe.id) {
+  @for (recipe of recipes; track recipe.id) {
   <div class="recipe-container">
     <cobo-recipe-card
       class="clickable"

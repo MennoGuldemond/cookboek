@@ -1,14 +1,20 @@
-<div class="page-container padded">
-  @if (user(); as userData) {
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>{{ userData.name }}</mat-card-title>
-      <!-- <mat-card-subtitle>Lid sinds: {{ user.createdAt | date : 'dd MMMM yyyy' }}</mat-card-subtitle> -->
-    </mat-card-header>
-    <mat-card-content>
-      <p>Je hebt {{ userData.numberOfRecipes }} recepten gemaakt.</p>
-      <p>Je hebt {{ userData.numberOfLikes }} favoriete recepten.</p>
-    </mat-card-content>
-  </mat-card>
+@if (user(); as userData) {
+<mat-tab-group
+  (selectedIndexChange)="onTabChange($event)"
+  mat-stretch-tabs="false"
+  mat-align-tabs="center"
+>
+  <mat-tab label="Overzicht">
+    <cobo-account-overview [user]="userData"></cobo-account-overview>
+  </mat-tab>
+  @if (userData.numberOfRecipes > 0) {
+  <mat-tab label="Mijn Recepten">
+    <cobo-account-recipes [authorId]="userData.id"></cobo-account-recipes>
+  </mat-tab>
+  } @if (userData.numberOfLikesGiven > 0) {
+  <mat-tab label="Favorieten">
+    <cobo-account-favorites></cobo-account-favorites>
+  </mat-tab>
   }
-</div>
+</mat-tab-group>
+}
