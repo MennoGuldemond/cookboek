@@ -51,6 +51,9 @@ export class GoogleAuthService {
       if (!isExpired) {
         const user = this.decodeCredential(storedToken);
         this.user.set(user);
+
+        // Fetch and update the user data
+        this.userService.getLoggedInUser();
       } else {
         localStorage.removeItem('bearerToken');
       }
