@@ -16,5 +16,6 @@ export interface User {
   createdAt: Date;
   provider: string;
   numberOfRecipes: number;
-  numberOfLikes: number;
+  numberOfLikesGiven: number;
+  numberOfLikesReceived: number;
 }

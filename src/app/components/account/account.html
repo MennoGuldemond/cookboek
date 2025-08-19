@@ -11,7 +11,7 @@
   <mat-tab label="Mijn Recepten">
     <cobo-account-recipes [authorId]="userData.id"></cobo-account-recipes>
   </mat-tab>
-  } @if (userData.numberOfLikes > 0) {
+  } @if (userData.numberOfLikesGiven > 0) {
   <mat-tab label="Favorieten">
     <cobo-account-favorites></cobo-account-favorites>
   </mat-tab>

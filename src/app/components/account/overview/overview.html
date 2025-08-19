@@ -27,14 +27,13 @@
           </div>
           <div class="stat">
             <mat-icon color="warn">favorite</mat-icon>
-            <span class="stat-number">{{ user.numberOfLikes }}</span>
+            <span class="stat-number">{{ user.numberOfLikesReceived }}</span>
             <span class="stat-label">Favorieten ontvangen</span>
           </div>
           <div class="stat">
-            <!-- TODO: use actual stats by updating user model -->
             <mat-icon color="accent">star_rate</mat-icon>
             <span class="stat-number">{{
-              user.numberOfLikes / user.numberOfRecipes | number : '1.0-1'
+              user.numberOfLikesReceived / user.numberOfRecipes | number : '1.0-1'
             }}</span>
             <span class="stat-label">Gem. favorieten per recept</span>
           </div>
@@ -46,7 +45,7 @@
           <span class="soon">(binnenkort beschikbaar)</span>
         </p>
       </div>
-      } @if (user.numberOfLikes === 0) {
+      } @if (user.numberOfLikesGiven === 0) {
       <div class="no-likes">
         <p>Je hebt nog geen favoriete recepten.</p>
         <button mat-raised-button color="accent" routerLink="/recepten">
