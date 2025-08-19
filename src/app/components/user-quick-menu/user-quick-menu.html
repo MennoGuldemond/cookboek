@@ -4,11 +4,11 @@
   <mat-menu #userMenu="matMenu">
     <button mat-menu-item (click)="navigateToAccount()">Mijn Account</button>
     <button mat-menu-item (click)="logout()">Uitloggen</button>
-    <button mat-menu-item [matMenuTriggerFor]="themeMenu">Thema</button>
+    <!-- <button mat-menu-item [matMenuTriggerFor]="themeMenu">Thema</button>
     <mat-menu #themeMenu="matMenu">
       <button
         mat-menu-item
-        [disabled]="(currentTheme$ | async) == 'light-theme'"
+        [disabled]="currentTheme() == 'light-theme'"
         (click)="setTheme('light-theme')"
       >
         <mat-icon>light_mode</mat-icon>
@@ -16,13 +16,13 @@
       </button>
       <button
         mat-menu-item
-        [disabled]="(currentTheme$ | async) == 'dark-theme'"
+        [disabled]="currentTheme() == 'dark-theme'"
         (click)="setTheme('dark-theme')"
       >
         <mat-icon>dark_mode</mat-icon>
         <span>Donker</span>
       </button>
-    </mat-menu>
+    </mat-menu> -->
   </mat-menu>
 </div>
 } @else {

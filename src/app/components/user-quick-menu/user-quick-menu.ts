@@ -1,12 +1,11 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit, Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { GoogleUser, LocalStorageKeys } from '@app/models';
-import { Observable } from 'rxjs';
-import { GoogleAuthService } from '@app/services';
+import { GoogleAuthService, ThemingService } from '@app/services';
 
 @Component({
   selector: 'cobo-user-quick-menu',
@@ -17,13 +16,14 @@ import { GoogleAuthService } from '@app/services';
 export class UserQuickMenu implements OnInit {
   @Input() user: GoogleUser;
 
-  currentTheme$: Observable<string>;
+  currentTheme: Signal<string>;
 
   private router = inject(Router);
   private authService = inject(GoogleAuthService);
+  private themingService = inject(ThemingService);
 
   ngOnInit() {
-    // this.currentTheme$ = this.store.select(selectTheme);
+    this.currentTheme = this.themingService.currentTheme;
   }
 
   login() {
@@ -41,6 +41,6 @@ export class UserQuickMenu implements OnInit {
   }
 
   setTheme(theme: string) {
-    // this.store.dispatch(setTheme({ theme: theme }));
+    this.themingService.setTheme(theme);
   }
 }
