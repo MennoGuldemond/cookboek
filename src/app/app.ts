@@ -40,7 +40,6 @@ export class App implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    // TODO: make sure we stay logged in after a refresh
     this.authService.initialize();
   }
 

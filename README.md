@@ -11,7 +11,6 @@ This app uses a nodejs back-end that you can find [here](https://github.com/Menn
 
 ## TODO
 
-- check if routes can be nested instead of the modules that were before
 - design good logo/favicon
 - Revoke token after signout
 - Improve home page

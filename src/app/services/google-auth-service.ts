@@ -12,14 +12,18 @@ export class GoogleAuthService {
   private router = inject(Router);
   private userService = inject(UserService);
 
+  /** Initializes the Google Sign-In API and sets up the callback for sign-in. */
   initialize(callback?: (user: GoogleUser) => void) {
     const tryInit = () => {
-      if (window.google && window.google.accounts && window.google.accounts.id) {
+      if (window.google?.accounts?.id) {
         window.google.accounts.id.initialize({
           client_id: environment.google.clientId,
           callback: (response: any) => {
             const user = this.decodeCredential(response.credential);
             this.user.set(user);
+
+            // Store the bearer token in localStorage
+            localStorage.setItem('bearerToken', user.bearerToken);
 
             const routeBeforeLogin = localStorage.getItem('urlBeforeLogin');
             if (routeBeforeLogin) {
@@ -38,9 +42,24 @@ export class GoogleAuthService {
         setTimeout(tryInit, 100);
       }
     };
+
+    // Restore user from localStorage if token exists and is not expired
+    const storedToken = localStorage.getItem('bearerToken');
+    if (storedToken) {
+      const payload = JSON.parse(atob(storedToken.split('.')[1]));
+      const isExpired = payload.exp * 1000 < Date.now();
+      if (!isExpired) {
+        const user = this.decodeCredential(storedToken);
+        this.user.set(user);
+      } else {
+        localStorage.removeItem('bearerToken');
+      }
+    }
+
     tryInit();
   }
 
+  /** Renders the Google Sign-In button in the specified element. */
   renderButton(elementId: string) {
     window.google.accounts.id.renderButton(document.getElementById(elementId), {
       theme: 'outline',
@@ -48,6 +67,7 @@ export class GoogleAuthService {
     });
   }
 
+  /** Decodes the JWT credential to extract user information. */
   decodeCredential(credential: string): GoogleUser {
     const payload = JSON.parse(atob(credential.split('.')[1]));
     return {
@@ -59,9 +79,10 @@ export class GoogleAuthService {
     };
   }
 
+  /** Signs out the user and clears the session. */
   signOut() {
     this.user.set(null);
+    localStorage.removeItem('bearerToken');
     this.router.navigate(['home']);
-    // TODO: revoke token here
   }
 }
