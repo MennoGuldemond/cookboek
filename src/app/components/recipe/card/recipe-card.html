@@ -1,9 +1,5 @@
 <mat-card>
-  <div
-    mat-card-image
-    class="recipe-image"
-    [ngStyle]="{ 'background-image': getImageURLStyle(recipe) }"
-  ></div>
+  <div mat-card-image class="recipe-image" [ngStyle]="{ 'background-image': getImageURLStyle(recipe) }"></div>
   <div class="recipe-info">
     <h2>
       {{ recipe.title }}<span class="subtitle">{{ recipe.authorName }}</span>

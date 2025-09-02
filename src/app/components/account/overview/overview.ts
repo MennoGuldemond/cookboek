@@ -11,14 +11,7 @@ import { User } from '@app/models';
   selector: 'cobo-account-overview',
   templateUrl: './overview.html',
   styleUrl: './overview.scss',
-  imports: [
-    CommonModule,
-    RouterModule,
-    MatCardModule,
-    MatButtonModule,
-    MatIconModule,
-    MatDividerModule,
-  ],
+  imports: [CommonModule, RouterModule, MatCardModule, MatButtonModule, MatIconModule, MatDividerModule],
 })
 export class AccountOverview {
   @Input() user: User;

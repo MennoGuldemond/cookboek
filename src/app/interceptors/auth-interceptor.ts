@@ -3,10 +3,7 @@ import { inject } from '@angular/core';
 import { GoogleAuthService } from '@app/services';
 import { Observable } from 'rxjs';
 
-export function authInterceptor(
-  req: HttpRequest<unknown>,
-  next: HttpHandlerFn
-): Observable<HttpEvent<unknown>> {
+export function authInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
   const authService = inject(GoogleAuthService);
 
   if (authService.isLoggedIn()) {

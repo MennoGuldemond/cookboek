@@ -1,11 +1,4 @@
-import {
-  ApplicationRef,
-  inject,
-  Injectable,
-  Renderer2,
-  RendererFactory2,
-  signal,
-} from '@angular/core';
+import { ApplicationRef, inject, Injectable, Renderer2, RendererFactory2, signal } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',

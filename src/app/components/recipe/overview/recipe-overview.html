@@ -9,22 +9,11 @@
     </form>
 
     @if ((browserUtils.isHandset$ | async) === true) {
-    <button
-      class="mobile-add-button"
-      mat-fab
-      aria-label="Add new recipe button"
-      (click)="onClickAdd()"
-    >
+    <button class="mobile-add-button" mat-fab aria-label="Add new recipe button" (click)="onClickAdd()">
       <mat-icon>add</mat-icon>
     </button>
     } @else {
-    <button
-      class="desktop-add-button"
-      matFab
-      extended
-      aria-label="Add new recipe button"
-      (click)="onClickAdd()"
-    >
+    <button class="desktop-add-button" matFab extended aria-label="Add new recipe button" (click)="onClickAdd()">
       <mat-icon>add</mat-icon>
       Nieuw recept
     </button>

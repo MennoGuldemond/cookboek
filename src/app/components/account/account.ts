@@ -12,14 +12,7 @@ import { AccountFavorites } from './favorites/favorites';
   selector: 'cobo-account',
   templateUrl: './account.html',
   styleUrls: ['./account.scss'],
-  imports: [
-    CommonModule,
-    MatCardModule,
-    MatTabsModule,
-    AccountOverview,
-    AccountRecipes,
-    AccountFavorites,
-  ],
+  imports: [CommonModule, MatCardModule, MatTabsModule, AccountOverview, AccountRecipes, AccountFavorites],
 })
 export class Account implements OnInit {
   user: Signal<User>;

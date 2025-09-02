@@ -1,11 +1,7 @@
 <div class="recipe-grid padded-x">
   @for (recipe of recipes; track recipe.id) {
   <div class="recipe-container">
-    <cobo-recipe-card
-      class="clickable"
-      [recipe]="recipe"
-      (click)="onRecipeClick(recipe)"
-    ></cobo-recipe-card>
+    <cobo-recipe-card class="clickable" [recipe]="recipe" (click)="onRecipeClick(recipe)"></cobo-recipe-card>
   </div>
   }
 </div>

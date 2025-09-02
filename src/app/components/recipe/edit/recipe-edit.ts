@@ -1,12 +1,6 @@
 import { ChangeDetectorRef, Component, inject, OnInit, Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-  FormControl,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
@@ -21,14 +15,7 @@ import { ChipAutocomplete } from '../../chip-autocomplete/chip-autocomplete';
   selector: 'cobo-recipe-edit',
   templateUrl: './recipe-edit.html',
   styleUrls: ['./recipe-edit.scss'],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    ChipAutocomplete,
-  ],
+  imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, ChipAutocomplete],
 })
 export class RecipeEdit implements OnInit {
   recipe: Recipe;
@@ -149,23 +136,21 @@ export class RecipeEdit implements OnInit {
 
   compressImage() {
     this.imageCompress.uploadFile().then(({ image, orientation, fileName }: UploadResponse) => {
-      this.imageCompress
-        .compressFile(image, orientation, 50, 100, 1024, 1024)
-        .then((dataUrl: DataUrl) => {
-          this.imagePreviewSrc = dataUrl;
+      this.imageCompress.compressFile(image, orientation, 50, 100, 1024, 1024).then((dataUrl: DataUrl) => {
+        this.imagePreviewSrc = dataUrl;
 
-          let arr = dataUrl.split(',');
-          let mimeType = arr[0].match(/:(.*?);/)[1];
-          let bstr = atob(arr[1]);
-          let n = bstr.length;
-          let u8arr = new Uint8Array(n);
+        let arr = dataUrl.split(',');
+        let mimeType = arr[0].match(/:(.*?);/)[1];
+        let bstr = atob(arr[1]);
+        let n = bstr.length;
+        let u8arr = new Uint8Array(n);
 
-          while (n--) {
-            u8arr[n] = bstr.charCodeAt(n);
-          }
+        while (n--) {
+          u8arr[n] = bstr.charCodeAt(n);
+        }
 
-          this.photoFile = new File([u8arr], fileName, { type: mimeType });
-        });
+        this.photoFile = new File([u8arr], fileName, { type: mimeType });
+      });
     });
   }
 
@@ -190,8 +175,6 @@ export class RecipeEdit implements OnInit {
   }
 
   onCategoriesChanged(currentCategories: string[]) {
-    this.recipe.categories = this.categories().filter((c) =>
-      currentCategories.find((name) => name === c.name)
-    );
+    this.recipe.categories = this.categories().filter((c) => currentCategories.find((name) => name === c.name));
   }
 }

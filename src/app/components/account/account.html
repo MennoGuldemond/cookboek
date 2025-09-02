@@ -1,9 +1,5 @@
 @if (user(); as userData) {
-<mat-tab-group
-  (selectedIndexChange)="onTabChange($event)"
-  mat-stretch-tabs="false"
-  mat-align-tabs="center"
->
+<mat-tab-group (selectedIndexChange)="onTabChange($event)" mat-stretch-tabs="false" mat-align-tabs="center">
   <mat-tab label="Overzicht">
     <cobo-account-overview [user]="userData"></cobo-account-overview>
   </mat-tab>

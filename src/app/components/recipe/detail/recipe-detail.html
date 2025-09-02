@@ -14,19 +14,11 @@
         @if (user(); as userData) {
         <span>
           @if (isLikedByUser(userData, recipe)) {
-          <button
-            mat-icon-button
-            aria-label="Like button"
-            (click)="onUnlikeClick($event, recipe, userData)"
-          >
+          <button mat-icon-button aria-label="Like button" (click)="onUnlikeClick($event, recipe, userData)">
             <mat-icon>favorite</mat-icon>
           </button>
           } @else {
-          <button
-            mat-icon-button
-            aria-label="Like button"
-            (click)="onLikeClick($event, recipe, userData)"
-          >
+          <button mat-icon-button aria-label="Like button" (click)="onLikeClick($event, recipe, userData)">
             <mat-icon>favorite_border</mat-icon>
           </button>
 

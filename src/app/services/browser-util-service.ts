@@ -13,10 +13,7 @@ export class BrowserUtilService {
     .pipe(map((result) => result.matches));
 
   isSafari(): boolean {
-    return (
-      navigator.userAgent.indexOf('Chrome') > -1 === false &&
-      navigator.userAgent.indexOf('Safari') > -1
-    );
+    return navigator.userAgent.indexOf('Chrome') > -1 === false && navigator.userAgent.indexOf('Safari') > -1;
   }
 
   isIframe(): boolean {

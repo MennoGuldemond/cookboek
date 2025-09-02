@@ -22,12 +22,7 @@
   <mat-sidenav-content>
     <mat-toolbar>
       @if (browserUtils.isHandset$ | async) {
-      <button
-        type="button"
-        aria-label="toggle side menu"
-        mat-icon-button
-        (click)="sideNav.toggle()"
-      >
+      <button type="button" aria-label="toggle side menu" mat-icon-button (click)="sideNav.toggle()">
         <mat-icon aria-label="menu icon">menu</mat-icon>
       </button>
       }
