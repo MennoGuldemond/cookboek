@@ -98,6 +98,10 @@ mat-button-toggle-group {
   cursor: pointer;
 }
 
+.dense-4 {
+  @include mat.all-component-densities(-4);
+}
+
 @media screen and (min-width: vars.$desktop-breakpoint) {
   .padded {
     padding: 2rem;

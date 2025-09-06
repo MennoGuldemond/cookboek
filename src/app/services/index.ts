@@ -5,3 +5,5 @@ export * from './photo-service';
 export * from './category-service';
 export * from './like-service';
 export * from './recipe-service';
+export * from './user-service';
+export * from './log-service';

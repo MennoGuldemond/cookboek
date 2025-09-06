@@ -12,8 +12,6 @@ This app uses a nodejs back-end that you can find [here](https://github.com/Menn
 ## TODO
 
 - Volgen van "Auteurs"
-- Admin role
-  - Add categories as an admin
 - design good logo/favicon
 - Improve home page
 - Use AI model to analyse and save ingredients and create a search by ingredients funcion

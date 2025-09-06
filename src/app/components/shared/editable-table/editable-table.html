@@ -1,0 +1,58 @@
+<table mat-table [dataSource]="localData" class="smaller">
+  @for (col of columns; track col.key) {
+    <ng-container [matColumnDef]="col.key">
+      <th mat-header-cell *matHeaderCellDef>{{ col.label }}</th>
+      <td mat-cell *matCellDef="let row" class="dense-4">
+        @if (editingRowId !== row.id || col.editable === false) {
+          @switch (col.type) {
+            @case ('date') {
+              <span>{{ row[col.key] | date }}</span>
+            }
+            @default {
+              <span>{{ row[col.key] }}</span>
+            }
+          }
+        } @else {
+          @if (col.editable) {
+            <mat-form-field appearance="outline">
+              @switch (col.type) {
+                @case ('number') {
+                  <input matInput type="number" [(ngModel)]="editBuffer[col.key]" />
+                }
+                @default {
+                  <input matInput type="text" [(ngModel)]="editBuffer[col.key]" />
+                }
+                <!-- TODO: Add date picker to edit date types -->
+              }
+            </mat-form-field>
+          }
+        }
+      </td>
+    </ng-container>
+  }
+
+  <!-- Actions column -->
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>Acties</th>
+    <td mat-cell *matCellDef="let row">
+      @if (editingRowId !== row.id) {
+        <button mat-icon-button aria-label="Edit button" (click)="startEdit(row)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="Delete button" (click)="deleteRow(row)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      } @else {
+        <button mat-icon-button aria-label="Save button" (click)="saveEdit(row)">
+          <mat-icon>save</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="Cancel button" (click)="cancelEdit()">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      }
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>

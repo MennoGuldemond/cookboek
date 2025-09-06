@@ -1,4 +1,4 @@
-import { Recipe } from './recipe-model';
+export type UserRole = 'USER' | 'ADMIN';
 
 export interface GoogleUser {
   id: string;
@@ -15,6 +15,7 @@ export interface User {
   photoUrl: string;
   createdAt: Date;
   provider: string;
+  role: UserRole;
   numberOfRecipes: number;
   numberOfLikesGiven: number;
   numberOfLikesReceived: number;

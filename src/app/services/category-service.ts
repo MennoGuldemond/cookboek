@@ -18,4 +18,28 @@ export class CategoryService {
       this.categories.set(categories);
     });
   }
+
+  add(category: Category) {
+    this.http.post<Category>(`${this.baseUrl}`, category).subscribe((newCategory) => {
+      this.categories.update((categories) => {
+        const index = categories.findIndex((c) => c.id === newCategory.id);
+        if (index !== -1) {
+          // Update existing category
+          categories[index] = newCategory;
+        } else {
+          // Add new category
+          categories.push(newCategory);
+        }
+        return [...categories];
+      });
+    });
+  }
+
+  delete(categoryId: string) {
+    this.http.delete(`${this.baseUrl}/${categoryId}`).subscribe(() => {
+      this.categories.update((categories) => {
+        return categories.filter((c) => c.id !== categoryId);
+      });
+    });
+  }
 }

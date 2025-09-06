@@ -5,6 +5,12 @@
         Welkom terug, <span class="username">{{ user.name }}</span
         >!
       </h2>
+      @if (user.role === 'ADMIN') {
+      <h3 class="admin-badge">
+        <mat-icon color="primary">admin_panel_settings</mat-icon>
+        Je bent een beheerder
+      </h3>
+      }
       <p class="member-since">
         Lid sinds <b>{{ user.createdAt | date : 'MMMM yyyy' }}</b>
       </p>

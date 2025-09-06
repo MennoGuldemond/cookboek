@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, signal } from '@angular/core';
+import { computed, inject, Injectable, Signal, signal } from '@angular/core';
 import { User } from '@app/models';
 import { environment } from '@env/environment';
 import { Observable } from 'rxjs';
@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
   user = signal<User>(undefined);
+  isAdmin: Signal<boolean> = computed(() => this.user()?.role === 'ADMIN');
 
   private http = inject(HttpClient);
   private baseUrl = environment.api.url;

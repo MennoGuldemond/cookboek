@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, inject, OnInit, Signal } from '@angular/core';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
-import { BrowserUtilService, CategoryService, GoogleAuthService } from './services';
+import { BrowserUtilService, CategoryService, GoogleAuthService, UserService } from './services';
 import { environment } from '@env/environment';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { UserQuickMenu } from './components';
+import { GoogleUser } from './models';
 
 @Component({
   selector: 'cobo-app',
@@ -27,15 +28,18 @@ import { UserQuickMenu } from './components';
   ],
 })
 export class App implements OnInit, AfterViewInit {
-  user: Signal<any>;
+  user: Signal<GoogleUser>;
+  userIsAdmin: Signal<boolean>;
   version: string = environment.version;
 
   browserUtils = inject(BrowserUtilService);
   private authService = inject(GoogleAuthService);
+  private userService = inject(UserService);
   private categoriesService = inject(CategoryService);
 
   ngOnInit() {
     this.user = this.authService.user;
+    this.userIsAdmin = this.userService.isAdmin;
     this.categoriesService.get();
   }
 

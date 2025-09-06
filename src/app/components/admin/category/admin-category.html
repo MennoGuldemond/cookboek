@@ -1,0 +1,10 @@
+<cobo-editable-table
+  [data]="categories()"
+  [columns]="[
+    { key: 'name', label: 'Naam', editable: true },
+    { key: 'description', label: 'Beschrijving', editable: true },
+    { key: 'createdAt', label: 'Datum aangemaakt', editable: false, type: 'date' },
+  ]"
+  (save)="updateCategory($event)"
+  (delete)="deleteCategory($event)"
+></cobo-editable-table>

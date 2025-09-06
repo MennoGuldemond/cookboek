@@ -13,6 +13,8 @@
       <a mat-list-item [routerLink]="['recepten']">Recepten</a>
       @if (user()) {
       <a mat-list-item [routerLink]="['profiel']">Mijn Account</a>
+      } @if (userIsAdmin()) {
+      <a mat-list-item [routerLink]="['admin']">Admin</a>
       }
     </mat-nav-list>
     <p class="version-text">Cookboek {{ version }}</p>

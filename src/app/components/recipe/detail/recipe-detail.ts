@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, take } from 'rxjs';
-import { GoogleUser, Recipe, User } from '@app/models';
+import { GoogleUser, Recipe } from '@app/models';
 import { YesNoDialog } from '@app/components';
 import { GoogleAuthService, RecipeService } from '@app/services';
 import { LikeService } from '@app/services';

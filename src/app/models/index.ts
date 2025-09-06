@@ -7,3 +7,4 @@ export * from './constants';
 export * from './category-recipe-model';
 export * from './like-model';
 export * from './pagination-settings-model';
+export * from './log-model';

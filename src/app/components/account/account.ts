@@ -2,7 +2,7 @@ import { Component, ViewChild, inject, OnInit, Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { User } from '@app/models';
-import { UserService } from '@app/services/user-service';
+import { UserService } from '@app/services';
 import { MatTabsModule } from '@angular/material/tabs';
 import { AccountOverview } from './overview/overview';
 import { AccountRecipes } from './recipes/recipes';

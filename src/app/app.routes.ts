@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { Home, Login, NotFound, RecipeDetail, RecipeOverview } from './components';
-import { authGuard } from './guards';
+import { adminGuard, authGuard } from './guards';
 
 export const routes: Routes = [
   { path: 'home', title: 'CB | Home', component: Home },
@@ -10,6 +10,12 @@ export const routes: Routes = [
     title: 'CB | Profiel',
     canActivate: [authGuard],
     loadComponent: () => import('./components/account/account').then((m) => m.Account),
+  },
+  {
+    path: 'admin',
+    title: 'CB | Admin',
+    canActivate: [adminGuard],
+    loadComponent: () => import('./components/admin/admin').then((m) => m.Admin),
   },
   {
     path: 'recepten',
