@@ -1,11 +1,11 @@
-<mat-card>
+<mat-card appearance="raised">
   <div mat-card-image class="recipe-image" [ngStyle]="{ 'background-image': getImageURLStyle(recipe) }"></div>
   <div class="recipe-info">
     <h2>
       {{ recipe.title }}<span class="subtitle">{{ recipe.authorName }}</span>
     </h2>
     @if (recipe.numberOfLikes > 0) {
-    <p>{{ recipe.numberOfLikes }} keer favoriet</p>
+      <p>{{ recipe.numberOfLikes }} keer favoriet</p>
     }
   </div>
 </mat-card>
