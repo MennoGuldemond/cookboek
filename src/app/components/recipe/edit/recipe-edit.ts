@@ -1,5 +1,4 @@
 import { ChangeDetectorRef, Component, inject, OnInit, Signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -15,7 +14,7 @@ import { ChipAutocomplete } from '../../chip-autocomplete/chip-autocomplete';
   selector: 'cobo-recipe-edit',
   templateUrl: './recipe-edit.html',
   styleUrls: ['./recipe-edit.scss'],
-  imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, ChipAutocomplete],
+  imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, ChipAutocomplete],
 })
 export class RecipeEdit implements OnInit {
   recipe: Recipe;

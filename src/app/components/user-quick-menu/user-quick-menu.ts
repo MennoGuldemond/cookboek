@@ -1,5 +1,4 @@
 import { Component, inject, Input, OnInit, Signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -11,7 +10,7 @@ import { GoogleAuthService, ThemingService } from '@app/services';
   selector: 'cobo-user-quick-menu',
   templateUrl: './user-quick-menu.html',
   styleUrls: ['./user-quick-menu.scss'],
-  imports: [CommonModule, MatMenuModule, MatIconModule, MatButtonModule],
+  imports: [MatMenuModule, MatIconModule, MatButtonModule],
 })
 export class UserQuickMenu implements OnInit {
   @Input() user: GoogleUser;

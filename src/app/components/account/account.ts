@@ -1,5 +1,4 @@
 import { Component, ViewChild, inject, OnInit, Signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { User } from '@app/models';
 import { UserService } from '@app/services';
@@ -12,7 +11,7 @@ import { AccountFavorites } from './favorites/favorites';
   selector: 'cobo-account',
   templateUrl: './account.html',
   styleUrls: ['./account.scss'],
-  imports: [CommonModule, MatCardModule, MatTabsModule, AccountOverview, AccountRecipes, AccountFavorites],
+  imports: [MatCardModule, MatTabsModule, AccountOverview, AccountRecipes, AccountFavorites],
 })
 export class Account implements OnInit {
   user: Signal<User>;

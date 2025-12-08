@@ -1,5 +1,4 @@
 import { AfterViewInit, Component, inject, OnInit, Signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { GoogleAuthService } from '@app/services';
 
@@ -7,7 +6,7 @@ import { GoogleAuthService } from '@app/services';
   selector: 'cobo-login',
   templateUrl: './login.html',
   styleUrl: './login.scss',
-  imports: [CommonModule, MatCardModule],
+  imports: [MatCardModule],
 })
 export class Login implements OnInit, AfterViewInit {
   isLoggedIn: Signal<boolean>;
