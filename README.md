@@ -29,6 +29,11 @@ This repository now contains a GitHub Actions workflow for frontend deployments:
 
 Create one Azure Web App for `tst` and one for `prd` under your existing App Service Plan.
 
+Target frontend URLs:
+
+- `tst`: `https://cookboek-tst.azurewebsites.net`
+- `prd`: `https://cookboek.azurewebsites.net`
+
 You can use the manually created `tst` Web App right away.
 
 ### 2. Add GitHub environment variables and secrets
@@ -42,6 +47,11 @@ For each environment (`tst` and `prd`), add:
 
 - Variable: `AZURE_WEBAPP_NAME` = matching Web App name
 - Secret: `AZURE_WEBAPP_PUBLISH_PROFILE` = publish profile XML from that Web App
+
+Use these app names if you follow the IaC defaults:
+
+- `tst`: `cookboek-tst`
+- `prd`: `cookboek`
 
 Alternative repo-level fallback values supported by workflow:
 

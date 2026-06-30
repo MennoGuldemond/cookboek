@@ -1,7 +1,7 @@
 using './frontend-webapp.bicep'
 
 param appServicePlanName = 'cookboek-tst-plan'
-param webAppName = 'cookboek-tst-app'
+param webAppName = 'cookboek-tst'
 
 param appSettings = {
   WEBSITE_NODE_DEFAULT_VERSION: '~22'
