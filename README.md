@@ -43,6 +43,11 @@ For each environment, add this secret:
 
 - `AZURE_STATIC_WEB_APPS_API_TOKEN` = deployment token from the matching Static Web App in Azure Portal
 
+Alternative (repo-level fallback secrets supported by workflow):
+
+- `AZURE_STATIC_WEB_APPS_API_TOKEN_TST`
+- `AZURE_STATIC_WEB_APPS_API_TOKEN_PRD`
+
 Recommended guardrail:
 
 - Add required reviewers on `prd` environment before deployment is allowed
