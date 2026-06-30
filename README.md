@@ -17,7 +17,7 @@ This app uses a nodejs back-end that you can find [here](https://github.com/Menn
 - Use AI model to analyse and save ingredients and create a search by ingredients funcion
 - implement a dark-mode (theming)
 
-## Frontend CI/CD (Azure Static Web Apps)
+## Frontend CI/CD (Azure Web App)
 
 This repository now contains a GitHub Actions workflow for frontend deployments:
 
@@ -25,28 +25,28 @@ This repository now contains a GitHub Actions workflow for frontend deployments:
 - `main` branch deploys to `prd`
 - Manual deployments are possible from Actions (`workflow_dispatch`)
 
-### 1. Create low-cost Azure resources
+### 1. Create frontend Web Apps
 
-For a hobby project, use Azure Static Web Apps.
+Create one Azure Web App for `tst` and one for `prd` under your existing App Service Plan.
 
-- Create one Static Web App for `tst`
-- Create one Static Web App for `prd`
+You can use the manually created `tst` Web App right away.
 
-### 2. Add GitHub environment secrets
+### 2. Add GitHub environment variables and secrets
 
 In GitHub repository settings, create environments:
 
 - `tst`
 - `prd`
 
-For each environment, add this secret:
+For each environment (`tst` and `prd`), add:
 
-- `AZURE_STATIC_WEB_APPS_API_TOKEN` = deployment token from the matching Static Web App in Azure Portal
+- Variable: `AZURE_WEBAPP_NAME` = matching Web App name
+- Secret: `AZURE_WEBAPP_PUBLISH_PROFILE` = publish profile XML from that Web App
 
-Alternative (repo-level fallback secrets supported by workflow):
+Alternative repo-level fallback values supported by workflow:
 
-- `AZURE_STATIC_WEB_APPS_API_TOKEN_TST`
-- `AZURE_STATIC_WEB_APPS_API_TOKEN_PRD`
+- Variables: `AZURE_WEBAPP_NAME_TST`, `AZURE_WEBAPP_NAME_PRD`
+- Secrets: `AZURE_WEBAPP_PUBLISH_PROFILE_TST`, `AZURE_WEBAPP_PUBLISH_PROFILE_PRD`
 
 Recommended guardrail:
 
@@ -65,3 +65,29 @@ Workflow file: `.github/workflows/frontend-cicd.yml`
 
 - Build command: `npm run build -- --configuration tst|prd`
 - Angular output folder: `dist/cookboek/browser`
+- Deployment action: `azure/webapps-deploy@v3`
+
+## IaC (Bicep) for frontend Web App
+
+Files:
+
+- `infra/frontend-webapp.bicep`
+- `infra/frontend-webapp.tst.bicepparam`
+- `infra/frontend-webapp.prd.bicepparam`
+
+Deploy example:
+
+```bash
+az deployment group create \
+	--resource-group <your-rg> \
+	--parameters infra/frontend-webapp.tst.bicepparam
+
+az deployment group create \
+	--resource-group <your-rg> \
+	--parameters infra/frontend-webapp.prd.bicepparam
+```
+
+Adjust these values before deploying:
+
+- `appServicePlanName`
+- `webAppName`
