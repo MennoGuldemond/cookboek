@@ -24,7 +24,7 @@ concurrency:
 
 jobs:
   deploy-tst:
-    if: ${{ (github.event_name == 'push' && github.ref == 'refs/heads/develop') || (github.event_name == 'workflow_dispatch' && inputs.target == 'tst') }}
+    if: ${{ (github.event_name == 'push' && (github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/main')) || (github.event_name == 'workflow_dispatch' && (inputs.target == 'tst' || inputs.target == 'prd')) }}
     runs-on: ubuntu-latest
     environment: tst
     steps:
@@ -69,7 +69,8 @@ jobs:
           package: dist/cookboek/browser
 
   deploy-prd:
-    if: ${{ (github.event_name == 'push' && github.ref == 'refs/heads/main') || (github.event_name == 'workflow_dispatch' && inputs.target == 'prd') }}
+    needs: [deploy-tst]
+    if: ${{ ((github.event_name == 'push' && github.ref == 'refs/heads/main') || (github.event_name == 'workflow_dispatch' && inputs.target == 'prd')) && needs.deploy-tst.result == 'success' }}
     runs-on: ubuntu-latest
     environment: prd
     steps:
