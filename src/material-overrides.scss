@@ -1,0 +1,23 @@
+@use '@angular/material' as mat;
+@use './vars.scss' as vars;
+
+:root {
+  @include mat.dialog-overrides(
+    (
+      container-shape: vars.$border-radius,
+      container-color: #fff,
+    )
+  );
+  @include mat.card-overrides(
+    (
+      elevated-container-shape: vars.$border-radius,
+      elevated-container-color: #fff,
+    )
+  );
+  @include mat.button-toggle-overrides(
+    (
+      shape: vars.$border-radius,
+      background-color: #fff,
+    )
+  );
+}

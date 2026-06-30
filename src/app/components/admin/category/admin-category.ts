@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit, Signal } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { EditableTable } from '@app/components';
@@ -7,7 +6,7 @@ import { CategoryService } from '@app/services';
 
 @Component({
   selector: 'cobo-admin-category',
-  imports: [CommonModule, EditableTable],
+  imports: [EditableTable],
   templateUrl: './admin-category.html',
   styleUrl: './admin-category.scss',
 })
