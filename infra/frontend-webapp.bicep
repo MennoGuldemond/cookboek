@@ -12,6 +12,12 @@ param webAppName string
 @description('Optional app settings to add to the frontend web app.')
 param appSettings object = {}
 
+@description('Linux runtime stack for the frontend web app.')
+param linuxFxVersion string = 'NODE|22-lts'
+
+@description('Startup command to serve Angular with SPA route fallback.')
+param startupCommand string = 'pm2 serve /home/site/wwwroot --no-daemon --spa'
+
 resource appServicePlan 'Microsoft.Web/serverfarms@2024-04-01' existing = {
   name: appServicePlanName
 }
@@ -23,6 +29,10 @@ resource webApp 'Microsoft.Web/sites@2024-04-01' = {
   properties: {
     serverFarmId: appServicePlan.id
     httpsOnly: true
+    siteConfig: {
+      linuxFxVersion: linuxFxVersion
+      appCommandLine: startupCommand
+    }
   }
 }
 
