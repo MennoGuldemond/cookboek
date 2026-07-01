@@ -1,6 +1,7 @@
 import packageJson from '../../package.json';
 
 export const environment = {
+  stage: 'tst',
   api: {
     // Set the tst API base URL for test deployments.
     url: 'https://cookboek-tst-api.azurewebsites.net',

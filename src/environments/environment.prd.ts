@@ -1,6 +1,7 @@
 import packageJson from '../../package.json';
 
 export const environment = {
+  stage: 'prd',
   api: {
     url: 'https://cookboek-prd-api.azurewebsites.net',
   },

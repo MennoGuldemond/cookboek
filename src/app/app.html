@@ -12,23 +12,24 @@
       <a mat-list-item [routerLink]="['/']">Home</a>
       <a mat-list-item [routerLink]="['recepten']">Recepten</a>
       @if (user()) {
-      <a mat-list-item [routerLink]="['profiel']">Mijn Account</a>
-      } @if (userIsAdmin()) {
-      <a mat-list-item [routerLink]="['admin']">Admin</a>
+        <a mat-list-item [routerLink]="['profiel']">Mijn Account</a>
+      }
+      @if (userIsAdmin()) {
+        <a mat-list-item [routerLink]="['admin']">Admin</a>
       }
     </mat-nav-list>
-    <p class="version-text">Cookboek {{ version }}</p>
+    <p class="version-text">Cookboek{{ environmentPostfix }} {{ version }}</p>
   </mat-sidenav>
 
   <!-- Main section -->
   <mat-sidenav-content>
     <mat-toolbar>
       @if (browserUtils.isHandset$ | async) {
-      <button type="button" aria-label="toggle side menu" mat-icon-button (click)="sideNav.toggle()">
-        <mat-icon aria-label="menu icon">menu</mat-icon>
-      </button>
+        <button type="button" aria-label="toggle side menu" mat-icon-button (click)="sideNav.toggle()">
+          <mat-icon aria-label="menu icon">menu</mat-icon>
+        </button>
       }
-      <span class="center-content">Cookboek</span>
+      <span class="center-content">Cookboek{{ environmentPostfix }}</span>
       <cobo-user-quick-menu [user]="user()"></cobo-user-quick-menu>
     </mat-toolbar>
 

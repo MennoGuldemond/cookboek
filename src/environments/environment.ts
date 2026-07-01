@@ -1,6 +1,7 @@
 import packageJson from '../../package.json';
 
 export const environment = {
+  stage: 'dev',
   api: {
     url: 'http://localhost:3000',
   },
