@@ -1,0 +1,56 @@
+name: Backend CI/CD
+
+on:
+  push:
+    branches:
+      - develop
+      - main
+    paths:
+      - "backend/**"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/backend-cicd.yml"
+  pull_request:
+    branches:
+      - develop
+      - main
+    paths:
+      - "backend/**"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/backend-cicd.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: backend-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate backend syntax
+        run: node --check backend/src/app.js
+
+      - name: Validate backend dev script wiring
+        run: npm run -w backend dev -- --help
+
+      - name: Validate Prisma schema
+        env:
+          DATABASE_URL: mysql://user:pass@localhost:3306/cookboek
+        run: npx prisma validate --schema backend/prisma/schema.prisma
