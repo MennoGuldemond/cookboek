@@ -1,0 +1,120 @@
+name: Backend Deploy
+
+on:
+  push:
+    branches:
+      - develop
+      - main
+    paths:
+      - "backend/**"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/backend-deploy.yml"
+  workflow_dispatch:
+    inputs:
+      target:
+        description: "Target environment"
+        required: true
+        type: choice
+        options:
+          - tst
+          - prd
+
+permissions:
+  contents: read
+
+concurrency:
+  group: backend-deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy-tst:
+    if: ${{ (github.event_name == 'push' && (github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/main')) || (github.event_name == 'workflow_dispatch' && (inputs.target == 'tst' || inputs.target == 'prd')) }}
+    runs-on: ubuntu-latest
+    environment: tst
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate backend syntax
+        run: node --check backend/src/app.js
+
+      - name: Validate tst web app settings
+        run: |
+          if [ -z "${{ vars.AZURE_API_WEBAPP_NAME }}" ] && [ -z "${{ vars.AZURE_API_WEBAPP_NAME_TST }}" ]; then
+            echo "Missing API web app name for tst."
+            echo "Set one of these variables:"
+            echo "- Environment variable (recommended): AZURE_API_WEBAPP_NAME on environment 'tst'"
+            echo "- Repository variable: AZURE_API_WEBAPP_NAME_TST"
+            exit 1
+          fi
+
+          if [ -z "${{ secrets.AZURE_API_WEBAPP_PUBLISH_PROFILE }}" ] && [ -z "${{ secrets.AZURE_API_WEBAPP_PUBLISH_PROFILE_TST }}" ]; then
+            echo "Missing API publish profile for tst."
+            echo "Set one of these secrets:"
+            echo "- Environment secret (recommended): AZURE_API_WEBAPP_PUBLISH_PROFILE on environment 'tst'"
+            echo "- Repository secret: AZURE_API_WEBAPP_PUBLISH_PROFILE_TST"
+            exit 1
+          fi
+
+      - name: Deploy to Azure Web App (tst)
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ vars.AZURE_API_WEBAPP_NAME || vars.AZURE_API_WEBAPP_NAME_TST }}
+          publish-profile: ${{ secrets.AZURE_API_WEBAPP_PUBLISH_PROFILE || secrets.AZURE_API_WEBAPP_PUBLISH_PROFILE_TST }}
+          package: backend
+
+  deploy-prd:
+    needs: [deploy-tst]
+    if: ${{ ((github.event_name == 'push' && github.ref == 'refs/heads/main') || (github.event_name == 'workflow_dispatch' && inputs.target == 'prd')) && needs.deploy-tst.result == 'success' }}
+    runs-on: ubuntu-latest
+    environment: prd
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate backend syntax
+        run: node --check backend/src/app.js
+
+      - name: Validate prd web app settings
+        run: |
+          if [ -z "${{ vars.AZURE_API_WEBAPP_NAME }}" ] && [ -z "${{ vars.AZURE_API_WEBAPP_NAME_PRD }}" ]; then
+            echo "Missing API web app name for prd."
+            echo "Set one of these variables:"
+            echo "- Environment variable (recommended): AZURE_API_WEBAPP_NAME on environment 'prd'"
+            echo "- Repository variable: AZURE_API_WEBAPP_NAME_PRD"
+            exit 1
+          fi
+
+          if [ -z "${{ secrets.AZURE_API_WEBAPP_PUBLISH_PROFILE }}" ] && [ -z "${{ secrets.AZURE_API_WEBAPP_PUBLISH_PROFILE_PRD }}" ]; then
+            echo "Missing API publish profile for prd."
+            echo "Set one of these secrets:"
+            echo "- Environment secret (recommended): AZURE_API_WEBAPP_PUBLISH_PROFILE on environment 'prd'"
+            echo "- Repository secret: AZURE_API_WEBAPP_PUBLISH_PROFILE_PRD"
+            exit 1
+          fi
+
+      - name: Deploy to Azure Web App (prd)
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ vars.AZURE_API_WEBAPP_NAME || vars.AZURE_API_WEBAPP_NAME_PRD }}
+          publish-profile: ${{ secrets.AZURE_API_WEBAPP_PUBLISH_PROFILE || secrets.AZURE_API_WEBAPP_PUBLISH_PROFILE_PRD }}
+          package: backend
