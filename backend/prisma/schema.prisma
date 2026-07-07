@@ -1,0 +1,102 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["views"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  USER
+  ADMIN
+}
+
+model User {
+  id        String   @id
+  email     String   @unique
+  name      String?
+  photoUrl  String?
+  recipes   Recipe[]
+  provider  String?
+  createdAt DateTime @default(now())
+  Likes     Likes[]
+  role      UserRole @default(USER)
+}
+
+model Recipe {
+  id           String                @id @default(uuid())
+  title        String
+  description  String                @db.VarChar(4000)
+  photoURL     String
+  instructions String                @db.VarChar(4000)
+  ingredients  String                @db.VarChar(4000)
+  published    Boolean               @default(false)
+  author       User                  @relation(fields: [authorId], references: [id])
+  authorId     String
+  categories   CategoriesOnRecipes[]
+  createdAt    DateTime              @default(now())
+  likes        Likes[]
+}
+
+model Category {
+  id          String                @id @default(uuid())
+  name        String                @unique
+  description String
+  recipes     CategoriesOnRecipes[]
+  createdAt   DateTime              @default(now())
+}
+
+model CategoriesOnRecipes {
+  id         String   @id @default(uuid())
+  recipe     Recipe   @relation(fields: [recipeId], references: [id])
+  recipeId   String // relation scalar field (used in the `@relation` attribute above)
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId String // relation scalar field (used in the `@relation` attribute above)
+  assignedAt DateTime @default(now())
+
+  @@unique([recipeId, categoryId])
+}
+
+model Likes {
+  id         String   @id @default(uuid())
+  recipe     Recipe   @relation(fields: [recipeId], references: [id])
+  recipeId   String // relation scalar field (used in the `@relation` attribute above)
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String
+  assignedAt DateTime @default(now())
+}
+
+model Log {
+  id        Int      @id @default(autoincrement())
+  message   String
+  level     String
+  createdAt DateTime @default(now())
+}
+
+view RecipeInfo {
+  id            String   @unique
+  title         String
+  numberOfLikes Int
+  authorName    String
+  authorId      String
+  photoURL      String
+  createdAt     DateTime
+}
+
+view UserInfo {
+  id                    String   @unique
+  email                 String   @unique
+  name                  String?
+  photoUrl              String?
+  provider              String?
+  createdAt             DateTime
+  role                  String
+  numberOfRecipes       Int
+  numberOfLikesGiven    Int
+  numberOfLikesReceived Int
+}
