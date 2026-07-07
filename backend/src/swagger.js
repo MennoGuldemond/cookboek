@@ -1,9 +1,9 @@
-import swaggerJsdoc from 'swagger-jsdoc'
-import { serve, setup } from 'swagger-ui-express'
+import swaggerJsdoc from 'swagger-jsdoc';
+import { serve, setup } from 'swagger-ui-express';
 
-import { createRequire } from 'module'
-const require = createRequire(import.meta.url)
-const packageJson = require('../package.json')
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+const packageJson = require('../package.json');
 
 const options = {
   definition: {
@@ -27,10 +27,10 @@ const options = {
     ],
   },
   apis: ['src/app.js', 'src/routes/*.js'],
-}
+};
 
-const specs = swaggerJsdoc(options)
+const specs = swaggerJsdoc(options);
 
 export function serveSwagger(app) {
-  app.use('/docs', serve, setup(specs))
+  app.use('/docs', serve, setup(specs));
 }

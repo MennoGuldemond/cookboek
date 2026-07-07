@@ -1,10 +1,10 @@
-import express from 'express'
-import bodyParser from 'body-parser'
-import * as categoryRepository from '../repositories/category.repository.js'
-import { isAuthorized, isAdmin } from '../auth.js'
+import express from 'express';
+import bodyParser from 'body-parser';
+import * as categoryRepository from '../repositories/category.repository.js';
+import { isAuthorized, isAdmin } from '../auth.js';
 
-export const categoryRouter = express.Router()
-categoryRouter.use(bodyParser.json())
+export const categoryRouter = express.Router();
+categoryRouter.use(bodyParser.json());
 
 /**
  * @openapi
@@ -18,12 +18,12 @@ categoryRouter.use(bodyParser.json())
  */
 categoryRouter.get('/', async (req, res) => {
   try {
-    let categories = await categoryRepository.get()
-    res.status(200).json(categories)
+    let categories = await categoryRepository.get();
+    res.status(200).json(categories);
   } catch (error) {
-    res.status(500).json(error)
+    res.status(500).json(error);
   }
-})
+});
 
 /**
  * @openapi
@@ -43,16 +43,16 @@ categoryRouter.get('/', async (req, res) => {
  */
 categoryRouter.get('/:id', async (req, res) => {
   try {
-    let category = await categoryRepository.getById(req.params.id)
+    let category = await categoryRepository.getById(req.params.id);
     if (category) {
-      return res.status(200).json(category)
+      return res.status(200).json(category);
     } else {
-      return res.status(404).json({ message: 'Category not found' })
+      return res.status(404).json({ message: 'Category not found' });
     }
   } catch (error) {
-    return res.status(500).json(error)
+    return res.status(500).json(error);
   }
-})
+});
 
 /**
  * @openapi
@@ -66,16 +66,16 @@ categoryRouter.get('/:id', async (req, res) => {
  */
 categoryRouter.post('/', isAuthorized, isAdmin, async (req, res) => {
   try {
-    let category = await categoryRepository.upsert(req.body)
+    let category = await categoryRepository.upsert(req.body);
     if (category) {
-      return res.status(200).json(category)
+      return res.status(200).json(category);
     } else {
-      return res.status(404).json({ message: 'Category could not be saved' })
+      return res.status(404).json({ message: 'Category could not be saved' });
     }
   } catch (error) {
-    return res.status(500).json(error)
+    return res.status(500).json(error);
   }
-})
+});
 
 /**
  * @openapi
@@ -95,13 +95,13 @@ categoryRouter.post('/', isAuthorized, isAdmin, async (req, res) => {
  */
 categoryRouter.delete('/:id', isAuthorized, isAdmin, async (req, res) => {
   try {
-    let success = await categoryRepository.remove(req.params.id)
+    let success = await categoryRepository.remove(req.params.id);
     if (success) {
-      return res.status(200).send(true)
+      return res.status(200).send(true);
     } else {
-      return res.status(500).send(false)
+      return res.status(500).send(false);
     }
   } catch (error) {
-    return res.status(500).json(error)
+    return res.status(500).json(error);
   }
-})
+});

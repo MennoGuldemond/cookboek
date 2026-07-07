@@ -1,5 +1,5 @@
-import { InferenceClient } from '@huggingface/inference'
-const client = new InferenceClient(process.env.HF_TOKEN)
+import { InferenceClient } from '@huggingface/inference';
+const client = new InferenceClient(process.env.HF_TOKEN);
 
 export async function extractIngredients(text) {
   const out = await client.chatCompletion({
@@ -14,10 +14,10 @@ export async function extractIngredients(text) {
       },
     ],
     max_tokens: 512,
-  })
-  const result = out.choices[0].message.content
+  });
+  const result = out.choices[0].message.content;
   if (result) {
-    return result.split(',')
+    return result.split(',');
   }
-  return null
+  return null;
 }

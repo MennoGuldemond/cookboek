@@ -5,6 +5,22 @@
     "frontend",
     "backend"
   ],
+  "prettier": {
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "semi": true,
+    "singleQuote": true,
+    "useTabs": false,
+    "printWidth": 120,
+    "overrides": [
+      {
+        "files": "*.html",
+        "options": {
+          "parser": "angular"
+        }
+      }
+    ]
+  },
   "scripts": {
     "start:frontend": "npm run start -w frontend",
     "start:backend": "npm run dev -w backend",

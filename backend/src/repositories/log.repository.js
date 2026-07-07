@@ -1,20 +1,20 @@
-import { prisma } from '../db/client.js'
+import { prisma } from '../db/client.js';
 
 export async function get(params) {
   try {
     // Default pagination settings if query params are not provided
-    const skip = params?.skip ? +params.skip : 0
-    const take = params?.take ? +params.take : 30
+    const skip = params?.skip ? +params.skip : 0;
+    const take = params?.take ? +params.take : 30;
 
     const logs = await prisma.log.findMany({
       orderBy: { createdAt: 'desc' },
       take: take,
       skip: skip,
-    })
-    return logs
+    });
+    return logs;
   } catch (err) {
-    console.error(err)
-    return null
+    console.error(err);
+    return null;
   }
 }
 
@@ -25,10 +25,10 @@ export async function create(message, level) {
         message,
         level,
       },
-    })
-    return log
+    });
+    return log;
   } catch (err) {
-    console.error(err)
-    return null
+    console.error(err);
+    return null;
   }
 }
