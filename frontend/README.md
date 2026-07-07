@@ -1,7 +1,5 @@
 ## A dutch cooking recipe website
 
-This app uses a nodejs back-end that you can find [here](https://github.com/MennoGuldemond/cookboek-api)
-
 ## Getting started
 
 - Run "npm install"

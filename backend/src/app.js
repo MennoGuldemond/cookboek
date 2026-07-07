@@ -1,0 +1,97 @@
+import dotenv from 'dotenv'
+import express from 'express'
+import session from 'express-session'
+import cors from 'cors'
+import path from 'path'
+import fs from 'fs'
+import https from 'https'
+import * as url from 'url'
+import { serveSwagger } from './swagger.js'
+import { userRouter } from './routes/user.routes.js'
+import { recipeRouter } from './routes/recipe.routes.js'
+import { imageRouter } from './routes/image.routes.js'
+import { categoryRouter } from './routes/category.routes.js'
+import { likeRouter } from './routes/like.routes.js'
+import { logRouter } from './routes/log.routes.js'
+import { prisma } from './db/client.js'
+
+const __dirname = url.fileURLToPath(new URL('../', import.meta.url))
+
+// const credentials = {
+//   key: fs.readFileSync(path.join('/etc/letsencrypt/live/cookboek.hopto.org', 'privkey.pem'), 'utf8'),
+//   cert: fs.readFileSync(path.join('/etc/letsencrypt/live/cookboek.hopto.org', 'cert.pem'), 'utf8'),
+// }
+
+const port = process.env.PORT || 3000
+const app = express()
+app.use('/public', express.static(path.join(__dirname, 'public')))
+serveSwagger(app)
+dotenv.config()
+
+app.use(cors())
+app.use(express.json())
+app.use(
+  session({
+    resave: false,
+    saveUninitialized: true,
+    secret: 'SECRET',
+  })
+)
+
+// Use this for production with HTTPS
+// https
+//   .createServer(
+//     {
+//       key: credentials.key,
+//       cert: credentials.cert,
+//     },
+//     app
+//   )
+//   .listen(port, () => {
+//     console.log(`App running on ${port}`)
+//   })
+
+// Use this for local development with HTTP
+app.listen(port, () => {
+  console.log(`App running on ${port}`)
+})
+
+app.get('/', (req, res) => {
+  res.sendFile('./public/dist/index.html', { root: __dirname })
+})
+
+/**
+ * @openapi
+ * /health:
+ *   get:
+ *     summary: Health check endpoint
+ *     tags:
+ *       - System
+ *     responses:
+ *       200:
+ *         description: Service is healthy
+ */
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok' })
+})
+
+// ROUTES
+app.use('/users', userRouter)
+app.use('/recipes', recipeRouter)
+app.use('/categories', categoryRouter)
+app.use('/likes', likeRouter)
+app.use('/images', imageRouter)
+app.use('/logs', logRouter)
+
+async function shutdown(signal) {
+  try {
+    await prisma.$disconnect()
+  } catch (error) {
+    console.error('Failed to disconnect Prisma during shutdown:', error)
+  } finally {
+    process.exit(0)
+  }
+}
+
+process.on('SIGINT', () => shutdown('SIGINT'))
+process.on('SIGTERM', () => shutdown('SIGTERM'))

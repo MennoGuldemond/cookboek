@@ -1,55 +1,17 @@
 {
   "name": "cookboek",
-  "version": "2.1.0",
-  "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test"
-  },
-  "prettier": {
-    "trailingComma": "es5",
-    "tabWidth": 2,
-    "semi": true,
-    "singleQuote": true,
-    "useTabs": false,
-    "printWidth": 120,
-    "overrides": [
-      {
-        "files": "*.html",
-        "options": {
-          "parser": "angular"
-        }
-      }
-    ]
-  },
   "private": true,
-  "dependencies": {
-    "@angular/cdk": "^21.0.2",
-    "@angular/common": "^21.0.3",
-    "@angular/compiler": "^21.0.3",
-    "@angular/core": "^21.0.3",
-    "@angular/forms": "^21.0.3",
-    "@angular/material": "^21.0.2",
-    "@angular/platform-browser": "^21.0.3",
-    "@angular/router": "^21.0.3",
-    "ngx-image-compress": "^18.1.5",
-    "rxjs": "~7.8.0",
-    "tslib": "^2.3.0"
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "start:frontend": "npm run start -w frontend",
+    "start:backend": "npm run dev -w backend",
+    "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
+    "test:frontend": "npm run test -w frontend"
   },
   "devDependencies": {
-    "@angular/build": "^21.0.2",
-    "@angular/cli": "^21.0.2",
-    "@angular/compiler-cli": "^21.0.3",
-    "@types/jasmine": "~5.1.0",
-    "jasmine-core": "~5.8.0",
-    "karma": "~6.4.0",
-    "karma-chrome-launcher": "~3.2.0",
-    "karma-coverage": "~2.2.0",
-    "karma-jasmine": "~5.1.0",
-    "karma-jasmine-html-reporter": "~2.1.0",
-    "prettier": "^3.6.2",
-    "typescript": "~5.9.3"
+    "concurrently": "^9.2.0"
   }
 }
