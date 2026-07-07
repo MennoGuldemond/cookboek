@@ -5,7 +5,7 @@
   text-align: center;
   color: #fff;
 
-  & > h1 {
+  h1 {
     font-weight: 100;
     font-size: clamp(3rem, 16vw, 12rem);
     padding-top: 0.3em;
@@ -15,10 +15,9 @@
     margin: 0;
   }
 
-  & h2 {
+  h2 {
     font-weight: 100;
     font-size: clamp(2rem, 3vw, 7rem);
-    color: vars.$cobo-dark-grey;
     padding-bottom: 0.7em;
   }
 }
@@ -26,6 +25,10 @@
 .recipe-container {
   max-width: 600px;
   margin: auto;
+
+  h2 {
+    color: vars.$cobo-dark-grey;
+  }
 }
 
 cobo-recipe-card {
