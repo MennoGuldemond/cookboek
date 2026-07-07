@@ -61,3 +61,10 @@
 
 - Summer BBQ, winter soups, holiday bundles.
 - “What to cook tonight” based on weather and time available.
+
+13. Random recipe button
+
+14. Draft autosave in recipe editor
+
+- Auto-save every few seconds while editing.
+- Store draft locally first; optional backend draft save.
