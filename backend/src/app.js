@@ -15,6 +15,8 @@ import { likeRouter } from './routes/like.routes.js';
 import { logRouter } from './routes/log.routes.js';
 import { prisma } from './db/client.js';
 
+dotenv.config();
+
 const __dirname = url.fileURLToPath(new URL('../', import.meta.url));
 
 // const credentials = {
@@ -26,7 +28,6 @@ const port = process.env.PORT || 3000;
 const app = express();
 app.use('/public', express.static(path.join(__dirname, 'public')));
 serveSwagger(app);
-dotenv.config();
 
 app.use(cors());
 app.use(express.json());
