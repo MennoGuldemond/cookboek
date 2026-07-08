@@ -1,4 +1,4 @@
-name: Frontend CI/CD
+name: Frontend CI
 
 on:
   push:
@@ -6,19 +6,19 @@ on:
       - develop
       - main
     paths:
-      - "frontend/**"
-      - "package.json"
-      - "package-lock.json"
-      - ".github/workflows/frontend-cicd.yml"
-  workflow_dispatch:
-    inputs:
-      target:
-        description: "Target environment"
-        required: true
-        type: choice
-        options:
-          - tst
-          - prd
+      - 'frontend/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/frontend-cicd.yml'
+  pull_request:
+    branches:
+      - develop
+      - main
+    paths:
+      - 'frontend/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/frontend-cicd.yml'
 
 permissions:
   contents: read
@@ -28,10 +28,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  deploy-tst:
-    if: ${{ (github.event_name == 'push' && (github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/main')) || (github.event_name == 'workflow_dispatch' && (inputs.target == 'tst' || inputs.target == 'prd')) }}
+  ci:
     runs-on: ubuntu-latest
-    environment: tst
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -39,82 +37,11 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "22"
+          node-version: '22'
           cache: npm
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Build tst
+      - name: Build frontend (tst config)
         run: npm run -w frontend build -- --configuration tst
-
-      - name: Validate tst web app settings
-        run: |
-          if [ -z "${{ vars.AZURE_WEBAPP_NAME }}" ] && [ -z "${{ vars.AZURE_WEBAPP_NAME_TST }}" ]; then
-            echo "Missing web app name for tst."
-            echo "Set one of these variables:"
-            echo "- Environment variable (recommended): AZURE_WEBAPP_NAME on environment 'tst'"
-            echo "- Repository variable: AZURE_WEBAPP_NAME_TST"
-            exit 1
-          fi
-
-          if [ -z "${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}" ] && [ -z "${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_TST }}" ]; then
-            echo "Missing publish profile for tst."
-            echo "Set one of these secrets:"
-            echo "- Environment secret (recommended): AZURE_WEBAPP_PUBLISH_PROFILE on environment 'tst'"
-            echo "- Repository secret: AZURE_WEBAPP_PUBLISH_PROFILE_TST"
-            exit 1
-          fi
-
-      - name: Deploy to Azure Web App (tst)
-        uses: azure/webapps-deploy@v3
-        with:
-          app-name: ${{ vars.AZURE_WEBAPP_NAME || vars.AZURE_WEBAPP_NAME_TST }}
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE || secrets.AZURE_WEBAPP_PUBLISH_PROFILE_TST }}
-          package: frontend/dist/cookboek/browser
-
-  deploy-prd:
-    needs: [deploy-tst]
-    if: ${{ ((github.event_name == 'push' && github.ref == 'refs/heads/main') || (github.event_name == 'workflow_dispatch' && inputs.target == 'prd')) && needs.deploy-tst.result == 'success' }}
-    runs-on: ubuntu-latest
-    environment: prd
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: "22"
-          cache: npm
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build prd
-        run: npm run -w frontend build -- --configuration prd
-
-      - name: Validate prd web app settings
-        run: |
-          if [ -z "${{ vars.AZURE_WEBAPP_NAME }}" ] && [ -z "${{ vars.AZURE_WEBAPP_NAME_PRD }}" ]; then
-            echo "Missing web app name for prd."
-            echo "Set one of these variables:"
-            echo "- Environment variable (recommended): AZURE_WEBAPP_NAME on environment 'prd'"
-            echo "- Repository variable: AZURE_WEBAPP_NAME_PRD"
-            exit 1
-          fi
-
-          if [ -z "${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}" ] && [ -z "${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_PRD }}" ]; then
-            echo "Missing publish profile for prd."
-            echo "Set one of these secrets:"
-            echo "- Environment secret (recommended): AZURE_WEBAPP_PUBLISH_PROFILE on environment 'prd'"
-            echo "- Repository secret: AZURE_WEBAPP_PUBLISH_PROFILE_PRD"
-            exit 1
-          fi
-
-      - name: Deploy to Azure Web App (prd)
-        uses: azure/webapps-deploy@v3
-        with:
-          app-name: ${{ vars.AZURE_WEBAPP_NAME || vars.AZURE_WEBAPP_NAME_PRD }}
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE || secrets.AZURE_WEBAPP_PUBLISH_PROFILE_PRD }}
-          package: frontend/dist/cookboek/browser
